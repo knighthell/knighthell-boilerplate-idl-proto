@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package notification;
+
+option go_package = "github.com/knighthell-family/knighthell-family-idl/notification";
+
+import "google/protobuf/timestamp.proto";
+import "notification/notification-user.proto";
+
+message Notification {
+  string id = 1;
+  google.protobuf.Timestamp createdDateTimeUTC = 2;
+  NotificationType type = 3;
+
+  string fcmMessageToken = 4; // Firebase Cloud Message Token
+
+  notification.NotificationUser fromUser = 5; // 알림을 보낸 사용자 정보
+  notification.NotificationUser toUser = 6; // 알림 받을 사용자 정보
+
+  string sourceId = 7;
+  string externalLink = 8;
+}
+
+enum NotificationType {
+  DIRECT_MESSAGE = 0;
+  POSTS_POST_BY_FOLLOWING_USER = 1;
+  POSTS_COMMENT_ON_MY_POST = 2;
+  LIKE_POSTS_ON_MY_POST = 3;
+}

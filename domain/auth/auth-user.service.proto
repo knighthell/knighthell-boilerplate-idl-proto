@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package auth;
+
+option go_package = "github.com/knighthell-family/knighthell-family-idl/auth";
+
+import "auth/auth-user.proto";
+
+service AuthUserService {
+  rpc SignUp(SignUpRequest) returns (SignUpResponse);
+
+  rpc SignInByEmailAndPassword(SignInByEmailAndPasswordRequest) returns (SignInByEmailAndPasswordResponse);
+  rpc SignInByPasskey(SignInByPasskeyRequeset) returns (SignInByPasskeyResponse);
+  rpc SignInByPasskeyStream(SignInByPasskeyRequeset) returns (stream SignInByPasskeyResponse);
+}
+
+message SignUpRequest {
+  string email = 1;
+  string password = 2;
+  string displayName = 3;
+}
+
+message SignUpResponse {
+  string email = 1;
+  string displayName = 3;
+}
+
+message SignInByEmailAndPasswordRequest {
+  string email = 1;
+  string password = 2;
+}
+
+message SignInByEmailAndPasswordResponse {
+
+}
+
+message SignInByPasskeyRequeset {
+
+}
+
+message SignInByPasskeyResponse {
+
+}

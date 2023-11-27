@@ -1,0 +1,45 @@
+syntax = "proto3";
+package place;
+
+option go_package = "github.com/knighthell/knighthell-boilerplate-idl-proto/place";
+
+import "google/protobuf/timestamp.proto";
+
+message Place {
+  string id = 1;
+  double latitude = 2;
+  double longitude = 3;
+  PlaceUser createdBy = 4;
+  google.protobuf.Timestamp createdAt = 5;
+  PlaceUser updatedBy = 6;
+  google.protobuf.Timestamp updatedAt = 7;
+  PlaceUser deletedBy = 8;
+  google.protobuf.Timestamp deletedAt = 9;
+
+  string name = 10;
+  optional PlaceNameTranslation nameTranslation = 11;
+
+  optional PlaceAddress address = 12;
+}
+
+message PlaceUser {
+  string id = 1;
+  string email = 2;
+  string photoURL = 3;
+  string displayName = 4;
+}
+
+message PlaceNameTranslation {
+  string ko = 1;
+  string en = 2;
+}
+
+message PlaceAddress {
+  optional string roadNameAddress = 1;
+  optional string lotNumberAddress = 2;
+}
+
+message Wgs84Coordinates {
+  double latitude = 1;
+  double longitude = 2;
+}

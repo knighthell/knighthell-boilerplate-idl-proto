@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package social;
+
+option go_package = "github.com/knighthell-family/knighthell-family-idl/social";
+
+import "google/protobuf/timestamp.proto";
+
+message SocialUser {
+  string id = 1;
+  string email = 2;
+  string displayName = 4;
+  optional string photoUrl = 3;
+}

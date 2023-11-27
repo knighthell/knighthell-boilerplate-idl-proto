@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package chat;
+
+option go_package = "github.com/knighthell-family/knighthell-family-idl/chat";
+
+import "google/protobuf/timestamp.proto";
+import "chat/chat-user.proto";
+
+message ChatMessage {
+  string id = 1;
+  google.protobuf.Timestamp createdDateTimeUTC = 2;
+
+  ChatUser user = 3;
+}
+
+enum ChatMessageType {
+  TEXT = 0;
+}

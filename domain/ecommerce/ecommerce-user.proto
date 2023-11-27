@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package ecommerce.user;
+
+option go_package = "github.com/knighthell-family/knighthell-family-idl/ecommerce";
+
+import "google/protobuf/timestamp.proto";
+
+message EcommerceUser {
+  string id = 1;
+  string displayName = 2;
+  optional string photoUrl = 3;
+}

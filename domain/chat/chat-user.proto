@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package chat;
+
+option go_package = "github.com/knighthell-family/knighthell-family-idl/chat";
+
+message ChatUser {
+  string id = 1;
+  string email = 2;
+  string displayName = 4;
+  string photoUrl = 5;
+}

@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package social.follow;
+
+option go_package = "github.com/knighthell-family/knighthell-family-idl/social";
+
+import "google/protobuf/timestamp.proto";
+import "social/social-user.proto";
+
+message Follow {
+  string id = 1;
+
+  social.SocialUser fromUser = 2;
+  social.SocialUser toUser = 3;
+
+  google.protobuf.Timestamp createdAt = 4;
+}

@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package social.feed;
+
+option go_package = "github.com/knighthell-family/knighthell-family-idl/social";
+
+import "google/protobuf/timestamp.proto";
+import "social/social-user.proto";
+
+message Feed {
+  string id = 1;
+
+  social.SocialUser createdBy = 2;
+  google.protobuf.Timestamp createdDateTimeUTC = 3;
+
+  FeedType type = 4;
+}
+
+enum FeedType {
+  TEXT_ONLY = 0;
+  IMAGE_ONLY = 1;
+  IMAGE_MULTI = 2;
+}

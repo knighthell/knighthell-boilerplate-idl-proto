@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package ecommerce.product;
+
+option go_package = "github.com/knighthell-family/knighthell-family-idl/ecommerce";
+
+import "google/protobuf/timestamp.proto";
+import "ecommerce/ecommerce-user.proto";
+
+message Product {
+  string id = 1;
+
+  ecommerce.user.EcommerceUser createdBy = 3;
+  google.protobuf.Timestamp createdDateTimeUTC = 4;
+  ecommerce.user.EcommerceUser updatedBy = 5;
+  google.protobuf.Timestamp updatedDateTimeUTC = 6;
+  ecommerce.user.EcommerceUser deletedBy = 7;
+  google.protobuf.Timestamp deletedDateTimeUTC = 8;
+
+  string productName = 9;
+  string skuCode = 10; // SKU(Stock Keeping Unit) Code
+  repeated string productPhotoUrls = 11; // Thumbnail Photo Url은 on-the-fly pattern으로 대체
+
+  repeated Product productComponents = 12; // 여러개의 상품을 단일 상품으로 묶을 때 그 구성 상품들
+  ProductPrice price = 13;
+}
+
+message ProductPrice {
+  double price = 1;
+  double deliveryFee = 2;
+  ProductCurrency currency = 3;
+}
+
+enum ProductCurrency {
+  USD = 0;
+  KRW = 1;
+  JPY = 2;
+}

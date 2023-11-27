@@ -1,0 +1,120 @@
+syntax = "proto3";
+package place;
+
+option go_package = "github.com/knighthell-family/knighthell-family-idl/place";
+
+import "place.proto";
+
+service PlaceService {
+  rpc QueryPlaceListBySquare(QueryPlaceListBySquareRequest) returns (QueryPlaceListBySquareResponse);
+  rpc QueryPlaceListByRadius(QueryPlaceListByRadiusRequest) returns (QueryPlaceListByRadiusResponse);
+
+  rpc CreatePlace(CreatePlaceRequest) returns (CreatePlaceResponse);
+  rpc CreatePlaceList(CreatePlaceListRequest) returns (CreatePlaceListResponse);
+
+  rpc ReadPlace(ReadPlaceRequest) returns (ReadPlaceResponse);
+  rpc ReadPlaceList(ReadPlaceListRequest) returns (ReadPlaceListResponse);
+
+  rpc UpdatePlace(UpdatePlaceRequest) returns (UpdatePlaceResponse);
+  rpc UpdatePlaceList(UpdatePlaceListRequest) returns (UpdatePlaceListResponse);
+
+  rpc DeletePlace(DeletePlaceRequest) returns (DeletePlaceResponse);
+  rpc DeletePlaceList(DeletePlaceListRequest) returns (DeletePlaceListResponse);
+}
+
+message QueryPlaceListBySquareRequest {
+  double topRightLatitude = 1;
+  double topRightLongitude = 2;
+
+  double bottomLeftLatitude = 3;
+  double bottomLeftLongitude = 4;
+
+  optional double userLatitude = 5;
+  optional double userLongitude = 6;
+}
+
+message QueryPlaceListBySquareResponse {
+  repeated place.Place results = 1;
+}
+
+message QueryPlaceListByRadiusRequest {
+  double centerLatitude = 1;
+  double centerLongitude = 2;
+
+  uint32 meterRadius = 3;
+
+  optional double userLatitude = 4;
+  optional double userLongitude = 5;
+}
+
+message QueryPlaceListByRadiusResponse {
+  repeated place.Place results = 1;
+}
+
+message CreatePlaceRequest {
+  string name = 1;
+  double latitude = 2;
+  double longitude = 3;
+}
+
+message ReadPlaceRequest {
+  string id = 1;
+}
+
+message ReadPlaceResponse {
+  place.Place place = 1;
+}
+
+message ReadPlaceListRequest {
+  repeated ReadPlaceRequest places = 1;
+}
+
+message ReadPlaceListResponse {
+  repeated place.Place places = 2;
+}
+
+message CreatePlaceResponse {
+  place.Place place = 1;
+}
+
+message CreatePlaceListRequest {
+  repeated CreatePlaceRequest places = 1;
+}
+
+message CreatePlaceListResponse {
+  repeated place.Place places = 2;
+}
+
+message UpdatePlaceRequest {
+  optional string name = 1;
+  optional double latitude = 2;
+  optional double longitude = 3;
+}
+
+message UpdatePlaceResponse {
+  place.Place place = 1;
+}
+
+message UpdatePlaceListRequest {
+  repeated UpdatePlaceRequest places = 1;
+}
+
+message UpdatePlaceListResponse {
+  repeated place.Place places = 1;
+}
+
+message DeletePlaceRequest {
+  string id = 1;
+}
+
+message DeletePlaceResponse {
+  place.Place place = 1;
+}
+
+message DeletePlaceListRequest {
+  repeated DeletePlaceRequest places = 1;
+}
+
+message DeletePlaceListResponse {
+  repeated place.Place places = 1;
+}

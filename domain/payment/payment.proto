@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package payment;
+
+option go_package = "github.com/knighthell-family/knighthell-family-idl/payment";
+
+import "google/protobuf/timestamp.proto";
+import "payment/payment-user.proto";
+
+message Payment {
+  string id = 1;
+
+  PaymentUser createdBy = 2;
+  google.protobuf.Timestamp createdDateTimeUTC = 3;
+
+  PaymentUser paidBy = 4;
+  google.protobuf.Timestamp paidDateTimeUTC = 5;
+  PaymentType paymentType = 6;
+
+  double price = 7; // 지불 가격
+  string currencyCode = 8; // 국가별 통화 코드(ISO 4217)
+}
+
+enum PaymentType{
+  PAYMENT_GATEWAY = 0; // 결제대행사(PG사)
+  GOOGLE_PLAY = 1; // 구글 플레이스토어 인앱결제
+  APPLE_STORE = 2; // 애플 앱스토어 인 앱 결제
+}

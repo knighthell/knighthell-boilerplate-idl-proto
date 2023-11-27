@@ -1,0 +1,68 @@
+syntax = "proto3";
+
+package auth;
+
+import "google/protobuf/timestamp.proto";
+
+message AuthUser {
+  string id = 1;
+  string email = 2;
+  google.protobuf.Timestamp  createdDateTimeUTC = 3; // 사용자가 생성된 날짜 및 시간(UTC)
+  google.protobuf.Timestamp  updatedDateTimeUTC = 4; // 사용자 정보가 최근업데이트된 날짜 및 시간
+
+  bool verifiedEmail = 5;
+  google.protobuf.Timestamp verifiedEmailDateTimeUTC = 6; // 이메일 인증된 날짜 및 시간(UTC)
+  optional google.protobuf.Timestamp verifyEmailRequestDateTimeUTC = 7; // 이메일 인증하기 위한 메일을 보낸 날짜 및 시간(UTC)
+
+  optional AuthUserPassword password = 8; // 사용자 비밀번호 객체(별도 정보로 보관하기위해 사용자 정보와 분리)
+
+  repeated AuthUserPasskey passkeys = 9; // 사용자가 등록한 패스키 목록
+
+  repeated AuthUserSignInHistory signInHistories = 10; // 사용자의 SignIn History 목록
+
+  repeated AuthUserAccessHistory accessHistories = 11; // 사용자의 Access History 목록
+}
+
+message AuthUserPassword {
+  string userId = 1;
+  string encryptedPassword = 2; // 사용자의 암호화된 비밀번호
+}
+
+message AuthUserPasskey {
+  string id = 1;
+  string userId = 2;
+
+  PasskeyDeviceType passkeyDeviceType = 4; // 해당 인증 기기 종류
+  PasskeyType passkeyType = 3; // 해당 인증기기에서 사용할 인증방식
+
+  google.protobuf.Timestamp  createdDateTimeUTC = 5;
+
+  optional string name = 6; // 인증기기 이름(사용자 직접 입력)
+}
+
+enum PasskeyDeviceType {
+  MACOS = 0;
+  WINDOWS = 1;
+  ANDROID = 2;
+  IOS = 3;
+  IPADOS = 4;
+  LINUX = 5;
+}
+
+enum PasskeyType {
+  FINGER_PRINT = 0; // 지문
+  FACE = 1; // 얼굴인식
+  PIN_CODE = 2; // 개인 식별 번호(Personal Identification Number) 코드
+}
+
+message AuthUserSignInHistory {
+  string id = 1;
+  string userId = 2;
+  google.protobuf.Timestamp signInDateTimeUTC = 3;
+}
+
+message AuthUserAccessHistory {
+  string id = 1;
+  string userId = 2;
+  google.protobuf.Timestamp accessDateTimeUTC = 5;
+}

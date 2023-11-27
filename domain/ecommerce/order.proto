@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package ecommerce.order;
+
+option go_package = "github.com/knighthell-family/knighthell-family-idl/ecommerce";
+
+import "google/protobuf/timestamp.proto";
+import "ecommerce/ecommerce-user.proto";
+import "ecommerce/product.proto";
+
+message Order {
+  string id = 1;
+
+  ecommerce.user.EcommerceUser orderedBy = 2;
+  google.protobuf.Timestamp orderedDateTimeUTC = 3;
+
+  OrderStatus orderStatus = 4;
+
+  repeated product.Product products = 5;
+}
+
+enum OrderStatus {
+  WAIT_FOR_PAYMENT = 0; // 결제대기
+  ORDERED = 1; // 주문완료
+  CHECKED_ORDER = 2; // 주문확인
+  READY_FOR_DELIVERY = 3; // 배송 준비중
+  DELIVERING = 4; // 배송중
+  COMPLETED_DELIVERY = 5; // 배송완료
+}

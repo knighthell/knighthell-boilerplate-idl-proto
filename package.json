@@ -1,0 +1,24 @@
+{
+  "name": "knighthell-boilerplate-idl-proto",
+  "version": "0.0.1",
+  "description": "knighthell's Interface Definition(Description) Language using protobuf",
+  "scripts": {
+    "compile:golang": "",
+    "compile:nestjs": "",
+    "compile:spring": "",
+    "compile:deno": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/knighthell/knighthell-boilerplate-idl-proto.git"
+  },
+  "author": "knighthell-family",
+  "license": "knighthell-family",
+  "bugs": {
+    "url": "https://github.com/knighthell/knighthell-boilerplate-idl-proto/issues"
+  },
+  "homepage": "https://github.com/knighthell/knighthell-boilerplate-idl-proto#readme",
+  "dependencies": {
+    "ts-proto": "^1.164.1"
+  }
+}

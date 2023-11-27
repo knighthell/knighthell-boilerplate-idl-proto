@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package payment;
+
+option go_package = "github.com/knighthell-family/knighthell-family-idl/payment";
+
+message PaymentUser {
+  string id = 1;
+  string email = 2;
+  string displayName = 4;
+}

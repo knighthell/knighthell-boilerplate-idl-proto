@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package notification;
+
+option go_package = "github.com/knighthell-family/knighthell-family-idl/notification";
+
+message NotificationUser {
+  string id = 1;
+  string email = 2;
+  string displayName = 4;
+}
