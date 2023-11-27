@@ -14,5 +14,5 @@ TS_PROTO_OPTIONS_ARRAY=(
 protoc -I "${PROTO_DIR_PATH%%/}" \
     --plugin=./node_modules/.bin/protoc-gen-ts_proto.cmd \
     "${TS_PROTO_OPTIONS_ARRAY[*]}" \
-    --ts_proto_out="${PROTO_DIR_PATH%%/}"/nestjs/ \
+    --ts_proto_out="${PROTO_DIR_PATH%%/}"/ts/ \
     "${PROTO_DIR_PATH%%/}"/**.proto

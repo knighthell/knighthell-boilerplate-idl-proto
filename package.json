@@ -3,17 +3,17 @@
   "version": "0.0.1",
   "description": "knighthell's Interface Definition(Description) Language using protobuf",
   "scripts": {
-    "compile:golang": "",
-    "compile:nestjs": "",
-    "compile:spring": "",
-    "compile:deno": ""
+    "compile:place:golang": "./domain/place/.protoc-shells/protoc_place_golang.sh",
+    "compile:place:nestjs": "./domain/place/.protoc-shells/protoc_place_nestjs.sh",
+    "compile:place:ts": "./domain/place/.protoc-shells/protoc_place_ts.sh",
+    "compile:place:dart": "./domain/place/.protoc-shells/protoc_place_dart.sh"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/knighthell/knighthell-boilerplate-idl-proto.git"
   },
-  "author": "knighthell-family",
-  "license": "knighthell-family",
+  "author": "knighthell",
+  "license": "knighthell",
   "bugs": {
     "url": "https://github.com/knighthell/knighthell-boilerplate-idl-proto/issues"
   },
