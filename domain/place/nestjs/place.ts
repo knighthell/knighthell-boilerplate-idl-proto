@@ -11,8 +11,8 @@ export interface Place {
   createdAt: Timestamp | undefined;
   updatedBy: PlaceUser | undefined;
   updatedAt: Timestamp | undefined;
-  deletedBy: PlaceUser | undefined;
-  deletedAt: Timestamp | undefined;
+  deletedBy?: PlaceUser | undefined;
+  deletedAt?: Timestamp | undefined;
   name: string;
   nameTranslation?: PlaceNameTranslation | undefined;
   address?: PlaceAddress | undefined;
@@ -26,8 +26,10 @@ export interface PlaceUser {
 }
 
 export interface PlaceNameTranslation {
-  ko: string;
-  en: string;
+  ko?: string | undefined;
+  en?: string | undefined;
+  ja?: string | undefined;
+  zh?: string | undefined;
 }
 
 export interface PlaceAddress {
