@@ -7,14 +7,18 @@ import "google/protobuf/timestamp.proto";
 
 message Place {
   string id = 1;
+
   double latitude = 2;
   double longitude = 3;
+
   PlaceUser createdBy = 4;
   google.protobuf.Timestamp createdAt = 5;
+
   PlaceUser updatedBy = 6;
   google.protobuf.Timestamp updatedAt = 7;
-  PlaceUser deletedBy = 8;
-  google.protobuf.Timestamp deletedAt = 9;
+
+  optional PlaceUser deletedBy = 8;
+  optional google.protobuf.Timestamp deletedAt = 9;
 
   string name = 10;
   optional PlaceNameTranslation nameTranslation = 11;
@@ -30,8 +34,10 @@ message PlaceUser {
 }
 
 message PlaceNameTranslation {
-  string ko = 1;
-  string en = 2;
+  optional string ko = 1;
+  optional string en = 2;
+  optional string ja = 3;
+  optional string zh = 4;
 }
 
 message PlaceAddress {
