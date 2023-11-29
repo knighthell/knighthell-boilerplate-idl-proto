@@ -1,5 +1,6 @@
 /* eslint-disable */
-import { Timestamp } from "./google/protobuf/timestamp";
+import { wrappers } from "protobufjs";
+import { PlaceUser } from "./place-user";
 
 export const protobufPackage = "place";
 
@@ -7,22 +8,15 @@ export interface Place {
   id: string;
   latitude: number;
   longitude: number;
-  createdBy: PlaceUser | undefined;
-  createdAt: Timestamp | undefined;
-  updatedBy: PlaceUser | undefined;
-  updatedAt: Timestamp | undefined;
+  createdBy?: PlaceUser | undefined;
+  createdAt?: Date | undefined;
+  updatedBy?: PlaceUser | undefined;
+  updatedAt?: Date | undefined;
   deletedBy?: PlaceUser | undefined;
-  deletedAt?: Timestamp | undefined;
+  deletedAt?: Date | undefined;
   name: string;
   nameTranslation?: PlaceNameTranslation | undefined;
   address?: PlaceAddress | undefined;
-}
-
-export interface PlaceUser {
-  id: string;
-  email: string;
-  photoURL: string;
-  displayName: string;
 }
 
 export interface PlaceNameTranslation {
@@ -43,3 +37,12 @@ export interface Wgs84Coordinates {
 }
 
 export const PLACE_PACKAGE_NAME = "place";
+
+wrappers[".google.protobuf.Timestamp"] = {
+  fromObject(value: Date) {
+    return { seconds: value.getTime() / 1000, nanos: (value.getTime() % 1000) * 1e6 };
+  },
+  toObject(message: { seconds: number; nanos: number }) {
+    return new Date(message.seconds * 1000 + message.nanos / 1e6);
+  },
+} as any;

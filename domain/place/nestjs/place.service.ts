@@ -41,7 +41,7 @@ export interface ReadPlaceRequest {
 }
 
 export interface ReadPlaceResponse {
-  place: Place | undefined;
+  place?: Place | undefined;
 }
 
 export interface ReadPlaceListRequest {
@@ -53,7 +53,7 @@ export interface ReadPlaceListResponse {
 }
 
 export interface CreatePlaceResponse {
-  place: Place | undefined;
+  place?: Place | undefined;
 }
 
 export interface CreatePlaceListRequest {
@@ -71,7 +71,7 @@ export interface UpdatePlaceRequest {
 }
 
 export interface UpdatePlaceResponse {
-  place: Place | undefined;
+  place?: Place | undefined;
 }
 
 export interface UpdatePlaceListRequest {
@@ -87,7 +87,7 @@ export interface DeletePlaceRequest {
 }
 
 export interface DeletePlaceResponse {
-  place: Place | undefined;
+  place?: Place | undefined;
 }
 
 export interface DeletePlaceListRequest {
@@ -101,30 +101,37 @@ export interface DeletePlaceListResponse {
 export const PLACE_PACKAGE_NAME = "place";
 
 export interface PlaceServiceClient {
-  queryPlaceListBySquare(request: QueryPlaceListBySquareRequest): Observable<QueryPlaceListBySquareResponse>;
+  queryPlaceListBySquare(
+    request: QueryPlaceListBySquareRequest,
+    ...rest: any
+  ): Observable<QueryPlaceListBySquareResponse>;
 
-  queryPlaceListByRadius(request: QueryPlaceListByRadiusRequest): Observable<QueryPlaceListByRadiusResponse>;
+  queryPlaceListByRadius(
+    request: QueryPlaceListByRadiusRequest,
+    ...rest: any
+  ): Observable<QueryPlaceListByRadiusResponse>;
 
-  createPlace(request: CreatePlaceRequest): Observable<CreatePlaceResponse>;
+  createPlace(request: CreatePlaceRequest, ...rest: any): Observable<CreatePlaceResponse>;
 
-  createPlaceList(request: CreatePlaceListRequest): Observable<CreatePlaceListResponse>;
+  createPlaceList(request: CreatePlaceListRequest, ...rest: any): Observable<CreatePlaceListResponse>;
 
-  readPlace(request: ReadPlaceRequest): Observable<ReadPlaceResponse>;
+  readPlace(request: ReadPlaceRequest, ...rest: any): Observable<ReadPlaceResponse>;
 
-  readPlaceList(request: ReadPlaceListRequest): Observable<ReadPlaceListResponse>;
+  readPlaceList(request: ReadPlaceListRequest, ...rest: any): Observable<ReadPlaceListResponse>;
 
-  updatePlace(request: UpdatePlaceRequest): Observable<UpdatePlaceResponse>;
+  updatePlace(request: UpdatePlaceRequest, ...rest: any): Observable<UpdatePlaceResponse>;
 
-  updatePlaceList(request: UpdatePlaceListRequest): Observable<UpdatePlaceListResponse>;
+  updatePlaceList(request: UpdatePlaceListRequest, ...rest: any): Observable<UpdatePlaceListResponse>;
 
-  deletePlace(request: DeletePlaceRequest): Observable<DeletePlaceResponse>;
+  deletePlace(request: DeletePlaceRequest, ...rest: any): Observable<DeletePlaceResponse>;
 
-  deletePlaceList(request: DeletePlaceListRequest): Observable<DeletePlaceListResponse>;
+  deletePlaceList(request: DeletePlaceListRequest, ...rest: any): Observable<DeletePlaceListResponse>;
 }
 
 export interface PlaceServiceController {
   queryPlaceListBySquare(
     request: QueryPlaceListBySquareRequest,
+    ...rest: any
   ):
     | Promise<QueryPlaceListBySquareResponse>
     | Observable<QueryPlaceListBySquareResponse>
@@ -132,6 +139,7 @@ export interface PlaceServiceController {
 
   queryPlaceListByRadius(
     request: QueryPlaceListByRadiusRequest,
+    ...rest: any
   ):
     | Promise<QueryPlaceListByRadiusResponse>
     | Observable<QueryPlaceListByRadiusResponse>
@@ -139,32 +147,42 @@ export interface PlaceServiceController {
 
   createPlace(
     request: CreatePlaceRequest,
+    ...rest: any
   ): Promise<CreatePlaceResponse> | Observable<CreatePlaceResponse> | CreatePlaceResponse;
 
   createPlaceList(
     request: CreatePlaceListRequest,
+    ...rest: any
   ): Promise<CreatePlaceListResponse> | Observable<CreatePlaceListResponse> | CreatePlaceListResponse;
 
-  readPlace(request: ReadPlaceRequest): Promise<ReadPlaceResponse> | Observable<ReadPlaceResponse> | ReadPlaceResponse;
+  readPlace(
+    request: ReadPlaceRequest,
+    ...rest: any
+  ): Promise<ReadPlaceResponse> | Observable<ReadPlaceResponse> | ReadPlaceResponse;
 
   readPlaceList(
     request: ReadPlaceListRequest,
+    ...rest: any
   ): Promise<ReadPlaceListResponse> | Observable<ReadPlaceListResponse> | ReadPlaceListResponse;
 
   updatePlace(
     request: UpdatePlaceRequest,
+    ...rest: any
   ): Promise<UpdatePlaceResponse> | Observable<UpdatePlaceResponse> | UpdatePlaceResponse;
 
   updatePlaceList(
     request: UpdatePlaceListRequest,
+    ...rest: any
   ): Promise<UpdatePlaceListResponse> | Observable<UpdatePlaceListResponse> | UpdatePlaceListResponse;
 
   deletePlace(
     request: DeletePlaceRequest,
+    ...rest: any
   ): Promise<DeletePlaceResponse> | Observable<DeletePlaceResponse> | DeletePlaceResponse;
 
   deletePlaceList(
     request: DeletePlaceListRequest,
+    ...rest: any
   ): Promise<DeletePlaceListResponse> | Observable<DeletePlaceListResponse> | DeletePlaceListResponse;
 }
 
