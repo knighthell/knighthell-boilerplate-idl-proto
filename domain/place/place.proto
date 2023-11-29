@@ -4,6 +4,7 @@ package place;
 option go_package = "github.com/knighthell/knighthell-boilerplate-idl-proto/place";
 
 import "google/protobuf/timestamp.proto";
+import "place-user.proto";
 
 message Place {
   string id = 1;
@@ -24,13 +25,6 @@ message Place {
   optional PlaceNameTranslation nameTranslation = 11;
 
   optional PlaceAddress address = 12;
-}
-
-message PlaceUser {
-  string id = 1;
-  string email = 2;
-  string photoURL = 3;
-  string displayName = 4;
 }
 
 message PlaceNameTranslation {

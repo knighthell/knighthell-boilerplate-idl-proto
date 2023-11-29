@@ -1,0 +1,11 @@
+syntax = "proto3";
+package place;
+
+option go_package = "github.com/knighthell/knighthell-boilerplate-idl-proto/place";
+
+message PlaceUser {
+  string id = 1;
+  string email = 2;
+  string photoURL = 3;
+  string displayName = 4;
+}
