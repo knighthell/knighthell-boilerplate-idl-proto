@@ -6,6 +6,16 @@ import { Place } from "./place";
 
 export const protobufPackage = "place";
 
+export enum PlaceServiceEventType {
+  PLACE_CREATED = "PLACE_CREATED",
+  PLACE_READ = "PLACE_READ",
+  PLACE_READ_LIST = "PLACE_READ_LIST",
+  PLACE_UPDATED = "PLACE_UPDATED",
+  PLACE_DELETED = "PLACE_DELETED",
+  QUERY_PLACE_BY_SQUARE = "QUERY_PLACE_BY_SQUARE",
+  QUERY_PLACE_BY_RADIUS = "QUERY_PLACE_BY_RADIUS",
+}
+
 export interface QueryPlaceListBySquareRequest {
   topRightLatitude: number;
   topRightLongitude: number;
@@ -42,7 +52,7 @@ export interface ReadPlaceRequest {
 }
 
 export interface ReadPlaceResponse {
-  place?: Place | undefined;
+  place: Place | undefined;
 }
 
 export interface ReadPlaceListRequest {
@@ -54,7 +64,7 @@ export interface ReadPlaceListResponse {
 }
 
 export interface CreatePlaceResponse {
-  place?: Place | undefined;
+  place: Place | undefined;
 }
 
 export interface CreatePlaceListRequest {
@@ -72,7 +82,7 @@ export interface UpdatePlaceRequest {
 }
 
 export interface UpdatePlaceResponse {
-  place?: Place | undefined;
+  place: Place | undefined;
 }
 
 export interface UpdatePlaceListRequest {
@@ -88,7 +98,7 @@ export interface DeletePlaceRequest {
 }
 
 export interface DeletePlaceResponse {
-  place?: Place | undefined;
+  place: Place | undefined;
 }
 
 export interface DeletePlaceListRequest {

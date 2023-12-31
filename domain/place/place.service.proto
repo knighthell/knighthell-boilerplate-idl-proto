@@ -22,6 +22,16 @@ service PlaceService {
   rpc DeletePlaceList(DeletePlaceListRequest) returns (DeletePlaceListResponse);
 }
 
+enum PlaceServiceEventType {
+  PLACE_CREATED = 0;
+  PLACE_READ = 1;
+  PLACE_READ_LIST = 2;
+  PLACE_UPDATED = 3;
+  PLACE_DELETED = 4;
+  QUERY_PLACE_BY_SQUARE = 5;
+  QUERY_PLACE_BY_RADIUS = 6;
+}
+
 message QueryPlaceListBySquareRequest {
   double topRightLatitude = 1;
   double topRightLongitude = 2;

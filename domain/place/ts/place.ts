@@ -1,6 +1,7 @@
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
 import { Timestamp } from "./google/protobuf/timestamp";
+import { PlaceUser } from "./place-user";
 
 export const protobufPackage = "place";
 
@@ -8,27 +9,22 @@ export interface Place {
   id: string;
   latitude: number;
   longitude: number;
-  createdBy: PlaceUser;
-  createdAt: Date;
-  updatedBy: PlaceUser;
-  updatedAt: Date;
-  deletedBy: PlaceUser;
-  deletedAt: Date;
+  createdBy: PlaceUser | undefined;
+  createdAt: Date | undefined;
+  updatedBy: PlaceUser | undefined;
+  updatedAt: Date | undefined;
+  deletedBy?: PlaceUser | undefined;
+  deletedAt?: Date | undefined;
   name: string;
   nameTranslation?: PlaceNameTranslation | undefined;
   address?: PlaceAddress | undefined;
 }
 
-export interface PlaceUser {
-  id: string;
-  email: string;
-  photoURL: string;
-  displayName: string;
-}
-
 export interface PlaceNameTranslation {
-  ko: string;
-  en: string;
+  ko?: string | undefined;
+  en?: string | undefined;
+  ja?: string | undefined;
+  zh?: string | undefined;
 }
 
 export interface PlaceAddress {
@@ -290,121 +286,23 @@ export const Place = {
   },
 };
 
-function createBasePlaceUser(): PlaceUser {
-  return { id: "", email: "", photoURL: "", displayName: "" };
-}
-
-export const PlaceUser = {
-  encode(message: PlaceUser, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.id !== "") {
-      writer.uint32(10).string(message.id);
-    }
-    if (message.email !== "") {
-      writer.uint32(18).string(message.email);
-    }
-    if (message.photoURL !== "") {
-      writer.uint32(26).string(message.photoURL);
-    }
-    if (message.displayName !== "") {
-      writer.uint32(34).string(message.displayName);
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): PlaceUser {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBasePlaceUser();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.id = reader.string();
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.email = reader.string();
-          continue;
-        case 3:
-          if (tag !== 26) {
-            break;
-          }
-
-          message.photoURL = reader.string();
-          continue;
-        case 4:
-          if (tag !== 34) {
-            break;
-          }
-
-          message.displayName = reader.string();
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): PlaceUser {
-    return {
-      id: isSet(object.id) ? globalThis.String(object.id) : "",
-      email: isSet(object.email) ? globalThis.String(object.email) : "",
-      photoURL: isSet(object.photoURL) ? globalThis.String(object.photoURL) : "",
-      displayName: isSet(object.displayName) ? globalThis.String(object.displayName) : "",
-    };
-  },
-
-  toJSON(message: PlaceUser): unknown {
-    const obj: any = {};
-    if (message.id !== "") {
-      obj.id = message.id;
-    }
-    if (message.email !== "") {
-      obj.email = message.email;
-    }
-    if (message.photoURL !== "") {
-      obj.photoURL = message.photoURL;
-    }
-    if (message.displayName !== "") {
-      obj.displayName = message.displayName;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<PlaceUser>, I>>(base?: I): PlaceUser {
-    return PlaceUser.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<PlaceUser>, I>>(object: I): PlaceUser {
-    const message = createBasePlaceUser();
-    message.id = object.id ?? "";
-    message.email = object.email ?? "";
-    message.photoURL = object.photoURL ?? "";
-    message.displayName = object.displayName ?? "";
-    return message;
-  },
-};
-
 function createBasePlaceNameTranslation(): PlaceNameTranslation {
-  return { ko: "", en: "" };
+  return { ko: undefined, en: undefined, ja: undefined, zh: undefined };
 }
 
 export const PlaceNameTranslation = {
   encode(message: PlaceNameTranslation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.ko !== "") {
+    if (message.ko !== undefined) {
       writer.uint32(10).string(message.ko);
     }
-    if (message.en !== "") {
+    if (message.en !== undefined) {
       writer.uint32(18).string(message.en);
+    }
+    if (message.ja !== undefined) {
+      writer.uint32(26).string(message.ja);
+    }
+    if (message.zh !== undefined) {
+      writer.uint32(34).string(message.zh);
     }
     return writer;
   },
@@ -430,6 +328,20 @@ export const PlaceNameTranslation = {
 
           message.en = reader.string();
           continue;
+        case 3:
+          if (tag !== 26) {
+            break;
+          }
+
+          message.ja = reader.string();
+          continue;
+        case 4:
+          if (tag !== 34) {
+            break;
+          }
+
+          message.zh = reader.string();
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -441,18 +353,26 @@ export const PlaceNameTranslation = {
 
   fromJSON(object: any): PlaceNameTranslation {
     return {
-      ko: isSet(object.ko) ? globalThis.String(object.ko) : "",
-      en: isSet(object.en) ? globalThis.String(object.en) : "",
+      ko: isSet(object.ko) ? globalThis.String(object.ko) : undefined,
+      en: isSet(object.en) ? globalThis.String(object.en) : undefined,
+      ja: isSet(object.ja) ? globalThis.String(object.ja) : undefined,
+      zh: isSet(object.zh) ? globalThis.String(object.zh) : undefined,
     };
   },
 
   toJSON(message: PlaceNameTranslation): unknown {
     const obj: any = {};
-    if (message.ko !== "") {
+    if (message.ko !== undefined) {
       obj.ko = message.ko;
     }
-    if (message.en !== "") {
+    if (message.en !== undefined) {
       obj.en = message.en;
+    }
+    if (message.ja !== undefined) {
+      obj.ja = message.ja;
+    }
+    if (message.zh !== undefined) {
+      obj.zh = message.zh;
     }
     return obj;
   },
@@ -462,8 +382,10 @@ export const PlaceNameTranslation = {
   },
   fromPartial<I extends Exact<DeepPartial<PlaceNameTranslation>, I>>(object: I): PlaceNameTranslation {
     const message = createBasePlaceNameTranslation();
-    message.ko = object.ko ?? "";
-    message.en = object.en ?? "";
+    message.ko = object.ko ?? undefined;
+    message.en = object.en ?? undefined;
+    message.ja = object.ja ?? undefined;
+    message.zh = object.zh ?? undefined;
     return message;
   },
 };

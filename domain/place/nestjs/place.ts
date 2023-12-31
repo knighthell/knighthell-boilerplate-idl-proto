@@ -8,10 +8,10 @@ export interface Place {
   id: string;
   latitude: number;
   longitude: number;
-  createdBy?: PlaceUser | undefined;
-  createdAt?: Date | undefined;
-  updatedBy?: PlaceUser | undefined;
-  updatedAt?: Date | undefined;
+  createdBy: PlaceUser | undefined;
+  createdAt: Date | undefined;
+  updatedBy: PlaceUser | undefined;
+  updatedAt: Date | undefined;
   deletedBy?: PlaceUser | undefined;
   deletedAt?: Date | undefined;
   name: string;

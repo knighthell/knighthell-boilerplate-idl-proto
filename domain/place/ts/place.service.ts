@@ -4,6 +4,86 @@ import { Place } from "./place";
 
 export const protobufPackage = "place";
 
+export enum PlaceServiceEventType {
+  PLACE_CREATED = "PLACE_CREATED",
+  PLACE_READ = "PLACE_READ",
+  PLACE_READ_LIST = "PLACE_READ_LIST",
+  PLACE_UPDATED = "PLACE_UPDATED",
+  PLACE_DELETED = "PLACE_DELETED",
+  QUERY_PLACE_BY_SQUARE = "QUERY_PLACE_BY_SQUARE",
+  QUERY_PLACE_BY_RADIUS = "QUERY_PLACE_BY_RADIUS",
+}
+
+export function placeServiceEventTypeFromJSON(object: any): PlaceServiceEventType {
+  switch (object) {
+    case 0:
+    case "PLACE_CREATED":
+      return PlaceServiceEventType.PLACE_CREATED;
+    case 1:
+    case "PLACE_READ":
+      return PlaceServiceEventType.PLACE_READ;
+    case 2:
+    case "PLACE_READ_LIST":
+      return PlaceServiceEventType.PLACE_READ_LIST;
+    case 3:
+    case "PLACE_UPDATED":
+      return PlaceServiceEventType.PLACE_UPDATED;
+    case 4:
+    case "PLACE_DELETED":
+      return PlaceServiceEventType.PLACE_DELETED;
+    case 5:
+    case "QUERY_PLACE_BY_SQUARE":
+      return PlaceServiceEventType.QUERY_PLACE_BY_SQUARE;
+    case 6:
+    case "QUERY_PLACE_BY_RADIUS":
+      return PlaceServiceEventType.QUERY_PLACE_BY_RADIUS;
+    default:
+      throw new globalThis.Error("Unrecognized enum value " + object + " for enum PlaceServiceEventType");
+  }
+}
+
+export function placeServiceEventTypeToJSON(object: PlaceServiceEventType): string {
+  switch (object) {
+    case PlaceServiceEventType.PLACE_CREATED:
+      return "PLACE_CREATED";
+    case PlaceServiceEventType.PLACE_READ:
+      return "PLACE_READ";
+    case PlaceServiceEventType.PLACE_READ_LIST:
+      return "PLACE_READ_LIST";
+    case PlaceServiceEventType.PLACE_UPDATED:
+      return "PLACE_UPDATED";
+    case PlaceServiceEventType.PLACE_DELETED:
+      return "PLACE_DELETED";
+    case PlaceServiceEventType.QUERY_PLACE_BY_SQUARE:
+      return "QUERY_PLACE_BY_SQUARE";
+    case PlaceServiceEventType.QUERY_PLACE_BY_RADIUS:
+      return "QUERY_PLACE_BY_RADIUS";
+    default:
+      throw new globalThis.Error("Unrecognized enum value " + object + " for enum PlaceServiceEventType");
+  }
+}
+
+export function placeServiceEventTypeToNumber(object: PlaceServiceEventType): number {
+  switch (object) {
+    case PlaceServiceEventType.PLACE_CREATED:
+      return 0;
+    case PlaceServiceEventType.PLACE_READ:
+      return 1;
+    case PlaceServiceEventType.PLACE_READ_LIST:
+      return 2;
+    case PlaceServiceEventType.PLACE_UPDATED:
+      return 3;
+    case PlaceServiceEventType.PLACE_DELETED:
+      return 4;
+    case PlaceServiceEventType.QUERY_PLACE_BY_SQUARE:
+      return 5;
+    case PlaceServiceEventType.QUERY_PLACE_BY_RADIUS:
+      return 6;
+    default:
+      throw new globalThis.Error("Unrecognized enum value " + object + " for enum PlaceServiceEventType");
+  }
+}
+
 export interface QueryPlaceListBySquareRequest {
   topRightLatitude: number;
   topRightLongitude: number;
@@ -40,7 +120,7 @@ export interface ReadPlaceRequest {
 }
 
 export interface ReadPlaceResponse {
-  place: Place;
+  place: Place | undefined;
 }
 
 export interface ReadPlaceListRequest {
@@ -52,7 +132,7 @@ export interface ReadPlaceListResponse {
 }
 
 export interface CreatePlaceResponse {
-  place: Place;
+  place: Place | undefined;
 }
 
 export interface CreatePlaceListRequest {
@@ -70,7 +150,7 @@ export interface UpdatePlaceRequest {
 }
 
 export interface UpdatePlaceResponse {
-  place: Place;
+  place: Place | undefined;
 }
 
 export interface UpdatePlaceListRequest {
@@ -86,7 +166,7 @@ export interface DeletePlaceRequest {
 }
 
 export interface DeletePlaceResponse {
-  place: Place;
+  place: Place | undefined;
 }
 
 export interface DeletePlaceListRequest {
