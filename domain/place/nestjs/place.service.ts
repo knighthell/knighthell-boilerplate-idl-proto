@@ -48,7 +48,8 @@ export interface CreatePlaceRequest {
 }
 
 export interface ReadPlaceRequest {
-  id: string;
+  /** 장소(Place) 고유 Id */
+  placeId: string;
 }
 
 export interface ReadPlaceResponse {

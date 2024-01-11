@@ -68,7 +68,7 @@ message CreatePlaceRequest {
 }
 
 message ReadPlaceRequest {
-  string id = 1;
+  string placeId = 1; // 장소(Place) 고유 Id
 }
 
 message ReadPlaceResponse {
