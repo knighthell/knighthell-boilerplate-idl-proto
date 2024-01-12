@@ -110,8 +110,11 @@ export interface QueryPlaceListByRadiusResponse {
 }
 
 export interface CreatePlaceRequest {
+  /** 장소(Place)의 원래 이름 */
   name: string;
+  /** 장소(Place)의 위도 */
   latitude: number;
+  /** 장소(Place)의 경도 */
   longitude: number;
 }
 
@@ -145,8 +148,15 @@ export interface CreatePlaceListResponse {
 }
 
 export interface UpdatePlaceRequest {
-  name?: string | undefined;
-  latitude?: number | undefined;
+  /** 장소(Place)의 원래 이름 */
+  name?:
+    | string
+    | undefined;
+  /** 장소(Place)의 위도 */
+  latitude?:
+    | number
+    | undefined;
+  /** 장소(Place)의 경도 */
   longitude?: number | undefined;
 }
 
@@ -163,7 +173,8 @@ export interface UpdatePlaceListResponse {
 }
 
 export interface DeletePlaceRequest {
-  id: string;
+  /** 장소(Place) 고유 Id */
+  placeId: string;
 }
 
 export interface DeletePlaceResponse {
@@ -1325,13 +1336,13 @@ export const UpdatePlaceListResponse = {
 };
 
 function createBaseDeletePlaceRequest(): DeletePlaceRequest {
-  return { id: "" };
+  return { placeId: "" };
 }
 
 export const DeletePlaceRequest = {
   encode(message: DeletePlaceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.id !== "") {
-      writer.uint32(10).string(message.id);
+    if (message.placeId !== "") {
+      writer.uint32(10).string(message.placeId);
     }
     return writer;
   },
@@ -1348,7 +1359,7 @@ export const DeletePlaceRequest = {
             break;
           }
 
-          message.id = reader.string();
+          message.placeId = reader.string();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -1360,13 +1371,13 @@ export const DeletePlaceRequest = {
   },
 
   fromJSON(object: any): DeletePlaceRequest {
-    return { id: isSet(object.id) ? globalThis.String(object.id) : "" };
+    return { placeId: isSet(object.placeId) ? globalThis.String(object.placeId) : "" };
   },
 
   toJSON(message: DeletePlaceRequest): unknown {
     const obj: any = {};
-    if (message.id !== "") {
-      obj.id = message.id;
+    if (message.placeId !== "") {
+      obj.placeId = message.placeId;
     }
     return obj;
   },
@@ -1376,7 +1387,7 @@ export const DeletePlaceRequest = {
   },
   fromPartial<I extends Exact<DeepPartial<DeletePlaceRequest>, I>>(object: I): DeletePlaceRequest {
     const message = createBaseDeletePlaceRequest();
-    message.id = object.id ?? "";
+    message.placeId = object.placeId ?? "";
     return message;
   },
 };
