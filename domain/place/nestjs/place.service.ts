@@ -42,7 +42,9 @@ export interface QueryPlaceListByRadiusResponse {
 }
 
 export interface CreatePlaceRequest {
-  placeId: string;
+  placeId?:
+    | string
+    | undefined;
   /** 장소(Place)의 원래 이름 */
   name: string;
   /** 장소(Place)의 위도 */

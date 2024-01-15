@@ -110,7 +110,9 @@ export interface QueryPlaceListByRadiusResponse {
 }
 
 export interface CreatePlaceRequest {
-  placeId: string;
+  placeId?:
+    | string
+    | undefined;
   /** 장소(Place)의 원래 이름 */
   name: string;
   /** 장소(Place)의 위도 */
@@ -578,12 +580,12 @@ export const QueryPlaceListByRadiusResponse = {
 };
 
 function createBaseCreatePlaceRequest(): CreatePlaceRequest {
-  return { placeId: "", name: "", latitude: 0, longitude: 0 };
+  return { placeId: undefined, name: "", latitude: 0, longitude: 0 };
 }
 
 export const CreatePlaceRequest = {
   encode(message: CreatePlaceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.placeId !== "") {
+    if (message.placeId !== undefined) {
       writer.uint32(10).string(message.placeId);
     }
     if (message.name !== "") {
@@ -644,7 +646,7 @@ export const CreatePlaceRequest = {
 
   fromJSON(object: any): CreatePlaceRequest {
     return {
-      placeId: isSet(object.placeId) ? globalThis.String(object.placeId) : "",
+      placeId: isSet(object.placeId) ? globalThis.String(object.placeId) : undefined,
       name: isSet(object.name) ? globalThis.String(object.name) : "",
       latitude: isSet(object.latitude) ? globalThis.Number(object.latitude) : 0,
       longitude: isSet(object.longitude) ? globalThis.Number(object.longitude) : 0,
@@ -653,7 +655,7 @@ export const CreatePlaceRequest = {
 
   toJSON(message: CreatePlaceRequest): unknown {
     const obj: any = {};
-    if (message.placeId !== "") {
+    if (message.placeId !== undefined) {
       obj.placeId = message.placeId;
     }
     if (message.name !== "") {
@@ -673,7 +675,7 @@ export const CreatePlaceRequest = {
   },
   fromPartial<I extends Exact<DeepPartial<CreatePlaceRequest>, I>>(object: I): CreatePlaceRequest {
     const message = createBaseCreatePlaceRequest();
-    message.placeId = object.placeId ?? "";
+    message.placeId = object.placeId ?? undefined;
     message.name = object.name ?? "";
     message.latitude = object.latitude ?? 0;
     message.longitude = object.longitude ?? 0;

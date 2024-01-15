@@ -62,7 +62,7 @@ message QueryPlaceListByRadiusResponse {
 }
 
 message CreatePlaceRequest {
-  string placeId = 1;
+  optional string placeId = 1;
 
   string name = 2; // 장소(Place)의 원래 이름
   double latitude = 3; // 장소(Place)의 위도
