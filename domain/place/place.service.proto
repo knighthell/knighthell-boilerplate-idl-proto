@@ -62,9 +62,15 @@ message QueryPlaceListByRadiusResponse {
 }
 
 message CreatePlaceRequest {
-  string name = 1; // 장소(Place)의 원래 이름
-  double latitude = 2; // 장소(Place)의 위도
-  double longitude = 3; // 장소(Place)의 경도
+  string placeId = 1;
+
+  string name = 2; // 장소(Place)의 원래 이름
+  double latitude = 3; // 장소(Place)의 위도
+  double longitude = 4; // 장소(Place)의 경도
+}
+
+message CreatePlaceResponse {
+  place.Place place = 1;
 }
 
 message ReadPlaceRequest {
@@ -83,10 +89,6 @@ message ReadPlaceListResponse {
   repeated place.Place places = 2;
 }
 
-message CreatePlaceResponse {
-  place.Place place = 1;
-}
-
 message CreatePlaceListRequest {
   repeated CreatePlaceRequest places = 1;
 }
@@ -96,9 +98,11 @@ message CreatePlaceListResponse {
 }
 
 message UpdatePlaceRequest {
-  optional string name = 1; // 장소(Place)의 원래 이름
-  optional double latitude = 2; // 장소(Place)의 위도
-  optional double longitude = 3; // 장소(Place)의 경도
+  string placeId = 1;
+
+  optional string name = 2; // 장소(Place)의 원래 이름(No Localization Name)
+  optional double latitude = 3; // 장소(Place)의 위도
+  optional double longitude = 4; // 장소(Place)의 경도
 }
 
 message UpdatePlaceResponse {

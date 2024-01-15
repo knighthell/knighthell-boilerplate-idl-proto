@@ -42,12 +42,17 @@ export interface QueryPlaceListByRadiusResponse {
 }
 
 export interface CreatePlaceRequest {
+  placeId: string;
   /** 장소(Place)의 원래 이름 */
   name: string;
   /** 장소(Place)의 위도 */
   latitude: number;
   /** 장소(Place)의 경도 */
   longitude: number;
+}
+
+export interface CreatePlaceResponse {
+  place: Place | undefined;
 }
 
 export interface ReadPlaceRequest {
@@ -67,10 +72,6 @@ export interface ReadPlaceListResponse {
   places: Place[];
 }
 
-export interface CreatePlaceResponse {
-  place: Place | undefined;
-}
-
 export interface CreatePlaceListRequest {
   places: CreatePlaceRequest[];
 }
@@ -80,7 +81,8 @@ export interface CreatePlaceListResponse {
 }
 
 export interface UpdatePlaceRequest {
-  /** 장소(Place)의 원래 이름 */
+  placeId: string;
+  /** 장소(Place)의 원래 이름(No Localization Name) */
   name?:
     | string
     | undefined;

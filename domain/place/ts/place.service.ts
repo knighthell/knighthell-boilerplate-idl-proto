@@ -110,12 +110,17 @@ export interface QueryPlaceListByRadiusResponse {
 }
 
 export interface CreatePlaceRequest {
+  placeId: string;
   /** 장소(Place)의 원래 이름 */
   name: string;
   /** 장소(Place)의 위도 */
   latitude: number;
   /** 장소(Place)의 경도 */
   longitude: number;
+}
+
+export interface CreatePlaceResponse {
+  place: Place | undefined;
 }
 
 export interface ReadPlaceRequest {
@@ -135,10 +140,6 @@ export interface ReadPlaceListResponse {
   places: Place[];
 }
 
-export interface CreatePlaceResponse {
-  place: Place | undefined;
-}
-
 export interface CreatePlaceListRequest {
   places: CreatePlaceRequest[];
 }
@@ -148,7 +149,8 @@ export interface CreatePlaceListResponse {
 }
 
 export interface UpdatePlaceRequest {
-  /** 장소(Place)의 원래 이름 */
+  placeId: string;
+  /** 장소(Place)의 원래 이름(No Localization Name) */
   name?:
     | string
     | undefined;
@@ -576,19 +578,22 @@ export const QueryPlaceListByRadiusResponse = {
 };
 
 function createBaseCreatePlaceRequest(): CreatePlaceRequest {
-  return { name: "", latitude: 0, longitude: 0 };
+  return { placeId: "", name: "", latitude: 0, longitude: 0 };
 }
 
 export const CreatePlaceRequest = {
   encode(message: CreatePlaceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.placeId !== "") {
+      writer.uint32(10).string(message.placeId);
+    }
     if (message.name !== "") {
-      writer.uint32(10).string(message.name);
+      writer.uint32(18).string(message.name);
     }
     if (message.latitude !== 0) {
-      writer.uint32(17).double(message.latitude);
+      writer.uint32(25).double(message.latitude);
     }
     if (message.longitude !== 0) {
-      writer.uint32(25).double(message.longitude);
+      writer.uint32(33).double(message.longitude);
     }
     return writer;
   },
@@ -605,17 +610,24 @@ export const CreatePlaceRequest = {
             break;
           }
 
-          message.name = reader.string();
+          message.placeId = reader.string();
           continue;
         case 2:
-          if (tag !== 17) {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.name = reader.string();
+          continue;
+        case 3:
+          if (tag !== 25) {
             break;
           }
 
           message.latitude = reader.double();
           continue;
-        case 3:
-          if (tag !== 25) {
+        case 4:
+          if (tag !== 33) {
             break;
           }
 
@@ -632,6 +644,7 @@ export const CreatePlaceRequest = {
 
   fromJSON(object: any): CreatePlaceRequest {
     return {
+      placeId: isSet(object.placeId) ? globalThis.String(object.placeId) : "",
       name: isSet(object.name) ? globalThis.String(object.name) : "",
       latitude: isSet(object.latitude) ? globalThis.Number(object.latitude) : 0,
       longitude: isSet(object.longitude) ? globalThis.Number(object.longitude) : 0,
@@ -640,6 +653,9 @@ export const CreatePlaceRequest = {
 
   toJSON(message: CreatePlaceRequest): unknown {
     const obj: any = {};
+    if (message.placeId !== "") {
+      obj.placeId = message.placeId;
+    }
     if (message.name !== "") {
       obj.name = message.name;
     }
@@ -657,9 +673,67 @@ export const CreatePlaceRequest = {
   },
   fromPartial<I extends Exact<DeepPartial<CreatePlaceRequest>, I>>(object: I): CreatePlaceRequest {
     const message = createBaseCreatePlaceRequest();
+    message.placeId = object.placeId ?? "";
     message.name = object.name ?? "";
     message.latitude = object.latitude ?? 0;
     message.longitude = object.longitude ?? 0;
+    return message;
+  },
+};
+
+function createBaseCreatePlaceResponse(): CreatePlaceResponse {
+  return { place: undefined };
+}
+
+export const CreatePlaceResponse = {
+  encode(message: CreatePlaceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.place !== undefined) {
+      Place.encode(message.place, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): CreatePlaceResponse {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseCreatePlaceResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.place = Place.decode(reader, reader.uint32());
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): CreatePlaceResponse {
+    return { place: isSet(object.place) ? Place.fromJSON(object.place) : undefined };
+  },
+
+  toJSON(message: CreatePlaceResponse): unknown {
+    const obj: any = {};
+    if (message.place !== undefined) {
+      obj.place = Place.toJSON(message.place);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<CreatePlaceResponse>, I>>(base?: I): CreatePlaceResponse {
+    return CreatePlaceResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<CreatePlaceResponse>, I>>(object: I): CreatePlaceResponse {
+    const message = createBaseCreatePlaceResponse();
+    message.place = (object.place !== undefined && object.place !== null) ? Place.fromPartial(object.place) : undefined;
     return message;
   },
 };
@@ -896,63 +970,6 @@ export const ReadPlaceListResponse = {
   },
 };
 
-function createBaseCreatePlaceResponse(): CreatePlaceResponse {
-  return { place: undefined };
-}
-
-export const CreatePlaceResponse = {
-  encode(message: CreatePlaceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.place !== undefined) {
-      Place.encode(message.place, writer.uint32(10).fork()).ldelim();
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): CreatePlaceResponse {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseCreatePlaceResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.place = Place.decode(reader, reader.uint32());
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): CreatePlaceResponse {
-    return { place: isSet(object.place) ? Place.fromJSON(object.place) : undefined };
-  },
-
-  toJSON(message: CreatePlaceResponse): unknown {
-    const obj: any = {};
-    if (message.place !== undefined) {
-      obj.place = Place.toJSON(message.place);
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<CreatePlaceResponse>, I>>(base?: I): CreatePlaceResponse {
-    return CreatePlaceResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<CreatePlaceResponse>, I>>(object: I): CreatePlaceResponse {
-    const message = createBaseCreatePlaceResponse();
-    message.place = (object.place !== undefined && object.place !== null) ? Place.fromPartial(object.place) : undefined;
-    return message;
-  },
-};
-
 function createBaseCreatePlaceListRequest(): CreatePlaceListRequest {
   return { places: [] };
 }
@@ -1072,19 +1089,22 @@ export const CreatePlaceListResponse = {
 };
 
 function createBaseUpdatePlaceRequest(): UpdatePlaceRequest {
-  return { name: undefined, latitude: undefined, longitude: undefined };
+  return { placeId: "", name: undefined, latitude: undefined, longitude: undefined };
 }
 
 export const UpdatePlaceRequest = {
   encode(message: UpdatePlaceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.placeId !== "") {
+      writer.uint32(10).string(message.placeId);
+    }
     if (message.name !== undefined) {
-      writer.uint32(10).string(message.name);
+      writer.uint32(18).string(message.name);
     }
     if (message.latitude !== undefined) {
-      writer.uint32(17).double(message.latitude);
+      writer.uint32(25).double(message.latitude);
     }
     if (message.longitude !== undefined) {
-      writer.uint32(25).double(message.longitude);
+      writer.uint32(33).double(message.longitude);
     }
     return writer;
   },
@@ -1101,17 +1121,24 @@ export const UpdatePlaceRequest = {
             break;
           }
 
-          message.name = reader.string();
+          message.placeId = reader.string();
           continue;
         case 2:
-          if (tag !== 17) {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.name = reader.string();
+          continue;
+        case 3:
+          if (tag !== 25) {
             break;
           }
 
           message.latitude = reader.double();
           continue;
-        case 3:
-          if (tag !== 25) {
+        case 4:
+          if (tag !== 33) {
             break;
           }
 
@@ -1128,6 +1155,7 @@ export const UpdatePlaceRequest = {
 
   fromJSON(object: any): UpdatePlaceRequest {
     return {
+      placeId: isSet(object.placeId) ? globalThis.String(object.placeId) : "",
       name: isSet(object.name) ? globalThis.String(object.name) : undefined,
       latitude: isSet(object.latitude) ? globalThis.Number(object.latitude) : undefined,
       longitude: isSet(object.longitude) ? globalThis.Number(object.longitude) : undefined,
@@ -1136,6 +1164,9 @@ export const UpdatePlaceRequest = {
 
   toJSON(message: UpdatePlaceRequest): unknown {
     const obj: any = {};
+    if (message.placeId !== "") {
+      obj.placeId = message.placeId;
+    }
     if (message.name !== undefined) {
       obj.name = message.name;
     }
@@ -1153,6 +1184,7 @@ export const UpdatePlaceRequest = {
   },
   fromPartial<I extends Exact<DeepPartial<UpdatePlaceRequest>, I>>(object: I): UpdatePlaceRequest {
     const message = createBaseUpdatePlaceRequest();
+    message.placeId = object.placeId ?? "";
     message.name = object.name ?? undefined;
     message.latitude = object.latitude ?? undefined;
     message.longitude = object.longitude ?? undefined;
