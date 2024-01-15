@@ -7,7 +7,7 @@ import "google/protobuf/timestamp.proto";
 import "place-user.proto";
 
 message Place {
-  string id = 1;
+  string placeId = 1;
 
   double latitude = 2;
   double longitude = 3;

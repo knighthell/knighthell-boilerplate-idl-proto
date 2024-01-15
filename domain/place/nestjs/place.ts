@@ -5,7 +5,7 @@ import { PlaceUser } from "./place-user";
 export const protobufPackage = "place";
 
 export interface Place {
-  id: string;
+  placeId: string;
   latitude: number;
   longitude: number;
   createdBy: PlaceUser | undefined;

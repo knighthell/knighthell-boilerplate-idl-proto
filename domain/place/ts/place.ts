@@ -6,7 +6,7 @@ import { PlaceUser } from "./place-user";
 export const protobufPackage = "place";
 
 export interface Place {
-  id: string;
+  placeId: string;
   latitude: number;
   longitude: number;
   createdBy: PlaceUser | undefined;
@@ -39,7 +39,7 @@ export interface Wgs84Coordinates {
 
 function createBasePlace(): Place {
   return {
-    id: "",
+    placeId: "",
     latitude: 0,
     longitude: 0,
     createdBy: undefined,
@@ -56,8 +56,8 @@ function createBasePlace(): Place {
 
 export const Place = {
   encode(message: Place, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.id !== "") {
-      writer.uint32(10).string(message.id);
+    if (message.placeId !== "") {
+      writer.uint32(10).string(message.placeId);
     }
     if (message.latitude !== 0) {
       writer.uint32(17).double(message.latitude);
@@ -107,7 +107,7 @@ export const Place = {
             break;
           }
 
-          message.id = reader.string();
+          message.placeId = reader.string();
           continue;
         case 2:
           if (tag !== 17) {
@@ -197,7 +197,7 @@ export const Place = {
 
   fromJSON(object: any): Place {
     return {
-      id: isSet(object.id) ? globalThis.String(object.id) : "",
+      placeId: isSet(object.placeId) ? globalThis.String(object.placeId) : "",
       latitude: isSet(object.latitude) ? globalThis.Number(object.latitude) : 0,
       longitude: isSet(object.longitude) ? globalThis.Number(object.longitude) : 0,
       createdBy: isSet(object.createdBy) ? PlaceUser.fromJSON(object.createdBy) : undefined,
@@ -216,8 +216,8 @@ export const Place = {
 
   toJSON(message: Place): unknown {
     const obj: any = {};
-    if (message.id !== "") {
-      obj.id = message.id;
+    if (message.placeId !== "") {
+      obj.placeId = message.placeId;
     }
     if (message.latitude !== 0) {
       obj.latitude = message.latitude;
@@ -260,7 +260,7 @@ export const Place = {
   },
   fromPartial<I extends Exact<DeepPartial<Place>, I>>(object: I): Place {
     const message = createBasePlace();
-    message.id = object.id ?? "";
+    message.placeId = object.placeId ?? "";
     message.latitude = object.latitude ?? 0;
     message.longitude = object.longitude ?? 0;
     message.createdBy = (object.createdBy !== undefined && object.createdBy !== null)
