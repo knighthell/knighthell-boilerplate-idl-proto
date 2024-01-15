@@ -6,8 +6,8 @@ option go_package = "github.com/knighthell-family/knighthell-family-idl/place";
 import "place.proto";
 
 service PlaceService {
-  rpc QueryPlaceListBySquare(QueryPlaceListBySquareRequest) returns (QueryPlaceListBySquareResponse);
-  rpc QueryPlaceListByRadius(QueryPlaceListByRadiusRequest) returns (QueryPlaceListByRadiusResponse);
+  rpc QueryPlaceListBySquare(QueryPlaceListBySquareRequest) returns (QueryPlaceListResponse);
+  rpc QueryPlaceListByRadius(QueryPlaceListByRadiusRequest) returns (QueryPlaceListResponse);
 
   rpc CreatePlace(CreatePlaceRequest) returns (CreatePlaceResponse);
   rpc CreatePlaceList(CreatePlaceListRequest) returns (CreatePlaceListResponse);
@@ -43,10 +43,6 @@ message QueryPlaceListBySquareRequest {
   optional double userLongitude = 6;
 }
 
-message QueryPlaceListBySquareResponse {
-  repeated place.Place results = 1;
-}
-
 message QueryPlaceListByRadiusRequest {
   double centerLatitude = 1;
   double centerLongitude = 2;
@@ -57,7 +53,7 @@ message QueryPlaceListByRadiusRequest {
   optional double userLongitude = 5;
 }
 
-message QueryPlaceListByRadiusResponse {
+message QueryPlaceListResponse {
   repeated place.Place results = 1;
 }
 

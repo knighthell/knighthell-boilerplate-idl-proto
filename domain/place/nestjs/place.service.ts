@@ -24,10 +24,6 @@ export interface QueryPlaceListBySquareRequest {
   userLongitude?: number | undefined;
 }
 
-export interface QueryPlaceListBySquareResponse {
-  results: Place[];
-}
-
 export interface QueryPlaceListByRadiusRequest {
   centerLatitude: number;
   centerLongitude: number;
@@ -36,7 +32,7 @@ export interface QueryPlaceListByRadiusRequest {
   userLongitude?: number | undefined;
 }
 
-export interface QueryPlaceListByRadiusResponse {
+export interface QueryPlaceListResponse {
   results: Place[];
 }
 
@@ -127,15 +123,9 @@ export interface DeletePlaceListResponse {
 export const PLACE_PACKAGE_NAME = "place";
 
 export interface PlaceServiceClient {
-  queryPlaceListBySquare(
-    request: QueryPlaceListBySquareRequest,
-    ...rest: any
-  ): Observable<QueryPlaceListBySquareResponse>;
+  queryPlaceListBySquare(request: QueryPlaceListBySquareRequest, ...rest: any): Observable<QueryPlaceListResponse>;
 
-  queryPlaceListByRadius(
-    request: QueryPlaceListByRadiusRequest,
-    ...rest: any
-  ): Observable<QueryPlaceListByRadiusResponse>;
+  queryPlaceListByRadius(request: QueryPlaceListByRadiusRequest, ...rest: any): Observable<QueryPlaceListResponse>;
 
   createPlace(request: CreatePlaceRequest, ...rest: any): Observable<CreatePlaceResponse>;
 
@@ -158,18 +148,12 @@ export interface PlaceServiceController {
   queryPlaceListBySquare(
     request: QueryPlaceListBySquareRequest,
     ...rest: any
-  ):
-    | Promise<QueryPlaceListBySquareResponse>
-    | Observable<QueryPlaceListBySquareResponse>
-    | QueryPlaceListBySquareResponse;
+  ): Promise<QueryPlaceListResponse> | Observable<QueryPlaceListResponse> | QueryPlaceListResponse;
 
   queryPlaceListByRadius(
     request: QueryPlaceListByRadiusRequest,
     ...rest: any
-  ):
-    | Promise<QueryPlaceListByRadiusResponse>
-    | Observable<QueryPlaceListByRadiusResponse>
-    | QueryPlaceListByRadiusResponse;
+  ): Promise<QueryPlaceListResponse> | Observable<QueryPlaceListResponse> | QueryPlaceListResponse;
 
   createPlace(
     request: CreatePlaceRequest,

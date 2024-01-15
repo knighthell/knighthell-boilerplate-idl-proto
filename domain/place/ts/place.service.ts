@@ -93,10 +93,6 @@ export interface QueryPlaceListBySquareRequest {
   userLongitude?: number | undefined;
 }
 
-export interface QueryPlaceListBySquareResponse {
-  results: Place[];
-}
-
 export interface QueryPlaceListByRadiusRequest {
   centerLatitude: number;
   centerLongitude: number;
@@ -105,7 +101,7 @@ export interface QueryPlaceListByRadiusRequest {
   userLongitude?: number | undefined;
 }
 
-export interface QueryPlaceListByRadiusResponse {
+export interface QueryPlaceListResponse {
   results: Place[];
 }
 
@@ -336,67 +332,6 @@ export const QueryPlaceListBySquareRequest = {
   },
 };
 
-function createBaseQueryPlaceListBySquareResponse(): QueryPlaceListBySquareResponse {
-  return { results: [] };
-}
-
-export const QueryPlaceListBySquareResponse = {
-  encode(message: QueryPlaceListBySquareResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    for (const v of message.results) {
-      Place.encode(v!, writer.uint32(10).fork()).ldelim();
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPlaceListBySquareResponse {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryPlaceListBySquareResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.results.push(Place.decode(reader, reader.uint32()));
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): QueryPlaceListBySquareResponse {
-    return {
-      results: globalThis.Array.isArray(object?.results) ? object.results.map((e: any) => Place.fromJSON(e)) : [],
-    };
-  },
-
-  toJSON(message: QueryPlaceListBySquareResponse): unknown {
-    const obj: any = {};
-    if (message.results?.length) {
-      obj.results = message.results.map((e) => Place.toJSON(e));
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryPlaceListBySquareResponse>, I>>(base?: I): QueryPlaceListBySquareResponse {
-    return QueryPlaceListBySquareResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryPlaceListBySquareResponse>, I>>(
-    object: I,
-  ): QueryPlaceListBySquareResponse {
-    const message = createBaseQueryPlaceListBySquareResponse();
-    message.results = object.results?.map((e) => Place.fromPartial(e)) || [];
-    return message;
-  },
-};
-
 function createBaseQueryPlaceListByRadiusRequest(): QueryPlaceListByRadiusRequest {
   return { centerLatitude: 0, centerLongitude: 0, meterRadius: 0, userLatitude: undefined, userLongitude: undefined };
 }
@@ -518,22 +453,22 @@ export const QueryPlaceListByRadiusRequest = {
   },
 };
 
-function createBaseQueryPlaceListByRadiusResponse(): QueryPlaceListByRadiusResponse {
+function createBaseQueryPlaceListResponse(): QueryPlaceListResponse {
   return { results: [] };
 }
 
-export const QueryPlaceListByRadiusResponse = {
-  encode(message: QueryPlaceListByRadiusResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+export const QueryPlaceListResponse = {
+  encode(message: QueryPlaceListResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.results) {
       Place.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPlaceListByRadiusResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPlaceListResponse {
     const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryPlaceListByRadiusResponse();
+    const message = createBaseQueryPlaceListResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -553,13 +488,13 @@ export const QueryPlaceListByRadiusResponse = {
     return message;
   },
 
-  fromJSON(object: any): QueryPlaceListByRadiusResponse {
+  fromJSON(object: any): QueryPlaceListResponse {
     return {
       results: globalThis.Array.isArray(object?.results) ? object.results.map((e: any) => Place.fromJSON(e)) : [],
     };
   },
 
-  toJSON(message: QueryPlaceListByRadiusResponse): unknown {
+  toJSON(message: QueryPlaceListResponse): unknown {
     const obj: any = {};
     if (message.results?.length) {
       obj.results = message.results.map((e) => Place.toJSON(e));
@@ -567,13 +502,11 @@ export const QueryPlaceListByRadiusResponse = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<QueryPlaceListByRadiusResponse>, I>>(base?: I): QueryPlaceListByRadiusResponse {
-    return QueryPlaceListByRadiusResponse.fromPartial(base ?? ({} as any));
+  create<I extends Exact<DeepPartial<QueryPlaceListResponse>, I>>(base?: I): QueryPlaceListResponse {
+    return QueryPlaceListResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<QueryPlaceListByRadiusResponse>, I>>(
-    object: I,
-  ): QueryPlaceListByRadiusResponse {
-    const message = createBaseQueryPlaceListByRadiusResponse();
+  fromPartial<I extends Exact<DeepPartial<QueryPlaceListResponse>, I>>(object: I): QueryPlaceListResponse {
+    const message = createBaseQueryPlaceListResponse();
     message.results = object.results?.map((e) => Place.fromPartial(e)) || [];
     return message;
   },
@@ -1602,8 +1535,8 @@ export const DeletePlaceListResponse = {
 };
 
 export interface PlaceService {
-  QueryPlaceListBySquare(request: QueryPlaceListBySquareRequest): Promise<QueryPlaceListBySquareResponse>;
-  QueryPlaceListByRadius(request: QueryPlaceListByRadiusRequest): Promise<QueryPlaceListByRadiusResponse>;
+  QueryPlaceListBySquare(request: QueryPlaceListBySquareRequest): Promise<QueryPlaceListResponse>;
+  QueryPlaceListByRadius(request: QueryPlaceListByRadiusRequest): Promise<QueryPlaceListResponse>;
   CreatePlace(request: CreatePlaceRequest): Promise<CreatePlaceResponse>;
   CreatePlaceList(request: CreatePlaceListRequest): Promise<CreatePlaceListResponse>;
   ReadPlace(request: ReadPlaceRequest): Promise<ReadPlaceResponse>;
@@ -1632,16 +1565,16 @@ export class PlaceServiceClientImpl implements PlaceService {
     this.DeletePlace = this.DeletePlace.bind(this);
     this.DeletePlaceList = this.DeletePlaceList.bind(this);
   }
-  QueryPlaceListBySquare(request: QueryPlaceListBySquareRequest): Promise<QueryPlaceListBySquareResponse> {
+  QueryPlaceListBySquare(request: QueryPlaceListBySquareRequest): Promise<QueryPlaceListResponse> {
     const data = QueryPlaceListBySquareRequest.encode(request).finish();
     const promise = this.rpc.request(this.service, "QueryPlaceListBySquare", data);
-    return promise.then((data) => QueryPlaceListBySquareResponse.decode(_m0.Reader.create(data)));
+    return promise.then((data) => QueryPlaceListResponse.decode(_m0.Reader.create(data)));
   }
 
-  QueryPlaceListByRadius(request: QueryPlaceListByRadiusRequest): Promise<QueryPlaceListByRadiusResponse> {
+  QueryPlaceListByRadius(request: QueryPlaceListByRadiusRequest): Promise<QueryPlaceListResponse> {
     const data = QueryPlaceListByRadiusRequest.encode(request).finish();
     const promise = this.rpc.request(this.service, "QueryPlaceListByRadius", data);
-    return promise.then((data) => QueryPlaceListByRadiusResponse.decode(_m0.Reader.create(data)));
+    return promise.then((data) => QueryPlaceListResponse.decode(_m0.Reader.create(data)));
   }
 
   CreatePlace(request: CreatePlaceRequest): Promise<CreatePlaceResponse> {
