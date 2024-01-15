@@ -1,5 +1,4 @@
 /* eslint-disable */
-import { Metadata } from "@grpc/grpc-js";
 import { GrpcMethod, GrpcStreamMethod } from "@nestjs/microservices";
 import { Observable } from "rxjs";
 import { Place } from "./place";
@@ -130,49 +129,34 @@ export const PLACE_PACKAGE_NAME = "place";
 export interface PlaceServiceClient {
   queryPlaceListBySquare(
     request: QueryPlaceListBySquareRequest,
-    metadata: Metadata,
     ...rest: any
   ): Observable<QueryPlaceListBySquareResponse>;
 
   queryPlaceListByRadius(
     request: QueryPlaceListByRadiusRequest,
-    metadata: Metadata,
     ...rest: any
   ): Observable<QueryPlaceListByRadiusResponse>;
 
-  createPlace(request: CreatePlaceRequest, metadata: Metadata, ...rest: any): Observable<CreatePlaceResponse>;
+  createPlace(request: CreatePlaceRequest, ...rest: any): Observable<CreatePlaceResponse>;
 
-  createPlaceList(
-    request: CreatePlaceListRequest,
-    metadata: Metadata,
-    ...rest: any
-  ): Observable<CreatePlaceListResponse>;
+  createPlaceList(request: CreatePlaceListRequest, ...rest: any): Observable<CreatePlaceListResponse>;
 
-  readPlace(request: ReadPlaceRequest, metadata: Metadata, ...rest: any): Observable<ReadPlaceResponse>;
+  readPlace(request: ReadPlaceRequest, ...rest: any): Observable<ReadPlaceResponse>;
 
-  readPlaceList(request: ReadPlaceListRequest, metadata: Metadata, ...rest: any): Observable<ReadPlaceListResponse>;
+  readPlaceList(request: ReadPlaceListRequest, ...rest: any): Observable<ReadPlaceListResponse>;
 
-  updatePlace(request: UpdatePlaceRequest, metadata: Metadata, ...rest: any): Observable<UpdatePlaceResponse>;
+  updatePlace(request: UpdatePlaceRequest, ...rest: any): Observable<UpdatePlaceResponse>;
 
-  updatePlaceList(
-    request: UpdatePlaceListRequest,
-    metadata: Metadata,
-    ...rest: any
-  ): Observable<UpdatePlaceListResponse>;
+  updatePlaceList(request: UpdatePlaceListRequest, ...rest: any): Observable<UpdatePlaceListResponse>;
 
-  deletePlace(request: DeletePlaceRequest, metadata: Metadata, ...rest: any): Observable<DeletePlaceResponse>;
+  deletePlace(request: DeletePlaceRequest, ...rest: any): Observable<DeletePlaceResponse>;
 
-  deletePlaceList(
-    request: DeletePlaceListRequest,
-    metadata: Metadata,
-    ...rest: any
-  ): Observable<DeletePlaceListResponse>;
+  deletePlaceList(request: DeletePlaceListRequest, ...rest: any): Observable<DeletePlaceListResponse>;
 }
 
 export interface PlaceServiceController {
   queryPlaceListBySquare(
     request: QueryPlaceListBySquareRequest,
-    metadata: Metadata,
     ...rest: any
   ):
     | Promise<QueryPlaceListBySquareResponse>
@@ -181,7 +165,6 @@ export interface PlaceServiceController {
 
   queryPlaceListByRadius(
     request: QueryPlaceListByRadiusRequest,
-    metadata: Metadata,
     ...rest: any
   ):
     | Promise<QueryPlaceListByRadiusResponse>
@@ -190,49 +173,41 @@ export interface PlaceServiceController {
 
   createPlace(
     request: CreatePlaceRequest,
-    metadata: Metadata,
     ...rest: any
   ): Promise<CreatePlaceResponse> | Observable<CreatePlaceResponse> | CreatePlaceResponse;
 
   createPlaceList(
     request: CreatePlaceListRequest,
-    metadata: Metadata,
     ...rest: any
   ): Promise<CreatePlaceListResponse> | Observable<CreatePlaceListResponse> | CreatePlaceListResponse;
 
   readPlace(
     request: ReadPlaceRequest,
-    metadata: Metadata,
     ...rest: any
   ): Promise<ReadPlaceResponse> | Observable<ReadPlaceResponse> | ReadPlaceResponse;
 
   readPlaceList(
     request: ReadPlaceListRequest,
-    metadata: Metadata,
     ...rest: any
   ): Promise<ReadPlaceListResponse> | Observable<ReadPlaceListResponse> | ReadPlaceListResponse;
 
   updatePlace(
     request: UpdatePlaceRequest,
-    metadata: Metadata,
     ...rest: any
   ): Promise<UpdatePlaceResponse> | Observable<UpdatePlaceResponse> | UpdatePlaceResponse;
 
   updatePlaceList(
     request: UpdatePlaceListRequest,
-    metadata: Metadata,
     ...rest: any
   ): Promise<UpdatePlaceListResponse> | Observable<UpdatePlaceListResponse> | UpdatePlaceListResponse;
 
   deletePlace(
     request: DeletePlaceRequest,
-    metadata: Metadata,
     ...rest: any
   ): Promise<DeletePlaceResponse> | Observable<DeletePlaceResponse> | DeletePlaceResponse;
 
   deletePlaceList(
     request: DeletePlaceListRequest,
-    metadata: Metadata,
     ...rest: any
   ): Promise<DeletePlaceListResponse> | Observable<DeletePlaceListResponse> | DeletePlaceListResponse;
 }

@@ -12,7 +12,6 @@ protoc -I "${PROTO_DIR_PATH%%/}" \
     --ts_proto_opt=unrecognizedEnum=false \
     --ts_proto_opt=nestJs=true \
     --ts_proto_opt=addNestjsRestParameter=true \
-    --ts_proto_opt=addGrpcMetadata=true \
     --ts_proto_opt=stringEnums=true \
     --ts_proto_out="${PROTO_DIR_PATH%%/}"/nestjs/ \
     "${PROTO_DIR_PATH%%/}"/**.proto
