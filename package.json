@@ -19,6 +19,6 @@
   },
   "homepage": "https://github.com/knighthell/knighthell-boilerplate-idl-proto#readme",
   "dependencies": {
-    "ts-proto": "^1.164.1"
+    "ts-proto": "^1.167.0"
   }
 }
