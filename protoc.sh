@@ -10,4 +10,15 @@ EOF
   exit 1
 }
 
-help
+domain=()
+types=()
+while getopts d:t: flag
+do
+    case "${flag}" in
+        d) domain+=("${OPTARG}");;
+        t) types+=("${OPTARG}");;
+        *) help;;
+    esac
+done
+(IFS=,; echo "Domain: ${domain[*]}")
+(IFS=,; echo "Types: ${types[*]}")
