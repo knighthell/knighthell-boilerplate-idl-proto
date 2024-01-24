@@ -1,45 +1,31 @@
 /* eslint-disable */
 import { GrpcMethod, GrpcStreamMethod } from "@nestjs/microservices";
 import { Observable } from "rxjs";
-import { Place } from "./place";
+import { Period } from "./period";
+import { Place, Wgs84Coordinates } from "./place";
+import { ResponseInfo } from "./response-info";
 
 export const protobufPackage = "place";
 
-export enum PlaceServiceEventType {
+export enum PlaceServiceRequestEventType {
+  CREATE_PLACE = "CREATE_PLACE",
+  READ_PLACE = "READ_PLACE",
+  UPDATE_PLACE = "UPDATE_PLACE",
+  DELETE_PLACE = "DELETE_PLACE",
+}
+
+export enum PlaceServiceResponseEventType {
   PLACE_CREATED = "PLACE_CREATED",
   PLACE_READ = "PLACE_READ",
-  PLACE_READ_LIST = "PLACE_READ_LIST",
   PLACE_UPDATED = "PLACE_UPDATED",
   PLACE_DELETED = "PLACE_DELETED",
-  QUERY_PLACE_BY_SQUARE = "QUERY_PLACE_BY_SQUARE",
-  QUERY_PLACE_BY_RADIUS = "QUERY_PLACE_BY_RADIUS",
 }
 
-export interface QueryPlaceListBySquareRequest {
-  topRightLatitude: number;
-  topRightLongitude: number;
-  bottomLeftLatitude: number;
-  bottomLeftLongitude: number;
-  userLatitude?: number | undefined;
-  userLongitude?: number | undefined;
+export interface CreatePlaceListRequest {
+  places: CreatePlaceListRequest_Place[];
 }
 
-export interface QueryPlaceListByRadiusRequest {
-  centerLatitude: number;
-  centerLongitude: number;
-  meterRadius: number;
-  userLatitude?: number | undefined;
-  userLongitude?: number | undefined;
-}
-
-export interface QueryPlaceListResponse {
-  results: Place[];
-}
-
-export interface CreatePlaceRequest {
-  placeId?:
-    | string
-    | undefined;
+export interface CreatePlaceListRequest_Place {
   /** 장소(Place)의 원래 이름 */
   name: string;
   /** 장소(Place)의 위도 */
@@ -48,36 +34,40 @@ export interface CreatePlaceRequest {
   longitude: number;
 }
 
-export interface CreatePlaceResponse {
-  place: Place | undefined;
-}
-
-export interface ReadPlaceRequest {
-  /** 장소(Place) 고유 Id */
-  placeId: string;
-}
-
-export interface ReadPlaceResponse {
-  place: Place | undefined;
+export interface CreatePlaceListResponse {
+  totalCount: number;
+  resultCount: number;
+  requestedPageNumber: number;
+  requestedLimitNumber: number;
+  results: Place[];
 }
 
 export interface ReadPlaceListRequest {
-  places: ReadPlaceRequest[];
+  places: ReadPlaceListRequest_Place[];
+  /** 검색 InputText에 넣은 그대로의 값 */
+  keywords?: string | undefined;
+  createdAtPeriod: Period | undefined;
+  updatedAtPeriod: Period | undefined;
+  deletedAtPeriod: Period | undefined;
+  isIncludeDeletedPlace: boolean;
+  boundSquare?: BoundSquare | undefined;
+  boundCircle?: BoundCircle | undefined;
+}
+
+export interface ReadPlaceListRequest_Place {
+  placeId: string;
 }
 
 export interface ReadPlaceListResponse {
+  responseInfo: ResponseInfo | undefined;
   places: Place[];
 }
 
-export interface CreatePlaceListRequest {
-  places: CreatePlaceRequest[];
+export interface UpdatePlaceListRequest {
+  places: UpdatePlaceListRequest_Place[];
 }
 
-export interface CreatePlaceListResponse {
-  places: Place[];
-}
-
-export interface UpdatePlaceRequest {
+export interface UpdatePlaceListRequest_Place {
   placeId: string;
   /** 장소(Place)의 원래 이름(No Localization Name) */
   name?:
@@ -91,104 +81,61 @@ export interface UpdatePlaceRequest {
   longitude?: number | undefined;
 }
 
-export interface UpdatePlaceResponse {
-  place: Place | undefined;
-}
-
-export interface UpdatePlaceListRequest {
-  places: UpdatePlaceRequest[];
-}
-
 export interface UpdatePlaceListResponse {
-  places: Place[];
-}
-
-export interface DeletePlaceRequest {
-  /** 장소(Place) 고유 Id */
-  placeId: string;
-}
-
-export interface DeletePlaceResponse {
-  place: Place | undefined;
+  responseInfo: ResponseInfo | undefined;
+  results: Place[];
 }
 
 export interface DeletePlaceListRequest {
-  places: DeletePlaceRequest[];
+  places: DeletePlaceListRequest_Place[];
+}
+
+export interface DeletePlaceListRequest_Place {
+  placeId: string;
 }
 
 export interface DeletePlaceListResponse {
-  places: Place[];
+  responseInfo: ResponseInfo | undefined;
+  results: Place[];
+}
+
+export interface BoundSquare {
+  topRight: Wgs84Coordinates | undefined;
+  bottomLeft: Wgs84Coordinates | undefined;
+}
+
+export interface BoundCircle {
+  center: Wgs84Coordinates | undefined;
+  radiusMeter: number;
 }
 
 export const PLACE_PACKAGE_NAME = "place";
 
 export interface PlaceServiceClient {
-  queryPlaceListBySquare(request: QueryPlaceListBySquareRequest, ...rest: any): Observable<QueryPlaceListResponse>;
-
-  queryPlaceListByRadius(request: QueryPlaceListByRadiusRequest, ...rest: any): Observable<QueryPlaceListResponse>;
-
-  createPlace(request: CreatePlaceRequest, ...rest: any): Observable<CreatePlaceResponse>;
-
   createPlaceList(request: CreatePlaceListRequest, ...rest: any): Observable<CreatePlaceListResponse>;
-
-  readPlace(request: ReadPlaceRequest, ...rest: any): Observable<ReadPlaceResponse>;
 
   readPlaceList(request: ReadPlaceListRequest, ...rest: any): Observable<ReadPlaceListResponse>;
 
-  updatePlace(request: UpdatePlaceRequest, ...rest: any): Observable<UpdatePlaceResponse>;
-
   updatePlaceList(request: UpdatePlaceListRequest, ...rest: any): Observable<UpdatePlaceListResponse>;
-
-  deletePlace(request: DeletePlaceRequest, ...rest: any): Observable<DeletePlaceResponse>;
 
   deletePlaceList(request: DeletePlaceListRequest, ...rest: any): Observable<DeletePlaceListResponse>;
 }
 
 export interface PlaceServiceController {
-  queryPlaceListBySquare(
-    request: QueryPlaceListBySquareRequest,
-    ...rest: any
-  ): Promise<QueryPlaceListResponse> | Observable<QueryPlaceListResponse> | QueryPlaceListResponse;
-
-  queryPlaceListByRadius(
-    request: QueryPlaceListByRadiusRequest,
-    ...rest: any
-  ): Promise<QueryPlaceListResponse> | Observable<QueryPlaceListResponse> | QueryPlaceListResponse;
-
-  createPlace(
-    request: CreatePlaceRequest,
-    ...rest: any
-  ): Promise<CreatePlaceResponse> | Observable<CreatePlaceResponse> | CreatePlaceResponse;
-
   createPlaceList(
     request: CreatePlaceListRequest,
     ...rest: any
   ): Promise<CreatePlaceListResponse> | Observable<CreatePlaceListResponse> | CreatePlaceListResponse;
-
-  readPlace(
-    request: ReadPlaceRequest,
-    ...rest: any
-  ): Promise<ReadPlaceResponse> | Observable<ReadPlaceResponse> | ReadPlaceResponse;
 
   readPlaceList(
     request: ReadPlaceListRequest,
     ...rest: any
   ): Promise<ReadPlaceListResponse> | Observable<ReadPlaceListResponse> | ReadPlaceListResponse;
 
-  updatePlace(
-    request: UpdatePlaceRequest,
-    ...rest: any
-  ): Promise<UpdatePlaceResponse> | Observable<UpdatePlaceResponse> | UpdatePlaceResponse;
-
   updatePlaceList(
     request: UpdatePlaceListRequest,
     ...rest: any
   ): Promise<UpdatePlaceListResponse> | Observable<UpdatePlaceListResponse> | UpdatePlaceListResponse;
-
-  deletePlace(
-    request: DeletePlaceRequest,
-    ...rest: any
-  ): Promise<DeletePlaceResponse> | Observable<DeletePlaceResponse> | DeletePlaceResponse;
 
   deletePlaceList(
     request: DeletePlaceListRequest,
@@ -198,18 +145,7 @@ export interface PlaceServiceController {
 
 export function PlaceServiceControllerMethods() {
   return function (constructor: Function) {
-    const grpcMethods: string[] = [
-      "queryPlaceListBySquare",
-      "queryPlaceListByRadius",
-      "createPlace",
-      "createPlaceList",
-      "readPlace",
-      "readPlaceList",
-      "updatePlace",
-      "updatePlaceList",
-      "deletePlace",
-      "deletePlaceList",
-    ];
+    const grpcMethods: string[] = ["createPlaceList", "readPlaceList", "updatePlaceList", "deletePlaceList"];
     for (const method of grpcMethods) {
       const descriptor: any = Reflect.getOwnPropertyDescriptor(constructor.prototype, method);
       GrpcMethod("PlaceService", method)(constructor.prototype[method], method, descriptor);

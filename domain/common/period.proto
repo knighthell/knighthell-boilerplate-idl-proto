@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package common;
+
+option go_package = "github.com/knighthell/knighthell-boilerplate-idl-proto/common";
+
+import "google/protobuf/timestamp.proto";
+
+message Period {
+  optional google.protobuf.Timestamp from = 5;
+  optional google.protobuf.Timestamp to = 6;
+}
