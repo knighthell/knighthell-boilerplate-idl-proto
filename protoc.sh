@@ -2,17 +2,19 @@
 
 PROGNAME=$0
 SHELL_DIR_PATH=$(dirname "$0")
-COMMON_PROTO_DIR_PATH="${SHELL_DIR_PATH}/domain/common"
+COMMON_PROTO_DIR_PATH="${SHELL_DIR_PATH}/common"
 
 help() {
   cat << EOF >&2
 Usage: $PROGNAME [-d <domain>] [-t <output_type>]
 
 -d, --domain <domain>: kind of domain [auth, place, ecommerce, ...]
--t, --type <output_type>: output type [nestjs, golang, ts, java, ...]
+-t, --type <compile_type>: compile type [nestjs, golang, ts, java, ...]
 EOF
   exit 1
 }
+
+
 
 compileNestJs() {
   domain=$1
@@ -54,6 +56,36 @@ compileTypeScript() {
       "${domainProtoDirPath%%/}"/**.proto
 }
 
+compileGolang() {
+  domain=$1
+  domainProtoDirPath="${SHELL_DIR_PATH}/domain/${domain}"
+}
+
+compileDart() {
+  domain=$1
+  domainProtoDirPath="${SHELL_DIR_PATH}/domain/${domain}"
+}
+
+compileJava() {
+  domain=$1
+  domainProtoDirPath="${SHELL_DIR_PATH}/domain/${domain}"
+}
+
+compileKotlin() {
+  domain=$1
+  domainProtoDirPath="${SHELL_DIR_PATH}/domain/${domain}"
+}
+
+compileRust() {
+  domain=$1
+  domainProtoDirPath="${SHELL_DIR_PATH}/domain/${domain}"
+}
+
+compilePython() {
+  domain=$1
+  domainProtoDirPath="${SHELL_DIR_PATH}/domain/${domain}"
+}
+
 domains=()
 types=()
 while getopts d:t: flag
@@ -68,5 +100,36 @@ done
 (IFS=,; echo "Domain: ${domains[*]}")
 (IFS=,; echo "Types: ${types[*]}")
 
-compileNestJs place
-compileTypeScript place
+for domain in "${domains[@]}"
+do
+  for type in "${types[@]}"
+  do
+    case $type in
+    nestjs)
+      compileNestJs "$domain"
+      ;;
+    ts)
+      compileTypeScript "$domain"
+      ;;
+    golang)
+      compileGolang "$domain"
+      ;;
+    dart)
+      compileDart "$domain"
+      ;;
+    java)
+      compileJava "$domain"
+      ;;
+    kotlin)
+      compileKotlin "$domain"
+      ;;
+    rust)
+      compileRust "$domain"
+      ;;
+    python)
+      compilePython "$domain"
+      ;;
+    esac
+    echo "Domain: $domain, Type: $type Compiled"
+  done
+done
