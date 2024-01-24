@@ -59,11 +59,26 @@ compileTypeScript() {
 compileGolang() {
   domain=$1
   domainProtoDirPath="${SHELL_DIR_PATH}/domain/${domain}"
+
+  export PATH="$PATH:$(go env GOPATH)/bin"
+
+  protoc -I "${domainProtoDirPath%%/}" -I "${COMMON_PROTO_DIR_PATH}" \
+      --go_out="${domainProtoDirPath%%/}"/golang \
+      --go_opt=paths=source_relative \
+      --go-grpc_out="${domainProtoDirPath%%/}"/golang \
+      --go-grpc_opt=paths=source_relative \
+      "${domainProtoDirPath%%/}"/**.proto
 }
 
 compileDart() {
   domain=$1
   domainProtoDirPath="${SHELL_DIR_PATH}/domain/${domain}"
+
+  export PATH="$PATH:$HOME/.pub-cache/bin"
+
+  protoc -I "${domainProtoDirPath%%/}" -I "${COMMON_PROTO_DIR_PATH}" \
+      --dart_out=grpc:"${domainProtoDirPath%%/}"/dart \
+      "${domainProtoDirPath%%/}"/**.proto
 }
 
 compileJava() {
