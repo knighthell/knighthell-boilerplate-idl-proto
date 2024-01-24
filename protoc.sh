@@ -14,7 +14,7 @@ EOF
   exit 1
 }
 
-compileNestJS() {
+compileNestJs() {
   domain=$1
   domainProtoDirPath="${SHELL_DIR_PATH}/domain/${domain}"
 
