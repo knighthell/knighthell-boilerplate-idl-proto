@@ -4,7 +4,11 @@ PROGNAME=$0
 SHELL_DIR_PATH=$(dirname "$0")
 COMMON_PROTO_DIR_PATH="${SHELL_DIR_PATH}/common"
 
+AVAILABLE_DOMAINS=()
+for dir in domain/*/; do AVAILABLE_DOMAINS+=("$(basename "$dir")"); done
+
 help() {
+  (IFS=,; echo "Available Domains: ${AVAILABLE_DOMAINS[*]}")
   cat << EOF >&2
 Usage: $PROGNAME [-d <domain>] [-t <output_type>]
 
@@ -14,7 +18,42 @@ EOF
   exit 1
 }
 
+checkAvailableDomains() {
+  domains=("$@")
+  notAvailableDomains=()
 
+  for domain in "${domains[@]}"
+  do
+#    if ! [[ "${AVAILABLE_DOMAINS[@]}" =~ $domain ]]; then
+#      echo -e "\nDomain $domain is NOT Available Domain\n" >&2
+#      help
+#      return
+#    fi
+
+    isIncluded=false
+    for available_domain in "${AVAILABLE_DOMAINS[@]}"
+    do
+      if [[ "$domain" = "$available_domain" ]]; then
+        isIncluded=true
+        continue
+      fi
+    done
+
+    if [[ "$isIncluded" = false ]] ; then
+    	notAvailableDomains+=("${domain}")
+    fi
+  done
+
+  length=${#notAvailableDomains[*]}
+  if [ "${length}" -eq 0 ]; then
+    return
+  fi
+
+  (IFS=,; echo -e "\nNot Available Domain: ${notAvailableDomains[*]}" >&2)
+  (IFS=,; echo -e "Domain [${notAvailableDomains[*]}] is NOT Available Domain" >&2)
+
+  exit 1
+}
 
 compileNestJs() {
   domain=$1
@@ -103,6 +142,7 @@ compilePython() {
 
 domains=()
 types=()
+
 while getopts d:t: flag
 do
     case "${flag}" in
@@ -114,6 +154,8 @@ done
 
 (IFS=,; echo "Domain: ${domains[*]}")
 (IFS=,; echo "Types: ${types[*]}")
+
+checkAvailableDomains "${domains[@]}"
 
 for domain in "${domains[@]}"
 do
