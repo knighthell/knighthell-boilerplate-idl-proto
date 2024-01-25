@@ -1,7 +1,8 @@
 syntax = "proto3";
+
 package place;
 
-option go_package = "github.com/knighthell/knighthell-boilerplate-idl-proto/tree/main/domain/place/golang";
+option go_package = "github.com/knighthell/knighthell-boilerplate-idl-proto/domain/place";
 
 import "response-info.proto";
 import "period.proto";
