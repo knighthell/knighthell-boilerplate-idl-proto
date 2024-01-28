@@ -1,130 +1,120 @@
 syntax = "proto3";
+
 package place;
 
-option go_package = "github.com/knighthell-family/knighthell-family-idl/place";
+option go_package = "github.com/knighthell/knighthell-boilerplate-idl-proto/domain/place";
 
+import "response-info.proto";
+import "period.proto";
 import "place.proto";
 
 service PlaceService {
-  rpc QueryPlaceListBySquare(QueryPlaceListBySquareRequest) returns (QueryPlaceListResponse);
-  rpc QueryPlaceListByRadius(QueryPlaceListByRadiusRequest) returns (QueryPlaceListResponse);
-
-  rpc CreatePlace(CreatePlaceRequest) returns (CreatePlaceResponse);
   rpc CreatePlaceList(CreatePlaceListRequest) returns (CreatePlaceListResponse);
 
-  rpc ReadPlace(ReadPlaceRequest) returns (ReadPlaceResponse);
   rpc ReadPlaceList(ReadPlaceListRequest) returns (ReadPlaceListResponse);
 
-  rpc UpdatePlace(UpdatePlaceRequest) returns (UpdatePlaceResponse);
   rpc UpdatePlaceList(UpdatePlaceListRequest) returns (UpdatePlaceListResponse);
 
-  rpc DeletePlace(DeletePlaceRequest) returns (DeletePlaceResponse);
   rpc DeletePlaceList(DeletePlaceListRequest) returns (DeletePlaceListResponse);
 }
 
-enum PlaceServiceEventType {
+enum PlaceServiceRequestEventType {
+  CREATE_PLACE = 0;
+  READ_PLACE = 1;
+  UPDATE_PLACE = 2;
+  DELETE_PLACE = 3;
+}
+
+enum PlaceServiceResponseEventType {
   PLACE_CREATED = 0;
   PLACE_READ = 1;
-  PLACE_READ_LIST = 2;
-  PLACE_UPDATED = 3;
-  PLACE_DELETED = 4;
-  QUERY_PLACE_BY_SQUARE = 5;
-  QUERY_PLACE_BY_RADIUS = 6;
-}
-
-message QueryPlaceListBySquareRequest {
-  double topRightLatitude = 1;
-  double topRightLongitude = 2;
-
-  double bottomLeftLatitude = 3;
-  double bottomLeftLongitude = 4;
-
-  optional double userLatitude = 5;
-  optional double userLongitude = 6;
-}
-
-message QueryPlaceListByRadiusRequest {
-  double centerLatitude = 1;
-  double centerLongitude = 2;
-
-  uint32 meterRadius = 3;
-
-  optional double userLatitude = 4;
-  optional double userLongitude = 5;
-}
-
-message QueryPlaceListResponse {
-  repeated place.Place results = 1;
-}
-
-message CreatePlaceRequest {
-  optional string placeId = 1;
-
-  string name = 2; // 장소(Place)의 원래 이름
-  double latitude = 3; // 장소(Place)의 위도
-  double longitude = 4; // 장소(Place)의 경도
-}
-
-message CreatePlaceResponse {
-  place.Place place = 1;
-}
-
-message ReadPlaceRequest {
-  string placeId = 1; // 장소(Place) 고유 Id
-}
-
-message ReadPlaceResponse {
-  place.Place place = 1;
-}
-
-message ReadPlaceListRequest {
-  repeated ReadPlaceRequest places = 1;
-}
-
-message ReadPlaceListResponse {
-  repeated place.Place places = 2;
+  PLACE_UPDATED = 2;
+  PLACE_DELETED = 3;
 }
 
 message CreatePlaceListRequest {
-  repeated CreatePlaceRequest places = 1;
+
+  message Place {
+    string name = 2; // 장소(Place)의 원래 이름
+    double latitude = 3; // 장소(Place)의 위도
+    double longitude = 4; // 장소(Place)의 경도
+  }
+  repeated Place places = 1;
 }
 
 message CreatePlaceListResponse {
+
+  int32 totalCount = 1;
+  int32 resultCount = 2;
+  int32 requestedPageNumber = 3;
+  int32 requestedLimitNumber = 4;
+
+  repeated place.Place results = 5;
+}
+
+message ReadPlaceListRequest {
+
+  message Place {
+    string placeId = 1;
+  }
+  repeated Place places = 1;
+
+  optional string keywords = 2; // 검색 InputText에 넣은 그대로의 값
+
+  common.Period createdAtPeriod = 3;
+  common.Period updatedAtPeriod = 4;
+  common.Period deletedAtPeriod = 5;
+  bool isIncludeDeletedPlace = 6;
+
+  optional BoundSquare boundSquare = 7;
+  optional BoundCircle boundCircle = 8;
+}
+
+message ReadPlaceListResponse {
+
+  common.ResponseInfo responseInfo = 1;
+
   repeated place.Place places = 2;
 }
 
-message UpdatePlaceRequest {
-  string placeId = 1;
-
-  optional string name = 2; // 장소(Place)의 원래 이름(No Localization Name)
-  optional double latitude = 3; // 장소(Place)의 위도
-  optional double longitude = 4; // 장소(Place)의 경도
-}
-
-message UpdatePlaceResponse {
-  place.Place place = 1;
-}
-
 message UpdatePlaceListRequest {
-  repeated UpdatePlaceRequest places = 1;
+
+  message Place {
+    string placeId = 1;
+
+    optional string name = 2; // 장소(Place)의 원래 이름(No Localization Name)
+    optional double latitude = 3; // 장소(Place)의 위도
+    optional double longitude = 4; // 장소(Place)의 경도
+  }
+  repeated Place places = 1;
 }
 
 message UpdatePlaceListResponse {
-  repeated place.Place places = 1;
-}
+  common.ResponseInfo responseInfo = 1;
 
-message DeletePlaceRequest {
-  string placeId = 1; // 장소(Place) 고유 Id
-}
-
-message DeletePlaceResponse {
-  place.Place place = 1;
+  repeated place.Place results = 2;
 }
 
 message DeletePlaceListRequest {
-  repeated DeletePlaceRequest places = 1;
+  message Place {
+    string placeId = 1;
+  }
+
+  repeated Place places = 1;
 }
 
 message DeletePlaceListResponse {
-  repeated place.Place places = 1;
+  common.ResponseInfo responseInfo = 1;
+
+  repeated place.Place results = 2;
+}
+
+message BoundSquare {
+  Wgs84Coordinates topRight = 1;
+  Wgs84Coordinates bottomLeft = 2;
+}
+
+message BoundCircle {
+  Wgs84Coordinates center = 1;
+  int32 radiusMeter = 2;
 }
