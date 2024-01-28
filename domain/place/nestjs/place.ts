@@ -17,6 +17,7 @@ export interface Place {
   name: string;
   nameTranslation?: PlaceNameTranslation | undefined;
   address?: PlaceAddress | undefined;
+  distanceFromUser?: number | undefined;
 }
 
 export interface PlaceNameTranslation {

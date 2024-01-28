@@ -29,12 +29,14 @@ const Place$json = {
     {'1': 'name', '3': 10, '4': 1, '5': 9, '10': 'name'},
     {'1': 'nameTranslation', '3': 11, '4': 1, '5': 11, '6': '.place.PlaceNameTranslation', '9': 2, '10': 'nameTranslation', '17': true},
     {'1': 'address', '3': 12, '4': 1, '5': 11, '6': '.place.PlaceAddress', '9': 3, '10': 'address', '17': true},
+    {'1': 'distanceFromUser', '3': 13, '4': 1, '5': 5, '9': 4, '10': 'distanceFromUser', '17': true},
   ],
   '8': [
     {'1': '_deletedBy'},
     {'1': '_deletedAt'},
     {'1': '_nameTranslation'},
     {'1': '_address'},
+    {'1': '_distanceFromUser'},
   ],
 };
 
@@ -50,8 +52,9 @@ final $typed_data.Uint8List placeDescriptor = $convert.base64Decode(
     'RvYnVmLlRpbWVzdGFtcEgBUglkZWxldGVkQXSIAQESEgoEbmFtZRgKIAEoCVIEbmFtZRJKCg9u'
     'YW1lVHJhbnNsYXRpb24YCyABKAsyGy5wbGFjZS5QbGFjZU5hbWVUcmFuc2xhdGlvbkgCUg9uYW'
     '1lVHJhbnNsYXRpb26IAQESMgoHYWRkcmVzcxgMIAEoCzITLnBsYWNlLlBsYWNlQWRkcmVzc0gD'
-    'UgdhZGRyZXNziAEBQgwKCl9kZWxldGVkQnlCDAoKX2RlbGV0ZWRBdEISChBfbmFtZVRyYW5zbG'
-    'F0aW9uQgoKCF9hZGRyZXNz');
+    'UgdhZGRyZXNziAEBEi8KEGRpc3RhbmNlRnJvbVVzZXIYDSABKAVIBFIQZGlzdGFuY2VGcm9tVX'
+    'NlcogBAUIMCgpfZGVsZXRlZEJ5QgwKCl9kZWxldGVkQXRCEgoQX25hbWVUcmFuc2xhdGlvbkIK'
+    'CghfYWRkcmVzc0ITChFfZGlzdGFuY2VGcm9tVXNlcg==');
 
 @$core.Deprecated('Use placeNameTranslationDescriptor instead')
 const PlaceNameTranslation$json = {

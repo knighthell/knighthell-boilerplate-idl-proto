@@ -25,6 +25,8 @@ message Place {
   optional PlaceNameTranslation nameTranslation = 11;
 
   optional PlaceAddress address = 12;
+
+  optional int32 distanceFromUser = 13;
 }
 
 message PlaceNameTranslation {

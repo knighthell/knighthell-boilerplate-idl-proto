@@ -30,6 +30,7 @@ class Place extends $pb.GeneratedMessage {
     $core.String? name,
     PlaceNameTranslation? nameTranslation,
     PlaceAddress? address,
+    $core.int? distanceFromUser,
   }) {
     final $result = create();
     if (placeId != null) {
@@ -68,6 +69,9 @@ class Place extends $pb.GeneratedMessage {
     if (address != null) {
       $result.address = address;
     }
+    if (distanceFromUser != null) {
+      $result.distanceFromUser = distanceFromUser;
+    }
     return $result;
   }
   Place._() : super();
@@ -87,6 +91,7 @@ class Place extends $pb.GeneratedMessage {
     ..aOS(10, _omitFieldNames ? '' : 'name')
     ..aOM<PlaceNameTranslation>(11, _omitFieldNames ? '' : 'nameTranslation', protoName: 'nameTranslation', subBuilder: PlaceNameTranslation.create)
     ..aOM<PlaceAddress>(12, _omitFieldNames ? '' : 'address', subBuilder: PlaceAddress.create)
+    ..a<$core.int>(13, _omitFieldNames ? '' : 'distanceFromUser', $pb.PbFieldType.O3, protoName: 'distanceFromUser')
     ..hasRequiredFields = false
   ;
 
@@ -234,6 +239,15 @@ class Place extends $pb.GeneratedMessage {
   void clearAddress() => clearField(12);
   @$pb.TagNumber(12)
   PlaceAddress ensureAddress() => $_ensure(11);
+
+  @$pb.TagNumber(13)
+  $core.int get distanceFromUser => $_getIZ(12);
+  @$pb.TagNumber(13)
+  set distanceFromUser($core.int v) { $_setSignedInt32(12, v); }
+  @$pb.TagNumber(13)
+  $core.bool hasDistanceFromUser() => $_has(12);
+  @$pb.TagNumber(13)
+  void clearDistanceFromUser() => clearField(13);
 }
 
 class PlaceNameTranslation extends $pb.GeneratedMessage {

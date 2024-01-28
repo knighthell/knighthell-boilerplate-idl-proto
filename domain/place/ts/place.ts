@@ -18,6 +18,7 @@ export interface Place {
   name: string;
   nameTranslation?: PlaceNameTranslation | undefined;
   address?: PlaceAddress | undefined;
+  distanceFromUser?: number | undefined;
 }
 
 export interface PlaceNameTranslation {
@@ -51,6 +52,7 @@ function createBasePlace(): Place {
     name: "",
     nameTranslation: undefined,
     address: undefined,
+    distanceFromUser: undefined,
   };
 }
 
@@ -91,6 +93,9 @@ export const Place = {
     }
     if (message.address !== undefined) {
       PlaceAddress.encode(message.address, writer.uint32(98).fork()).ldelim();
+    }
+    if (message.distanceFromUser !== undefined) {
+      writer.uint32(104).int32(message.distanceFromUser);
     }
     return writer;
   },
@@ -186,6 +191,13 @@ export const Place = {
 
           message.address = PlaceAddress.decode(reader, reader.uint32());
           continue;
+        case 13:
+          if (tag !== 104) {
+            break;
+          }
+
+          message.distanceFromUser = reader.int32();
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -211,6 +223,7 @@ export const Place = {
         ? PlaceNameTranslation.fromJSON(object.nameTranslation)
         : undefined,
       address: isSet(object.address) ? PlaceAddress.fromJSON(object.address) : undefined,
+      distanceFromUser: isSet(object.distanceFromUser) ? globalThis.Number(object.distanceFromUser) : undefined,
     };
   },
 
@@ -252,6 +265,9 @@ export const Place = {
     if (message.address !== undefined) {
       obj.address = PlaceAddress.toJSON(message.address);
     }
+    if (message.distanceFromUser !== undefined) {
+      obj.distanceFromUser = Math.round(message.distanceFromUser);
+    }
     return obj;
   },
 
@@ -282,6 +298,7 @@ export const Place = {
     message.address = (object.address !== undefined && object.address !== null)
       ? PlaceAddress.fromPartial(object.address)
       : undefined;
+    message.distanceFromUser = object.distanceFromUser ?? undefined;
     return message;
   },
 };
