@@ -56,7 +56,7 @@ export interface ReadPlaceListRequest_Place {
 
 export interface ReadPlaceListResponse {
   responseInfo: ResponseInfo | undefined;
-  places: Place[];
+  results: Place[];
 }
 
 export interface UpdatePlaceListRequest {

@@ -153,7 +153,7 @@ export interface ReadPlaceListRequest_Place {
 
 export interface ReadPlaceListResponse {
   responseInfo: ResponseInfo | undefined;
-  places: Place[];
+  results: Place[];
 }
 
 export interface UpdatePlaceListRequest {
@@ -654,7 +654,7 @@ export const ReadPlaceListRequest_Place = {
 };
 
 function createBaseReadPlaceListResponse(): ReadPlaceListResponse {
-  return { responseInfo: undefined, places: [] };
+  return { responseInfo: undefined, results: [] };
 }
 
 export const ReadPlaceListResponse = {
@@ -662,7 +662,7 @@ export const ReadPlaceListResponse = {
     if (message.responseInfo !== undefined) {
       ResponseInfo.encode(message.responseInfo, writer.uint32(10).fork()).ldelim();
     }
-    for (const v of message.places) {
+    for (const v of message.results) {
       Place.encode(v!, writer.uint32(18).fork()).ldelim();
     }
     return writer;
@@ -687,7 +687,7 @@ export const ReadPlaceListResponse = {
             break;
           }
 
-          message.places.push(Place.decode(reader, reader.uint32()));
+          message.results.push(Place.decode(reader, reader.uint32()));
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -701,7 +701,7 @@ export const ReadPlaceListResponse = {
   fromJSON(object: any): ReadPlaceListResponse {
     return {
       responseInfo: isSet(object.responseInfo) ? ResponseInfo.fromJSON(object.responseInfo) : undefined,
-      places: globalThis.Array.isArray(object?.places) ? object.places.map((e: any) => Place.fromJSON(e)) : [],
+      results: globalThis.Array.isArray(object?.results) ? object.results.map((e: any) => Place.fromJSON(e)) : [],
     };
   },
 
@@ -710,8 +710,8 @@ export const ReadPlaceListResponse = {
     if (message.responseInfo !== undefined) {
       obj.responseInfo = ResponseInfo.toJSON(message.responseInfo);
     }
-    if (message.places?.length) {
-      obj.places = message.places.map((e) => Place.toJSON(e));
+    if (message.results?.length) {
+      obj.results = message.results.map((e) => Place.toJSON(e));
     }
     return obj;
   },
@@ -724,7 +724,7 @@ export const ReadPlaceListResponse = {
     message.responseInfo = (object.responseInfo !== undefined && object.responseInfo !== null)
       ? ResponseInfo.fromPartial(object.responseInfo)
       : undefined;
-    message.places = object.places?.map((e) => Place.fromPartial(e)) || [];
+    message.results = object.results?.map((e) => Place.fromPartial(e)) || [];
     return message;
   },
 };

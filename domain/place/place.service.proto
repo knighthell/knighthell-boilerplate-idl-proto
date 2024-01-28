@@ -68,7 +68,7 @@ message ReadPlaceListResponse {
 
   common.ResponseInfo responseInfo = 1;
 
-  repeated place.Place places = 2;
+  repeated place.Place results = 2;
 }
 
 message UpdatePlaceListRequest {
