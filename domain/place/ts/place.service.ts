@@ -1,114 +1,128 @@
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
-import { Place } from "./place";
+import { Period } from "./period";
+import { Place, Wgs84Coordinates } from "./place";
+import { ResponseInfo } from "./response-info";
 
 export const protobufPackage = "place";
 
-export enum PlaceServiceEventType {
-  PLACE_CREATED = "PLACE_CREATED",
-  PLACE_READ = "PLACE_READ",
-  PLACE_READ_LIST = "PLACE_READ_LIST",
-  PLACE_UPDATED = "PLACE_UPDATED",
-  PLACE_DELETED = "PLACE_DELETED",
-  QUERY_PLACE_BY_SQUARE = "QUERY_PLACE_BY_SQUARE",
-  QUERY_PLACE_BY_RADIUS = "QUERY_PLACE_BY_RADIUS",
+export enum PlaceServiceRequestEventType {
+  CREATE_PLACE = "CREATE_PLACE",
+  READ_PLACE = "READ_PLACE",
+  UPDATE_PLACE = "UPDATE_PLACE",
+  DELETE_PLACE = "DELETE_PLACE",
 }
 
-export function placeServiceEventTypeFromJSON(object: any): PlaceServiceEventType {
+export function placeServiceRequestEventTypeFromJSON(object: any): PlaceServiceRequestEventType {
+  switch (object) {
+    case 0:
+    case "CREATE_PLACE":
+      return PlaceServiceRequestEventType.CREATE_PLACE;
+    case 1:
+    case "READ_PLACE":
+      return PlaceServiceRequestEventType.READ_PLACE;
+    case 2:
+    case "UPDATE_PLACE":
+      return PlaceServiceRequestEventType.UPDATE_PLACE;
+    case 3:
+    case "DELETE_PLACE":
+      return PlaceServiceRequestEventType.DELETE_PLACE;
+    default:
+      throw new globalThis.Error("Unrecognized enum value " + object + " for enum PlaceServiceRequestEventType");
+  }
+}
+
+export function placeServiceRequestEventTypeToJSON(object: PlaceServiceRequestEventType): string {
+  switch (object) {
+    case PlaceServiceRequestEventType.CREATE_PLACE:
+      return "CREATE_PLACE";
+    case PlaceServiceRequestEventType.READ_PLACE:
+      return "READ_PLACE";
+    case PlaceServiceRequestEventType.UPDATE_PLACE:
+      return "UPDATE_PLACE";
+    case PlaceServiceRequestEventType.DELETE_PLACE:
+      return "DELETE_PLACE";
+    default:
+      throw new globalThis.Error("Unrecognized enum value " + object + " for enum PlaceServiceRequestEventType");
+  }
+}
+
+export function placeServiceRequestEventTypeToNumber(object: PlaceServiceRequestEventType): number {
+  switch (object) {
+    case PlaceServiceRequestEventType.CREATE_PLACE:
+      return 0;
+    case PlaceServiceRequestEventType.READ_PLACE:
+      return 1;
+    case PlaceServiceRequestEventType.UPDATE_PLACE:
+      return 2;
+    case PlaceServiceRequestEventType.DELETE_PLACE:
+      return 3;
+    default:
+      throw new globalThis.Error("Unrecognized enum value " + object + " for enum PlaceServiceRequestEventType");
+  }
+}
+
+export enum PlaceServiceResponseEventType {
+  PLACE_CREATED = "PLACE_CREATED",
+  PLACE_READ = "PLACE_READ",
+  PLACE_UPDATED = "PLACE_UPDATED",
+  PLACE_DELETED = "PLACE_DELETED",
+}
+
+export function placeServiceResponseEventTypeFromJSON(object: any): PlaceServiceResponseEventType {
   switch (object) {
     case 0:
     case "PLACE_CREATED":
-      return PlaceServiceEventType.PLACE_CREATED;
+      return PlaceServiceResponseEventType.PLACE_CREATED;
     case 1:
     case "PLACE_READ":
-      return PlaceServiceEventType.PLACE_READ;
+      return PlaceServiceResponseEventType.PLACE_READ;
     case 2:
-    case "PLACE_READ_LIST":
-      return PlaceServiceEventType.PLACE_READ_LIST;
-    case 3:
     case "PLACE_UPDATED":
-      return PlaceServiceEventType.PLACE_UPDATED;
-    case 4:
+      return PlaceServiceResponseEventType.PLACE_UPDATED;
+    case 3:
     case "PLACE_DELETED":
-      return PlaceServiceEventType.PLACE_DELETED;
-    case 5:
-    case "QUERY_PLACE_BY_SQUARE":
-      return PlaceServiceEventType.QUERY_PLACE_BY_SQUARE;
-    case 6:
-    case "QUERY_PLACE_BY_RADIUS":
-      return PlaceServiceEventType.QUERY_PLACE_BY_RADIUS;
+      return PlaceServiceResponseEventType.PLACE_DELETED;
     default:
-      throw new globalThis.Error("Unrecognized enum value " + object + " for enum PlaceServiceEventType");
+      throw new globalThis.Error("Unrecognized enum value " + object + " for enum PlaceServiceResponseEventType");
   }
 }
 
-export function placeServiceEventTypeToJSON(object: PlaceServiceEventType): string {
+export function placeServiceResponseEventTypeToJSON(object: PlaceServiceResponseEventType): string {
   switch (object) {
-    case PlaceServiceEventType.PLACE_CREATED:
+    case PlaceServiceResponseEventType.PLACE_CREATED:
       return "PLACE_CREATED";
-    case PlaceServiceEventType.PLACE_READ:
+    case PlaceServiceResponseEventType.PLACE_READ:
       return "PLACE_READ";
-    case PlaceServiceEventType.PLACE_READ_LIST:
-      return "PLACE_READ_LIST";
-    case PlaceServiceEventType.PLACE_UPDATED:
+    case PlaceServiceResponseEventType.PLACE_UPDATED:
       return "PLACE_UPDATED";
-    case PlaceServiceEventType.PLACE_DELETED:
+    case PlaceServiceResponseEventType.PLACE_DELETED:
       return "PLACE_DELETED";
-    case PlaceServiceEventType.QUERY_PLACE_BY_SQUARE:
-      return "QUERY_PLACE_BY_SQUARE";
-    case PlaceServiceEventType.QUERY_PLACE_BY_RADIUS:
-      return "QUERY_PLACE_BY_RADIUS";
     default:
-      throw new globalThis.Error("Unrecognized enum value " + object + " for enum PlaceServiceEventType");
+      throw new globalThis.Error("Unrecognized enum value " + object + " for enum PlaceServiceResponseEventType");
   }
 }
 
-export function placeServiceEventTypeToNumber(object: PlaceServiceEventType): number {
+export function placeServiceResponseEventTypeToNumber(object: PlaceServiceResponseEventType): number {
   switch (object) {
-    case PlaceServiceEventType.PLACE_CREATED:
+    case PlaceServiceResponseEventType.PLACE_CREATED:
       return 0;
-    case PlaceServiceEventType.PLACE_READ:
+    case PlaceServiceResponseEventType.PLACE_READ:
       return 1;
-    case PlaceServiceEventType.PLACE_READ_LIST:
+    case PlaceServiceResponseEventType.PLACE_UPDATED:
       return 2;
-    case PlaceServiceEventType.PLACE_UPDATED:
+    case PlaceServiceResponseEventType.PLACE_DELETED:
       return 3;
-    case PlaceServiceEventType.PLACE_DELETED:
-      return 4;
-    case PlaceServiceEventType.QUERY_PLACE_BY_SQUARE:
-      return 5;
-    case PlaceServiceEventType.QUERY_PLACE_BY_RADIUS:
-      return 6;
     default:
-      throw new globalThis.Error("Unrecognized enum value " + object + " for enum PlaceServiceEventType");
+      throw new globalThis.Error("Unrecognized enum value " + object + " for enum PlaceServiceResponseEventType");
   }
 }
 
-export interface QueryPlaceListBySquareRequest {
-  topRightLatitude: number;
-  topRightLongitude: number;
-  bottomLeftLatitude: number;
-  bottomLeftLongitude: number;
-  userLatitude?: number | undefined;
-  userLongitude?: number | undefined;
+export interface CreatePlaceListRequest {
+  places: CreatePlaceListRequest_Place[];
 }
 
-export interface QueryPlaceListByRadiusRequest {
-  centerLatitude: number;
-  centerLongitude: number;
-  meterRadius: number;
-  userLatitude?: number | undefined;
-  userLongitude?: number | undefined;
-}
-
-export interface QueryPlaceListResponse {
-  results: Place[];
-}
-
-export interface CreatePlaceRequest {
-  placeId?:
-    | string
-    | undefined;
+export interface CreatePlaceListRequest_Place {
   /** 장소(Place)의 원래 이름 */
   name: string;
   /** 장소(Place)의 위도 */
@@ -117,36 +131,40 @@ export interface CreatePlaceRequest {
   longitude: number;
 }
 
-export interface CreatePlaceResponse {
-  place: Place | undefined;
-}
-
-export interface ReadPlaceRequest {
-  /** 장소(Place) 고유 Id */
-  placeId: string;
-}
-
-export interface ReadPlaceResponse {
-  place: Place | undefined;
+export interface CreatePlaceListResponse {
+  totalCount: number;
+  resultCount: number;
+  requestedPageNumber: number;
+  requestedLimitNumber: number;
+  results: Place[];
 }
 
 export interface ReadPlaceListRequest {
-  places: ReadPlaceRequest[];
+  places: ReadPlaceListRequest_Place[];
+  /** 검색 InputText에 넣은 그대로의 값 */
+  keywords?: string | undefined;
+  createdAtPeriod: Period | undefined;
+  updatedAtPeriod: Period | undefined;
+  deletedAtPeriod: Period | undefined;
+  isIncludeDeletedPlace: boolean;
+  boundSquare?: BoundSquare | undefined;
+  boundCircle?: BoundCircle | undefined;
+}
+
+export interface ReadPlaceListRequest_Place {
+  placeId: string;
 }
 
 export interface ReadPlaceListResponse {
+  responseInfo: ResponseInfo | undefined;
   places: Place[];
 }
 
-export interface CreatePlaceListRequest {
-  places: CreatePlaceRequest[];
+export interface UpdatePlaceListRequest {
+  places: UpdatePlaceListRequest_Place[];
 }
 
-export interface CreatePlaceListResponse {
-  places: Place[];
-}
-
-export interface UpdatePlaceRequest {
+export interface UpdatePlaceListRequest_Place {
   placeId: string;
   /** 장소(Place)의 원래 이름(No Localization Name) */
   name?:
@@ -160,315 +178,50 @@ export interface UpdatePlaceRequest {
   longitude?: number | undefined;
 }
 
-export interface UpdatePlaceResponse {
-  place: Place | undefined;
-}
-
-export interface UpdatePlaceListRequest {
-  places: UpdatePlaceRequest[];
-}
-
 export interface UpdatePlaceListResponse {
-  places: Place[];
-}
-
-export interface DeletePlaceRequest {
-  /** 장소(Place) 고유 Id */
-  placeId: string;
-}
-
-export interface DeletePlaceResponse {
-  place: Place | undefined;
+  responseInfo: ResponseInfo | undefined;
+  results: Place[];
 }
 
 export interface DeletePlaceListRequest {
-  places: DeletePlaceRequest[];
+  places: DeletePlaceListRequest_Place[];
+}
+
+export interface DeletePlaceListRequest_Place {
+  placeId: string;
 }
 
 export interface DeletePlaceListResponse {
-  places: Place[];
+  responseInfo: ResponseInfo | undefined;
+  results: Place[];
 }
 
-function createBaseQueryPlaceListBySquareRequest(): QueryPlaceListBySquareRequest {
-  return {
-    topRightLatitude: 0,
-    topRightLongitude: 0,
-    bottomLeftLatitude: 0,
-    bottomLeftLongitude: 0,
-    userLatitude: undefined,
-    userLongitude: undefined,
-  };
+export interface BoundSquare {
+  topRight: Wgs84Coordinates | undefined;
+  bottomLeft: Wgs84Coordinates | undefined;
 }
 
-export const QueryPlaceListBySquareRequest = {
-  encode(message: QueryPlaceListBySquareRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.topRightLatitude !== 0) {
-      writer.uint32(9).double(message.topRightLatitude);
-    }
-    if (message.topRightLongitude !== 0) {
-      writer.uint32(17).double(message.topRightLongitude);
-    }
-    if (message.bottomLeftLatitude !== 0) {
-      writer.uint32(25).double(message.bottomLeftLatitude);
-    }
-    if (message.bottomLeftLongitude !== 0) {
-      writer.uint32(33).double(message.bottomLeftLongitude);
-    }
-    if (message.userLatitude !== undefined) {
-      writer.uint32(41).double(message.userLatitude);
-    }
-    if (message.userLongitude !== undefined) {
-      writer.uint32(49).double(message.userLongitude);
+export interface BoundCircle {
+  center: Wgs84Coordinates | undefined;
+  radiusMeter: number;
+}
+
+function createBaseCreatePlaceListRequest(): CreatePlaceListRequest {
+  return { places: [] };
+}
+
+export const CreatePlaceListRequest = {
+  encode(message: CreatePlaceListRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    for (const v of message.places) {
+      CreatePlaceListRequest_Place.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPlaceListBySquareRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CreatePlaceListRequest {
     const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryPlaceListBySquareRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 9) {
-            break;
-          }
-
-          message.topRightLatitude = reader.double();
-          continue;
-        case 2:
-          if (tag !== 17) {
-            break;
-          }
-
-          message.topRightLongitude = reader.double();
-          continue;
-        case 3:
-          if (tag !== 25) {
-            break;
-          }
-
-          message.bottomLeftLatitude = reader.double();
-          continue;
-        case 4:
-          if (tag !== 33) {
-            break;
-          }
-
-          message.bottomLeftLongitude = reader.double();
-          continue;
-        case 5:
-          if (tag !== 41) {
-            break;
-          }
-
-          message.userLatitude = reader.double();
-          continue;
-        case 6:
-          if (tag !== 49) {
-            break;
-          }
-
-          message.userLongitude = reader.double();
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): QueryPlaceListBySquareRequest {
-    return {
-      topRightLatitude: isSet(object.topRightLatitude) ? globalThis.Number(object.topRightLatitude) : 0,
-      topRightLongitude: isSet(object.topRightLongitude) ? globalThis.Number(object.topRightLongitude) : 0,
-      bottomLeftLatitude: isSet(object.bottomLeftLatitude) ? globalThis.Number(object.bottomLeftLatitude) : 0,
-      bottomLeftLongitude: isSet(object.bottomLeftLongitude) ? globalThis.Number(object.bottomLeftLongitude) : 0,
-      userLatitude: isSet(object.userLatitude) ? globalThis.Number(object.userLatitude) : undefined,
-      userLongitude: isSet(object.userLongitude) ? globalThis.Number(object.userLongitude) : undefined,
-    };
-  },
-
-  toJSON(message: QueryPlaceListBySquareRequest): unknown {
-    const obj: any = {};
-    if (message.topRightLatitude !== 0) {
-      obj.topRightLatitude = message.topRightLatitude;
-    }
-    if (message.topRightLongitude !== 0) {
-      obj.topRightLongitude = message.topRightLongitude;
-    }
-    if (message.bottomLeftLatitude !== 0) {
-      obj.bottomLeftLatitude = message.bottomLeftLatitude;
-    }
-    if (message.bottomLeftLongitude !== 0) {
-      obj.bottomLeftLongitude = message.bottomLeftLongitude;
-    }
-    if (message.userLatitude !== undefined) {
-      obj.userLatitude = message.userLatitude;
-    }
-    if (message.userLongitude !== undefined) {
-      obj.userLongitude = message.userLongitude;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryPlaceListBySquareRequest>, I>>(base?: I): QueryPlaceListBySquareRequest {
-    return QueryPlaceListBySquareRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryPlaceListBySquareRequest>, I>>(
-    object: I,
-  ): QueryPlaceListBySquareRequest {
-    const message = createBaseQueryPlaceListBySquareRequest();
-    message.topRightLatitude = object.topRightLatitude ?? 0;
-    message.topRightLongitude = object.topRightLongitude ?? 0;
-    message.bottomLeftLatitude = object.bottomLeftLatitude ?? 0;
-    message.bottomLeftLongitude = object.bottomLeftLongitude ?? 0;
-    message.userLatitude = object.userLatitude ?? undefined;
-    message.userLongitude = object.userLongitude ?? undefined;
-    return message;
-  },
-};
-
-function createBaseQueryPlaceListByRadiusRequest(): QueryPlaceListByRadiusRequest {
-  return { centerLatitude: 0, centerLongitude: 0, meterRadius: 0, userLatitude: undefined, userLongitude: undefined };
-}
-
-export const QueryPlaceListByRadiusRequest = {
-  encode(message: QueryPlaceListByRadiusRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.centerLatitude !== 0) {
-      writer.uint32(9).double(message.centerLatitude);
-    }
-    if (message.centerLongitude !== 0) {
-      writer.uint32(17).double(message.centerLongitude);
-    }
-    if (message.meterRadius !== 0) {
-      writer.uint32(24).uint32(message.meterRadius);
-    }
-    if (message.userLatitude !== undefined) {
-      writer.uint32(33).double(message.userLatitude);
-    }
-    if (message.userLongitude !== undefined) {
-      writer.uint32(41).double(message.userLongitude);
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPlaceListByRadiusRequest {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryPlaceListByRadiusRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 9) {
-            break;
-          }
-
-          message.centerLatitude = reader.double();
-          continue;
-        case 2:
-          if (tag !== 17) {
-            break;
-          }
-
-          message.centerLongitude = reader.double();
-          continue;
-        case 3:
-          if (tag !== 24) {
-            break;
-          }
-
-          message.meterRadius = reader.uint32();
-          continue;
-        case 4:
-          if (tag !== 33) {
-            break;
-          }
-
-          message.userLatitude = reader.double();
-          continue;
-        case 5:
-          if (tag !== 41) {
-            break;
-          }
-
-          message.userLongitude = reader.double();
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): QueryPlaceListByRadiusRequest {
-    return {
-      centerLatitude: isSet(object.centerLatitude) ? globalThis.Number(object.centerLatitude) : 0,
-      centerLongitude: isSet(object.centerLongitude) ? globalThis.Number(object.centerLongitude) : 0,
-      meterRadius: isSet(object.meterRadius) ? globalThis.Number(object.meterRadius) : 0,
-      userLatitude: isSet(object.userLatitude) ? globalThis.Number(object.userLatitude) : undefined,
-      userLongitude: isSet(object.userLongitude) ? globalThis.Number(object.userLongitude) : undefined,
-    };
-  },
-
-  toJSON(message: QueryPlaceListByRadiusRequest): unknown {
-    const obj: any = {};
-    if (message.centerLatitude !== 0) {
-      obj.centerLatitude = message.centerLatitude;
-    }
-    if (message.centerLongitude !== 0) {
-      obj.centerLongitude = message.centerLongitude;
-    }
-    if (message.meterRadius !== 0) {
-      obj.meterRadius = Math.round(message.meterRadius);
-    }
-    if (message.userLatitude !== undefined) {
-      obj.userLatitude = message.userLatitude;
-    }
-    if (message.userLongitude !== undefined) {
-      obj.userLongitude = message.userLongitude;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryPlaceListByRadiusRequest>, I>>(base?: I): QueryPlaceListByRadiusRequest {
-    return QueryPlaceListByRadiusRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryPlaceListByRadiusRequest>, I>>(
-    object: I,
-  ): QueryPlaceListByRadiusRequest {
-    const message = createBaseQueryPlaceListByRadiusRequest();
-    message.centerLatitude = object.centerLatitude ?? 0;
-    message.centerLongitude = object.centerLongitude ?? 0;
-    message.meterRadius = object.meterRadius ?? 0;
-    message.userLatitude = object.userLatitude ?? undefined;
-    message.userLongitude = object.userLongitude ?? undefined;
-    return message;
-  },
-};
-
-function createBaseQueryPlaceListResponse(): QueryPlaceListResponse {
-  return { results: [] };
-}
-
-export const QueryPlaceListResponse = {
-  encode(message: QueryPlaceListResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    for (const v of message.results) {
-      Place.encode(v!, writer.uint32(10).fork()).ldelim();
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPlaceListResponse {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryPlaceListResponse();
+    const message = createBaseCreatePlaceListRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -477,7 +230,7 @@ export const QueryPlaceListResponse = {
             break;
           }
 
-          message.results.push(Place.decode(reader, reader.uint32()));
+          message.places.push(CreatePlaceListRequest_Place.decode(reader, reader.uint32()));
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -488,39 +241,38 @@ export const QueryPlaceListResponse = {
     return message;
   },
 
-  fromJSON(object: any): QueryPlaceListResponse {
+  fromJSON(object: any): CreatePlaceListRequest {
     return {
-      results: globalThis.Array.isArray(object?.results) ? object.results.map((e: any) => Place.fromJSON(e)) : [],
+      places: globalThis.Array.isArray(object?.places)
+        ? object.places.map((e: any) => CreatePlaceListRequest_Place.fromJSON(e))
+        : [],
     };
   },
 
-  toJSON(message: QueryPlaceListResponse): unknown {
+  toJSON(message: CreatePlaceListRequest): unknown {
     const obj: any = {};
-    if (message.results?.length) {
-      obj.results = message.results.map((e) => Place.toJSON(e));
+    if (message.places?.length) {
+      obj.places = message.places.map((e) => CreatePlaceListRequest_Place.toJSON(e));
     }
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<QueryPlaceListResponse>, I>>(base?: I): QueryPlaceListResponse {
-    return QueryPlaceListResponse.fromPartial(base ?? ({} as any));
+  create<I extends Exact<DeepPartial<CreatePlaceListRequest>, I>>(base?: I): CreatePlaceListRequest {
+    return CreatePlaceListRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<QueryPlaceListResponse>, I>>(object: I): QueryPlaceListResponse {
-    const message = createBaseQueryPlaceListResponse();
-    message.results = object.results?.map((e) => Place.fromPartial(e)) || [];
+  fromPartial<I extends Exact<DeepPartial<CreatePlaceListRequest>, I>>(object: I): CreatePlaceListRequest {
+    const message = createBaseCreatePlaceListRequest();
+    message.places = object.places?.map((e) => CreatePlaceListRequest_Place.fromPartial(e)) || [];
     return message;
   },
 };
 
-function createBaseCreatePlaceRequest(): CreatePlaceRequest {
-  return { placeId: undefined, name: "", latitude: 0, longitude: 0 };
+function createBaseCreatePlaceListRequest_Place(): CreatePlaceListRequest_Place {
+  return { name: "", latitude: 0, longitude: 0 };
 }
 
-export const CreatePlaceRequest = {
-  encode(message: CreatePlaceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.placeId !== undefined) {
-      writer.uint32(10).string(message.placeId);
-    }
+export const CreatePlaceListRequest_Place = {
+  encode(message: CreatePlaceListRequest_Place, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(18).string(message.name);
     }
@@ -533,20 +285,13 @@ export const CreatePlaceRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): CreatePlaceRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CreatePlaceListRequest_Place {
     const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseCreatePlaceRequest();
+    const message = createBaseCreatePlaceListRequest_Place();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.placeId = reader.string();
-          continue;
         case 2:
           if (tag !== 18) {
             break;
@@ -577,20 +322,16 @@ export const CreatePlaceRequest = {
     return message;
   },
 
-  fromJSON(object: any): CreatePlaceRequest {
+  fromJSON(object: any): CreatePlaceListRequest_Place {
     return {
-      placeId: isSet(object.placeId) ? globalThis.String(object.placeId) : undefined,
       name: isSet(object.name) ? globalThis.String(object.name) : "",
       latitude: isSet(object.latitude) ? globalThis.Number(object.latitude) : 0,
       longitude: isSet(object.longitude) ? globalThis.Number(object.longitude) : 0,
     };
   },
 
-  toJSON(message: CreatePlaceRequest): unknown {
+  toJSON(message: CreatePlaceListRequest_Place): unknown {
     const obj: any = {};
-    if (message.placeId !== undefined) {
-      obj.placeId = message.placeId;
-    }
     if (message.name !== "") {
       obj.name = message.name;
     }
@@ -603,12 +344,11 @@ export const CreatePlaceRequest = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<CreatePlaceRequest>, I>>(base?: I): CreatePlaceRequest {
-    return CreatePlaceRequest.fromPartial(base ?? ({} as any));
+  create<I extends Exact<DeepPartial<CreatePlaceListRequest_Place>, I>>(base?: I): CreatePlaceListRequest_Place {
+    return CreatePlaceListRequest_Place.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<CreatePlaceRequest>, I>>(object: I): CreatePlaceRequest {
-    const message = createBaseCreatePlaceRequest();
-    message.placeId = object.placeId ?? undefined;
+  fromPartial<I extends Exact<DeepPartial<CreatePlaceListRequest_Place>, I>>(object: I): CreatePlaceListRequest_Place {
+    const message = createBaseCreatePlaceListRequest_Place();
     message.name = object.name ?? "";
     message.latitude = object.latitude ?? 0;
     message.longitude = object.longitude ?? 0;
@@ -616,31 +356,71 @@ export const CreatePlaceRequest = {
   },
 };
 
-function createBaseCreatePlaceResponse(): CreatePlaceResponse {
-  return { place: undefined };
+function createBaseCreatePlaceListResponse(): CreatePlaceListResponse {
+  return { totalCount: 0, resultCount: 0, requestedPageNumber: 0, requestedLimitNumber: 0, results: [] };
 }
 
-export const CreatePlaceResponse = {
-  encode(message: CreatePlaceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.place !== undefined) {
-      Place.encode(message.place, writer.uint32(10).fork()).ldelim();
+export const CreatePlaceListResponse = {
+  encode(message: CreatePlaceListResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.totalCount !== 0) {
+      writer.uint32(8).int32(message.totalCount);
+    }
+    if (message.resultCount !== 0) {
+      writer.uint32(16).int32(message.resultCount);
+    }
+    if (message.requestedPageNumber !== 0) {
+      writer.uint32(24).int32(message.requestedPageNumber);
+    }
+    if (message.requestedLimitNumber !== 0) {
+      writer.uint32(32).int32(message.requestedLimitNumber);
+    }
+    for (const v of message.results) {
+      Place.encode(v!, writer.uint32(42).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): CreatePlaceResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CreatePlaceListResponse {
     const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseCreatePlaceResponse();
+    const message = createBaseCreatePlaceListResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag !== 10) {
+          if (tag !== 8) {
             break;
           }
 
-          message.place = Place.decode(reader, reader.uint32());
+          message.totalCount = reader.int32();
+          continue;
+        case 2:
+          if (tag !== 16) {
+            break;
+          }
+
+          message.resultCount = reader.int32();
+          continue;
+        case 3:
+          if (tag !== 24) {
+            break;
+          }
+
+          message.requestedPageNumber = reader.int32();
+          continue;
+        case 4:
+          if (tag !== 32) {
+            break;
+          }
+
+          message.requestedLimitNumber = reader.int32();
+          continue;
+        case 5:
+          if (tag !== 42) {
+            break;
+          }
+
+          message.results.push(Place.decode(reader, reader.uint32()));
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -651,44 +431,253 @@ export const CreatePlaceResponse = {
     return message;
   },
 
-  fromJSON(object: any): CreatePlaceResponse {
-    return { place: isSet(object.place) ? Place.fromJSON(object.place) : undefined };
+  fromJSON(object: any): CreatePlaceListResponse {
+    return {
+      totalCount: isSet(object.totalCount) ? globalThis.Number(object.totalCount) : 0,
+      resultCount: isSet(object.resultCount) ? globalThis.Number(object.resultCount) : 0,
+      requestedPageNumber: isSet(object.requestedPageNumber) ? globalThis.Number(object.requestedPageNumber) : 0,
+      requestedLimitNumber: isSet(object.requestedLimitNumber) ? globalThis.Number(object.requestedLimitNumber) : 0,
+      results: globalThis.Array.isArray(object?.results) ? object.results.map((e: any) => Place.fromJSON(e)) : [],
+    };
   },
 
-  toJSON(message: CreatePlaceResponse): unknown {
+  toJSON(message: CreatePlaceListResponse): unknown {
     const obj: any = {};
-    if (message.place !== undefined) {
-      obj.place = Place.toJSON(message.place);
+    if (message.totalCount !== 0) {
+      obj.totalCount = Math.round(message.totalCount);
+    }
+    if (message.resultCount !== 0) {
+      obj.resultCount = Math.round(message.resultCount);
+    }
+    if (message.requestedPageNumber !== 0) {
+      obj.requestedPageNumber = Math.round(message.requestedPageNumber);
+    }
+    if (message.requestedLimitNumber !== 0) {
+      obj.requestedLimitNumber = Math.round(message.requestedLimitNumber);
+    }
+    if (message.results?.length) {
+      obj.results = message.results.map((e) => Place.toJSON(e));
     }
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<CreatePlaceResponse>, I>>(base?: I): CreatePlaceResponse {
-    return CreatePlaceResponse.fromPartial(base ?? ({} as any));
+  create<I extends Exact<DeepPartial<CreatePlaceListResponse>, I>>(base?: I): CreatePlaceListResponse {
+    return CreatePlaceListResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<CreatePlaceResponse>, I>>(object: I): CreatePlaceResponse {
-    const message = createBaseCreatePlaceResponse();
-    message.place = (object.place !== undefined && object.place !== null) ? Place.fromPartial(object.place) : undefined;
+  fromPartial<I extends Exact<DeepPartial<CreatePlaceListResponse>, I>>(object: I): CreatePlaceListResponse {
+    const message = createBaseCreatePlaceListResponse();
+    message.totalCount = object.totalCount ?? 0;
+    message.resultCount = object.resultCount ?? 0;
+    message.requestedPageNumber = object.requestedPageNumber ?? 0;
+    message.requestedLimitNumber = object.requestedLimitNumber ?? 0;
+    message.results = object.results?.map((e) => Place.fromPartial(e)) || [];
     return message;
   },
 };
 
-function createBaseReadPlaceRequest(): ReadPlaceRequest {
+function createBaseReadPlaceListRequest(): ReadPlaceListRequest {
+  return {
+    places: [],
+    keywords: undefined,
+    createdAtPeriod: undefined,
+    updatedAtPeriod: undefined,
+    deletedAtPeriod: undefined,
+    isIncludeDeletedPlace: false,
+    boundSquare: undefined,
+    boundCircle: undefined,
+  };
+}
+
+export const ReadPlaceListRequest = {
+  encode(message: ReadPlaceListRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    for (const v of message.places) {
+      ReadPlaceListRequest_Place.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.keywords !== undefined) {
+      writer.uint32(18).string(message.keywords);
+    }
+    if (message.createdAtPeriod !== undefined) {
+      Period.encode(message.createdAtPeriod, writer.uint32(26).fork()).ldelim();
+    }
+    if (message.updatedAtPeriod !== undefined) {
+      Period.encode(message.updatedAtPeriod, writer.uint32(34).fork()).ldelim();
+    }
+    if (message.deletedAtPeriod !== undefined) {
+      Period.encode(message.deletedAtPeriod, writer.uint32(42).fork()).ldelim();
+    }
+    if (message.isIncludeDeletedPlace === true) {
+      writer.uint32(48).bool(message.isIncludeDeletedPlace);
+    }
+    if (message.boundSquare !== undefined) {
+      BoundSquare.encode(message.boundSquare, writer.uint32(58).fork()).ldelim();
+    }
+    if (message.boundCircle !== undefined) {
+      BoundCircle.encode(message.boundCircle, writer.uint32(66).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): ReadPlaceListRequest {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseReadPlaceListRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.places.push(ReadPlaceListRequest_Place.decode(reader, reader.uint32()));
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.keywords = reader.string();
+          continue;
+        case 3:
+          if (tag !== 26) {
+            break;
+          }
+
+          message.createdAtPeriod = Period.decode(reader, reader.uint32());
+          continue;
+        case 4:
+          if (tag !== 34) {
+            break;
+          }
+
+          message.updatedAtPeriod = Period.decode(reader, reader.uint32());
+          continue;
+        case 5:
+          if (tag !== 42) {
+            break;
+          }
+
+          message.deletedAtPeriod = Period.decode(reader, reader.uint32());
+          continue;
+        case 6:
+          if (tag !== 48) {
+            break;
+          }
+
+          message.isIncludeDeletedPlace = reader.bool();
+          continue;
+        case 7:
+          if (tag !== 58) {
+            break;
+          }
+
+          message.boundSquare = BoundSquare.decode(reader, reader.uint32());
+          continue;
+        case 8:
+          if (tag !== 66) {
+            break;
+          }
+
+          message.boundCircle = BoundCircle.decode(reader, reader.uint32());
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): ReadPlaceListRequest {
+    return {
+      places: globalThis.Array.isArray(object?.places)
+        ? object.places.map((e: any) => ReadPlaceListRequest_Place.fromJSON(e))
+        : [],
+      keywords: isSet(object.keywords) ? globalThis.String(object.keywords) : undefined,
+      createdAtPeriod: isSet(object.createdAtPeriod) ? Period.fromJSON(object.createdAtPeriod) : undefined,
+      updatedAtPeriod: isSet(object.updatedAtPeriod) ? Period.fromJSON(object.updatedAtPeriod) : undefined,
+      deletedAtPeriod: isSet(object.deletedAtPeriod) ? Period.fromJSON(object.deletedAtPeriod) : undefined,
+      isIncludeDeletedPlace: isSet(object.isIncludeDeletedPlace)
+        ? globalThis.Boolean(object.isIncludeDeletedPlace)
+        : false,
+      boundSquare: isSet(object.boundSquare) ? BoundSquare.fromJSON(object.boundSquare) : undefined,
+      boundCircle: isSet(object.boundCircle) ? BoundCircle.fromJSON(object.boundCircle) : undefined,
+    };
+  },
+
+  toJSON(message: ReadPlaceListRequest): unknown {
+    const obj: any = {};
+    if (message.places?.length) {
+      obj.places = message.places.map((e) => ReadPlaceListRequest_Place.toJSON(e));
+    }
+    if (message.keywords !== undefined) {
+      obj.keywords = message.keywords;
+    }
+    if (message.createdAtPeriod !== undefined) {
+      obj.createdAtPeriod = Period.toJSON(message.createdAtPeriod);
+    }
+    if (message.updatedAtPeriod !== undefined) {
+      obj.updatedAtPeriod = Period.toJSON(message.updatedAtPeriod);
+    }
+    if (message.deletedAtPeriod !== undefined) {
+      obj.deletedAtPeriod = Period.toJSON(message.deletedAtPeriod);
+    }
+    if (message.isIncludeDeletedPlace === true) {
+      obj.isIncludeDeletedPlace = message.isIncludeDeletedPlace;
+    }
+    if (message.boundSquare !== undefined) {
+      obj.boundSquare = BoundSquare.toJSON(message.boundSquare);
+    }
+    if (message.boundCircle !== undefined) {
+      obj.boundCircle = BoundCircle.toJSON(message.boundCircle);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<ReadPlaceListRequest>, I>>(base?: I): ReadPlaceListRequest {
+    return ReadPlaceListRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<ReadPlaceListRequest>, I>>(object: I): ReadPlaceListRequest {
+    const message = createBaseReadPlaceListRequest();
+    message.places = object.places?.map((e) => ReadPlaceListRequest_Place.fromPartial(e)) || [];
+    message.keywords = object.keywords ?? undefined;
+    message.createdAtPeriod = (object.createdAtPeriod !== undefined && object.createdAtPeriod !== null)
+      ? Period.fromPartial(object.createdAtPeriod)
+      : undefined;
+    message.updatedAtPeriod = (object.updatedAtPeriod !== undefined && object.updatedAtPeriod !== null)
+      ? Period.fromPartial(object.updatedAtPeriod)
+      : undefined;
+    message.deletedAtPeriod = (object.deletedAtPeriod !== undefined && object.deletedAtPeriod !== null)
+      ? Period.fromPartial(object.deletedAtPeriod)
+      : undefined;
+    message.isIncludeDeletedPlace = object.isIncludeDeletedPlace ?? false;
+    message.boundSquare = (object.boundSquare !== undefined && object.boundSquare !== null)
+      ? BoundSquare.fromPartial(object.boundSquare)
+      : undefined;
+    message.boundCircle = (object.boundCircle !== undefined && object.boundCircle !== null)
+      ? BoundCircle.fromPartial(object.boundCircle)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseReadPlaceListRequest_Place(): ReadPlaceListRequest_Place {
   return { placeId: "" };
 }
 
-export const ReadPlaceRequest = {
-  encode(message: ReadPlaceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+export const ReadPlaceListRequest_Place = {
+  encode(message: ReadPlaceListRequest_Place, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.placeId !== "") {
       writer.uint32(10).string(message.placeId);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ReadPlaceRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ReadPlaceListRequest_Place {
     const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseReadPlaceRequest();
+    const message = createBaseReadPlaceListRequest_Place();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -708,11 +697,11 @@ export const ReadPlaceRequest = {
     return message;
   },
 
-  fromJSON(object: any): ReadPlaceRequest {
+  fromJSON(object: any): ReadPlaceListRequest_Place {
     return { placeId: isSet(object.placeId) ? globalThis.String(object.placeId) : "" };
   },
 
-  toJSON(message: ReadPlaceRequest): unknown {
+  toJSON(message: ReadPlaceListRequest_Place): unknown {
     const obj: any = {};
     if (message.placeId !== "") {
       obj.placeId = message.placeId;
@@ -720,140 +709,25 @@ export const ReadPlaceRequest = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ReadPlaceRequest>, I>>(base?: I): ReadPlaceRequest {
-    return ReadPlaceRequest.fromPartial(base ?? ({} as any));
+  create<I extends Exact<DeepPartial<ReadPlaceListRequest_Place>, I>>(base?: I): ReadPlaceListRequest_Place {
+    return ReadPlaceListRequest_Place.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<ReadPlaceRequest>, I>>(object: I): ReadPlaceRequest {
-    const message = createBaseReadPlaceRequest();
+  fromPartial<I extends Exact<DeepPartial<ReadPlaceListRequest_Place>, I>>(object: I): ReadPlaceListRequest_Place {
+    const message = createBaseReadPlaceListRequest_Place();
     message.placeId = object.placeId ?? "";
     return message;
   },
 };
 
-function createBaseReadPlaceResponse(): ReadPlaceResponse {
-  return { place: undefined };
-}
-
-export const ReadPlaceResponse = {
-  encode(message: ReadPlaceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.place !== undefined) {
-      Place.encode(message.place, writer.uint32(10).fork()).ldelim();
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): ReadPlaceResponse {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseReadPlaceResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.place = Place.decode(reader, reader.uint32());
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): ReadPlaceResponse {
-    return { place: isSet(object.place) ? Place.fromJSON(object.place) : undefined };
-  },
-
-  toJSON(message: ReadPlaceResponse): unknown {
-    const obj: any = {};
-    if (message.place !== undefined) {
-      obj.place = Place.toJSON(message.place);
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<ReadPlaceResponse>, I>>(base?: I): ReadPlaceResponse {
-    return ReadPlaceResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<ReadPlaceResponse>, I>>(object: I): ReadPlaceResponse {
-    const message = createBaseReadPlaceResponse();
-    message.place = (object.place !== undefined && object.place !== null) ? Place.fromPartial(object.place) : undefined;
-    return message;
-  },
-};
-
-function createBaseReadPlaceListRequest(): ReadPlaceListRequest {
-  return { places: [] };
-}
-
-export const ReadPlaceListRequest = {
-  encode(message: ReadPlaceListRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    for (const v of message.places) {
-      ReadPlaceRequest.encode(v!, writer.uint32(10).fork()).ldelim();
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): ReadPlaceListRequest {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseReadPlaceListRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.places.push(ReadPlaceRequest.decode(reader, reader.uint32()));
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): ReadPlaceListRequest {
-    return {
-      places: globalThis.Array.isArray(object?.places)
-        ? object.places.map((e: any) => ReadPlaceRequest.fromJSON(e))
-        : [],
-    };
-  },
-
-  toJSON(message: ReadPlaceListRequest): unknown {
-    const obj: any = {};
-    if (message.places?.length) {
-      obj.places = message.places.map((e) => ReadPlaceRequest.toJSON(e));
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<ReadPlaceListRequest>, I>>(base?: I): ReadPlaceListRequest {
-    return ReadPlaceListRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<ReadPlaceListRequest>, I>>(object: I): ReadPlaceListRequest {
-    const message = createBaseReadPlaceListRequest();
-    message.places = object.places?.map((e) => ReadPlaceRequest.fromPartial(e)) || [];
-    return message;
-  },
-};
-
 function createBaseReadPlaceListResponse(): ReadPlaceListResponse {
-  return { places: [] };
+  return { responseInfo: undefined, places: [] };
 }
 
 export const ReadPlaceListResponse = {
   encode(message: ReadPlaceListResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.responseInfo !== undefined) {
+      ResponseInfo.encode(message.responseInfo, writer.uint32(10).fork()).ldelim();
+    }
     for (const v of message.places) {
       Place.encode(v!, writer.uint32(18).fork()).ldelim();
     }
@@ -867,6 +741,13 @@ export const ReadPlaceListResponse = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.responseInfo = ResponseInfo.decode(reader, reader.uint32());
+          continue;
         case 2:
           if (tag !== 18) {
             break;
@@ -884,11 +765,17 @@ export const ReadPlaceListResponse = {
   },
 
   fromJSON(object: any): ReadPlaceListResponse {
-    return { places: globalThis.Array.isArray(object?.places) ? object.places.map((e: any) => Place.fromJSON(e)) : [] };
+    return {
+      responseInfo: isSet(object.responseInfo) ? ResponseInfo.fromJSON(object.responseInfo) : undefined,
+      places: globalThis.Array.isArray(object?.places) ? object.places.map((e: any) => Place.fromJSON(e)) : [],
+    };
   },
 
   toJSON(message: ReadPlaceListResponse): unknown {
     const obj: any = {};
+    if (message.responseInfo !== undefined) {
+      obj.responseInfo = ResponseInfo.toJSON(message.responseInfo);
+    }
     if (message.places?.length) {
       obj.places = message.places.map((e) => Place.toJSON(e));
     }
@@ -900,27 +787,30 @@ export const ReadPlaceListResponse = {
   },
   fromPartial<I extends Exact<DeepPartial<ReadPlaceListResponse>, I>>(object: I): ReadPlaceListResponse {
     const message = createBaseReadPlaceListResponse();
+    message.responseInfo = (object.responseInfo !== undefined && object.responseInfo !== null)
+      ? ResponseInfo.fromPartial(object.responseInfo)
+      : undefined;
     message.places = object.places?.map((e) => Place.fromPartial(e)) || [];
     return message;
   },
 };
 
-function createBaseCreatePlaceListRequest(): CreatePlaceListRequest {
+function createBaseUpdatePlaceListRequest(): UpdatePlaceListRequest {
   return { places: [] };
 }
 
-export const CreatePlaceListRequest = {
-  encode(message: CreatePlaceListRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+export const UpdatePlaceListRequest = {
+  encode(message: UpdatePlaceListRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.places) {
-      CreatePlaceRequest.encode(v!, writer.uint32(10).fork()).ldelim();
+      UpdatePlaceListRequest_Place.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): CreatePlaceListRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): UpdatePlaceListRequest {
     const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseCreatePlaceListRequest();
+    const message = createBaseUpdatePlaceListRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -929,7 +819,7 @@ export const CreatePlaceListRequest = {
             break;
           }
 
-          message.places.push(CreatePlaceRequest.decode(reader, reader.uint32()));
+          message.places.push(UpdatePlaceListRequest_Place.decode(reader, reader.uint32()));
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -940,95 +830,38 @@ export const CreatePlaceListRequest = {
     return message;
   },
 
-  fromJSON(object: any): CreatePlaceListRequest {
+  fromJSON(object: any): UpdatePlaceListRequest {
     return {
       places: globalThis.Array.isArray(object?.places)
-        ? object.places.map((e: any) => CreatePlaceRequest.fromJSON(e))
+        ? object.places.map((e: any) => UpdatePlaceListRequest_Place.fromJSON(e))
         : [],
     };
   },
 
-  toJSON(message: CreatePlaceListRequest): unknown {
+  toJSON(message: UpdatePlaceListRequest): unknown {
     const obj: any = {};
     if (message.places?.length) {
-      obj.places = message.places.map((e) => CreatePlaceRequest.toJSON(e));
+      obj.places = message.places.map((e) => UpdatePlaceListRequest_Place.toJSON(e));
     }
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<CreatePlaceListRequest>, I>>(base?: I): CreatePlaceListRequest {
-    return CreatePlaceListRequest.fromPartial(base ?? ({} as any));
+  create<I extends Exact<DeepPartial<UpdatePlaceListRequest>, I>>(base?: I): UpdatePlaceListRequest {
+    return UpdatePlaceListRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<CreatePlaceListRequest>, I>>(object: I): CreatePlaceListRequest {
-    const message = createBaseCreatePlaceListRequest();
-    message.places = object.places?.map((e) => CreatePlaceRequest.fromPartial(e)) || [];
+  fromPartial<I extends Exact<DeepPartial<UpdatePlaceListRequest>, I>>(object: I): UpdatePlaceListRequest {
+    const message = createBaseUpdatePlaceListRequest();
+    message.places = object.places?.map((e) => UpdatePlaceListRequest_Place.fromPartial(e)) || [];
     return message;
   },
 };
 
-function createBaseCreatePlaceListResponse(): CreatePlaceListResponse {
-  return { places: [] };
-}
-
-export const CreatePlaceListResponse = {
-  encode(message: CreatePlaceListResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    for (const v of message.places) {
-      Place.encode(v!, writer.uint32(18).fork()).ldelim();
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): CreatePlaceListResponse {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseCreatePlaceListResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.places.push(Place.decode(reader, reader.uint32()));
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): CreatePlaceListResponse {
-    return { places: globalThis.Array.isArray(object?.places) ? object.places.map((e: any) => Place.fromJSON(e)) : [] };
-  },
-
-  toJSON(message: CreatePlaceListResponse): unknown {
-    const obj: any = {};
-    if (message.places?.length) {
-      obj.places = message.places.map((e) => Place.toJSON(e));
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<CreatePlaceListResponse>, I>>(base?: I): CreatePlaceListResponse {
-    return CreatePlaceListResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<CreatePlaceListResponse>, I>>(object: I): CreatePlaceListResponse {
-    const message = createBaseCreatePlaceListResponse();
-    message.places = object.places?.map((e) => Place.fromPartial(e)) || [];
-    return message;
-  },
-};
-
-function createBaseUpdatePlaceRequest(): UpdatePlaceRequest {
+function createBaseUpdatePlaceListRequest_Place(): UpdatePlaceListRequest_Place {
   return { placeId: "", name: undefined, latitude: undefined, longitude: undefined };
 }
 
-export const UpdatePlaceRequest = {
-  encode(message: UpdatePlaceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+export const UpdatePlaceListRequest_Place = {
+  encode(message: UpdatePlaceListRequest_Place, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.placeId !== "") {
       writer.uint32(10).string(message.placeId);
     }
@@ -1044,10 +877,10 @@ export const UpdatePlaceRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): UpdatePlaceRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): UpdatePlaceListRequest_Place {
     const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseUpdatePlaceRequest();
+    const message = createBaseUpdatePlaceListRequest_Place();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -1088,7 +921,7 @@ export const UpdatePlaceRequest = {
     return message;
   },
 
-  fromJSON(object: any): UpdatePlaceRequest {
+  fromJSON(object: any): UpdatePlaceListRequest_Place {
     return {
       placeId: isSet(object.placeId) ? globalThis.String(object.placeId) : "",
       name: isSet(object.name) ? globalThis.String(object.name) : undefined,
@@ -1097,7 +930,7 @@ export const UpdatePlaceRequest = {
     };
   },
 
-  toJSON(message: UpdatePlaceRequest): unknown {
+  toJSON(message: UpdatePlaceListRequest_Place): unknown {
     const obj: any = {};
     if (message.placeId !== "") {
       obj.placeId = message.placeId;
@@ -1114,11 +947,11 @@ export const UpdatePlaceRequest = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<UpdatePlaceRequest>, I>>(base?: I): UpdatePlaceRequest {
-    return UpdatePlaceRequest.fromPartial(base ?? ({} as any));
+  create<I extends Exact<DeepPartial<UpdatePlaceListRequest_Place>, I>>(base?: I): UpdatePlaceListRequest_Place {
+    return UpdatePlaceListRequest_Place.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<UpdatePlaceRequest>, I>>(object: I): UpdatePlaceRequest {
-    const message = createBaseUpdatePlaceRequest();
+  fromPartial<I extends Exact<DeepPartial<UpdatePlaceListRequest_Place>, I>>(object: I): UpdatePlaceListRequest_Place {
+    const message = createBaseUpdatePlaceListRequest_Place();
     message.placeId = object.placeId ?? "";
     message.name = object.name ?? undefined;
     message.latitude = object.latitude ?? undefined;
@@ -1127,132 +960,17 @@ export const UpdatePlaceRequest = {
   },
 };
 
-function createBaseUpdatePlaceResponse(): UpdatePlaceResponse {
-  return { place: undefined };
-}
-
-export const UpdatePlaceResponse = {
-  encode(message: UpdatePlaceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.place !== undefined) {
-      Place.encode(message.place, writer.uint32(10).fork()).ldelim();
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): UpdatePlaceResponse {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseUpdatePlaceResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.place = Place.decode(reader, reader.uint32());
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): UpdatePlaceResponse {
-    return { place: isSet(object.place) ? Place.fromJSON(object.place) : undefined };
-  },
-
-  toJSON(message: UpdatePlaceResponse): unknown {
-    const obj: any = {};
-    if (message.place !== undefined) {
-      obj.place = Place.toJSON(message.place);
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<UpdatePlaceResponse>, I>>(base?: I): UpdatePlaceResponse {
-    return UpdatePlaceResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<UpdatePlaceResponse>, I>>(object: I): UpdatePlaceResponse {
-    const message = createBaseUpdatePlaceResponse();
-    message.place = (object.place !== undefined && object.place !== null) ? Place.fromPartial(object.place) : undefined;
-    return message;
-  },
-};
-
-function createBaseUpdatePlaceListRequest(): UpdatePlaceListRequest {
-  return { places: [] };
-}
-
-export const UpdatePlaceListRequest = {
-  encode(message: UpdatePlaceListRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    for (const v of message.places) {
-      UpdatePlaceRequest.encode(v!, writer.uint32(10).fork()).ldelim();
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): UpdatePlaceListRequest {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseUpdatePlaceListRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.places.push(UpdatePlaceRequest.decode(reader, reader.uint32()));
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): UpdatePlaceListRequest {
-    return {
-      places: globalThis.Array.isArray(object?.places)
-        ? object.places.map((e: any) => UpdatePlaceRequest.fromJSON(e))
-        : [],
-    };
-  },
-
-  toJSON(message: UpdatePlaceListRequest): unknown {
-    const obj: any = {};
-    if (message.places?.length) {
-      obj.places = message.places.map((e) => UpdatePlaceRequest.toJSON(e));
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<UpdatePlaceListRequest>, I>>(base?: I): UpdatePlaceListRequest {
-    return UpdatePlaceListRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<UpdatePlaceListRequest>, I>>(object: I): UpdatePlaceListRequest {
-    const message = createBaseUpdatePlaceListRequest();
-    message.places = object.places?.map((e) => UpdatePlaceRequest.fromPartial(e)) || [];
-    return message;
-  },
-};
-
 function createBaseUpdatePlaceListResponse(): UpdatePlaceListResponse {
-  return { places: [] };
+  return { responseInfo: undefined, results: [] };
 }
 
 export const UpdatePlaceListResponse = {
   encode(message: UpdatePlaceListResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    for (const v of message.places) {
-      Place.encode(v!, writer.uint32(10).fork()).ldelim();
+    if (message.responseInfo !== undefined) {
+      ResponseInfo.encode(message.responseInfo, writer.uint32(10).fork()).ldelim();
+    }
+    for (const v of message.results) {
+      Place.encode(v!, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
@@ -1269,7 +987,14 @@ export const UpdatePlaceListResponse = {
             break;
           }
 
-          message.places.push(Place.decode(reader, reader.uint32()));
+          message.responseInfo = ResponseInfo.decode(reader, reader.uint32());
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.results.push(Place.decode(reader, reader.uint32()));
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -1281,13 +1006,19 @@ export const UpdatePlaceListResponse = {
   },
 
   fromJSON(object: any): UpdatePlaceListResponse {
-    return { places: globalThis.Array.isArray(object?.places) ? object.places.map((e: any) => Place.fromJSON(e)) : [] };
+    return {
+      responseInfo: isSet(object.responseInfo) ? ResponseInfo.fromJSON(object.responseInfo) : undefined,
+      results: globalThis.Array.isArray(object?.results) ? object.results.map((e: any) => Place.fromJSON(e)) : [],
+    };
   },
 
   toJSON(message: UpdatePlaceListResponse): unknown {
     const obj: any = {};
-    if (message.places?.length) {
-      obj.places = message.places.map((e) => Place.toJSON(e));
+    if (message.responseInfo !== undefined) {
+      obj.responseInfo = ResponseInfo.toJSON(message.responseInfo);
+    }
+    if (message.results?.length) {
+      obj.results = message.results.map((e) => Place.toJSON(e));
     }
     return obj;
   },
@@ -1297,27 +1028,91 @@ export const UpdatePlaceListResponse = {
   },
   fromPartial<I extends Exact<DeepPartial<UpdatePlaceListResponse>, I>>(object: I): UpdatePlaceListResponse {
     const message = createBaseUpdatePlaceListResponse();
-    message.places = object.places?.map((e) => Place.fromPartial(e)) || [];
+    message.responseInfo = (object.responseInfo !== undefined && object.responseInfo !== null)
+      ? ResponseInfo.fromPartial(object.responseInfo)
+      : undefined;
+    message.results = object.results?.map((e) => Place.fromPartial(e)) || [];
     return message;
   },
 };
 
-function createBaseDeletePlaceRequest(): DeletePlaceRequest {
+function createBaseDeletePlaceListRequest(): DeletePlaceListRequest {
+  return { places: [] };
+}
+
+export const DeletePlaceListRequest = {
+  encode(message: DeletePlaceListRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    for (const v of message.places) {
+      DeletePlaceListRequest_Place.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): DeletePlaceListRequest {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseDeletePlaceListRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.places.push(DeletePlaceListRequest_Place.decode(reader, reader.uint32()));
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): DeletePlaceListRequest {
+    return {
+      places: globalThis.Array.isArray(object?.places)
+        ? object.places.map((e: any) => DeletePlaceListRequest_Place.fromJSON(e))
+        : [],
+    };
+  },
+
+  toJSON(message: DeletePlaceListRequest): unknown {
+    const obj: any = {};
+    if (message.places?.length) {
+      obj.places = message.places.map((e) => DeletePlaceListRequest_Place.toJSON(e));
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<DeletePlaceListRequest>, I>>(base?: I): DeletePlaceListRequest {
+    return DeletePlaceListRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<DeletePlaceListRequest>, I>>(object: I): DeletePlaceListRequest {
+    const message = createBaseDeletePlaceListRequest();
+    message.places = object.places?.map((e) => DeletePlaceListRequest_Place.fromPartial(e)) || [];
+    return message;
+  },
+};
+
+function createBaseDeletePlaceListRequest_Place(): DeletePlaceListRequest_Place {
   return { placeId: "" };
 }
 
-export const DeletePlaceRequest = {
-  encode(message: DeletePlaceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+export const DeletePlaceListRequest_Place = {
+  encode(message: DeletePlaceListRequest_Place, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.placeId !== "") {
       writer.uint32(10).string(message.placeId);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): DeletePlaceRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): DeletePlaceListRequest_Place {
     const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseDeletePlaceRequest();
+    const message = createBaseDeletePlaceListRequest_Place();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -1337,11 +1132,11 @@ export const DeletePlaceRequest = {
     return message;
   },
 
-  fromJSON(object: any): DeletePlaceRequest {
+  fromJSON(object: any): DeletePlaceListRequest_Place {
     return { placeId: isSet(object.placeId) ? globalThis.String(object.placeId) : "" };
   },
 
-  toJSON(message: DeletePlaceRequest): unknown {
+  toJSON(message: DeletePlaceListRequest_Place): unknown {
     const obj: any = {};
     if (message.placeId !== "") {
       obj.placeId = message.placeId;
@@ -1349,142 +1144,27 @@ export const DeletePlaceRequest = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<DeletePlaceRequest>, I>>(base?: I): DeletePlaceRequest {
-    return DeletePlaceRequest.fromPartial(base ?? ({} as any));
+  create<I extends Exact<DeepPartial<DeletePlaceListRequest_Place>, I>>(base?: I): DeletePlaceListRequest_Place {
+    return DeletePlaceListRequest_Place.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<DeletePlaceRequest>, I>>(object: I): DeletePlaceRequest {
-    const message = createBaseDeletePlaceRequest();
+  fromPartial<I extends Exact<DeepPartial<DeletePlaceListRequest_Place>, I>>(object: I): DeletePlaceListRequest_Place {
+    const message = createBaseDeletePlaceListRequest_Place();
     message.placeId = object.placeId ?? "";
     return message;
   },
 };
 
-function createBaseDeletePlaceResponse(): DeletePlaceResponse {
-  return { place: undefined };
-}
-
-export const DeletePlaceResponse = {
-  encode(message: DeletePlaceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.place !== undefined) {
-      Place.encode(message.place, writer.uint32(10).fork()).ldelim();
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): DeletePlaceResponse {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseDeletePlaceResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.place = Place.decode(reader, reader.uint32());
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): DeletePlaceResponse {
-    return { place: isSet(object.place) ? Place.fromJSON(object.place) : undefined };
-  },
-
-  toJSON(message: DeletePlaceResponse): unknown {
-    const obj: any = {};
-    if (message.place !== undefined) {
-      obj.place = Place.toJSON(message.place);
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<DeletePlaceResponse>, I>>(base?: I): DeletePlaceResponse {
-    return DeletePlaceResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<DeletePlaceResponse>, I>>(object: I): DeletePlaceResponse {
-    const message = createBaseDeletePlaceResponse();
-    message.place = (object.place !== undefined && object.place !== null) ? Place.fromPartial(object.place) : undefined;
-    return message;
-  },
-};
-
-function createBaseDeletePlaceListRequest(): DeletePlaceListRequest {
-  return { places: [] };
-}
-
-export const DeletePlaceListRequest = {
-  encode(message: DeletePlaceListRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    for (const v of message.places) {
-      DeletePlaceRequest.encode(v!, writer.uint32(10).fork()).ldelim();
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): DeletePlaceListRequest {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseDeletePlaceListRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.places.push(DeletePlaceRequest.decode(reader, reader.uint32()));
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): DeletePlaceListRequest {
-    return {
-      places: globalThis.Array.isArray(object?.places)
-        ? object.places.map((e: any) => DeletePlaceRequest.fromJSON(e))
-        : [],
-    };
-  },
-
-  toJSON(message: DeletePlaceListRequest): unknown {
-    const obj: any = {};
-    if (message.places?.length) {
-      obj.places = message.places.map((e) => DeletePlaceRequest.toJSON(e));
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<DeletePlaceListRequest>, I>>(base?: I): DeletePlaceListRequest {
-    return DeletePlaceListRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<DeletePlaceListRequest>, I>>(object: I): DeletePlaceListRequest {
-    const message = createBaseDeletePlaceListRequest();
-    message.places = object.places?.map((e) => DeletePlaceRequest.fromPartial(e)) || [];
-    return message;
-  },
-};
-
 function createBaseDeletePlaceListResponse(): DeletePlaceListResponse {
-  return { places: [] };
+  return { responseInfo: undefined, results: [] };
 }
 
 export const DeletePlaceListResponse = {
   encode(message: DeletePlaceListResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    for (const v of message.places) {
-      Place.encode(v!, writer.uint32(10).fork()).ldelim();
+    if (message.responseInfo !== undefined) {
+      ResponseInfo.encode(message.responseInfo, writer.uint32(10).fork()).ldelim();
+    }
+    for (const v of message.results) {
+      Place.encode(v!, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
@@ -1501,7 +1181,14 @@ export const DeletePlaceListResponse = {
             break;
           }
 
-          message.places.push(Place.decode(reader, reader.uint32()));
+          message.responseInfo = ResponseInfo.decode(reader, reader.uint32());
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.results.push(Place.decode(reader, reader.uint32()));
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -1513,13 +1200,19 @@ export const DeletePlaceListResponse = {
   },
 
   fromJSON(object: any): DeletePlaceListResponse {
-    return { places: globalThis.Array.isArray(object?.places) ? object.places.map((e: any) => Place.fromJSON(e)) : [] };
+    return {
+      responseInfo: isSet(object.responseInfo) ? ResponseInfo.fromJSON(object.responseInfo) : undefined,
+      results: globalThis.Array.isArray(object?.results) ? object.results.map((e: any) => Place.fromJSON(e)) : [],
+    };
   },
 
   toJSON(message: DeletePlaceListResponse): unknown {
     const obj: any = {};
-    if (message.places?.length) {
-      obj.places = message.places.map((e) => Place.toJSON(e));
+    if (message.responseInfo !== undefined) {
+      obj.responseInfo = ResponseInfo.toJSON(message.responseInfo);
+    }
+    if (message.results?.length) {
+      obj.results = message.results.map((e) => Place.toJSON(e));
     }
     return obj;
   },
@@ -1529,21 +1222,172 @@ export const DeletePlaceListResponse = {
   },
   fromPartial<I extends Exact<DeepPartial<DeletePlaceListResponse>, I>>(object: I): DeletePlaceListResponse {
     const message = createBaseDeletePlaceListResponse();
-    message.places = object.places?.map((e) => Place.fromPartial(e)) || [];
+    message.responseInfo = (object.responseInfo !== undefined && object.responseInfo !== null)
+      ? ResponseInfo.fromPartial(object.responseInfo)
+      : undefined;
+    message.results = object.results?.map((e) => Place.fromPartial(e)) || [];
+    return message;
+  },
+};
+
+function createBaseBoundSquare(): BoundSquare {
+  return { topRight: undefined, bottomLeft: undefined };
+}
+
+export const BoundSquare = {
+  encode(message: BoundSquare, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.topRight !== undefined) {
+      Wgs84Coordinates.encode(message.topRight, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.bottomLeft !== undefined) {
+      Wgs84Coordinates.encode(message.bottomLeft, writer.uint32(18).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): BoundSquare {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseBoundSquare();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.topRight = Wgs84Coordinates.decode(reader, reader.uint32());
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.bottomLeft = Wgs84Coordinates.decode(reader, reader.uint32());
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): BoundSquare {
+    return {
+      topRight: isSet(object.topRight) ? Wgs84Coordinates.fromJSON(object.topRight) : undefined,
+      bottomLeft: isSet(object.bottomLeft) ? Wgs84Coordinates.fromJSON(object.bottomLeft) : undefined,
+    };
+  },
+
+  toJSON(message: BoundSquare): unknown {
+    const obj: any = {};
+    if (message.topRight !== undefined) {
+      obj.topRight = Wgs84Coordinates.toJSON(message.topRight);
+    }
+    if (message.bottomLeft !== undefined) {
+      obj.bottomLeft = Wgs84Coordinates.toJSON(message.bottomLeft);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<BoundSquare>, I>>(base?: I): BoundSquare {
+    return BoundSquare.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<BoundSquare>, I>>(object: I): BoundSquare {
+    const message = createBaseBoundSquare();
+    message.topRight = (object.topRight !== undefined && object.topRight !== null)
+      ? Wgs84Coordinates.fromPartial(object.topRight)
+      : undefined;
+    message.bottomLeft = (object.bottomLeft !== undefined && object.bottomLeft !== null)
+      ? Wgs84Coordinates.fromPartial(object.bottomLeft)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseBoundCircle(): BoundCircle {
+  return { center: undefined, radiusMeter: 0 };
+}
+
+export const BoundCircle = {
+  encode(message: BoundCircle, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.center !== undefined) {
+      Wgs84Coordinates.encode(message.center, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.radiusMeter !== 0) {
+      writer.uint32(16).int32(message.radiusMeter);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): BoundCircle {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseBoundCircle();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.center = Wgs84Coordinates.decode(reader, reader.uint32());
+          continue;
+        case 2:
+          if (tag !== 16) {
+            break;
+          }
+
+          message.radiusMeter = reader.int32();
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): BoundCircle {
+    return {
+      center: isSet(object.center) ? Wgs84Coordinates.fromJSON(object.center) : undefined,
+      radiusMeter: isSet(object.radiusMeter) ? globalThis.Number(object.radiusMeter) : 0,
+    };
+  },
+
+  toJSON(message: BoundCircle): unknown {
+    const obj: any = {};
+    if (message.center !== undefined) {
+      obj.center = Wgs84Coordinates.toJSON(message.center);
+    }
+    if (message.radiusMeter !== 0) {
+      obj.radiusMeter = Math.round(message.radiusMeter);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<BoundCircle>, I>>(base?: I): BoundCircle {
+    return BoundCircle.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<BoundCircle>, I>>(object: I): BoundCircle {
+    const message = createBaseBoundCircle();
+    message.center = (object.center !== undefined && object.center !== null)
+      ? Wgs84Coordinates.fromPartial(object.center)
+      : undefined;
+    message.radiusMeter = object.radiusMeter ?? 0;
     return message;
   },
 };
 
 export interface PlaceService {
-  QueryPlaceListBySquare(request: QueryPlaceListBySquareRequest): Promise<QueryPlaceListResponse>;
-  QueryPlaceListByRadius(request: QueryPlaceListByRadiusRequest): Promise<QueryPlaceListResponse>;
-  CreatePlace(request: CreatePlaceRequest): Promise<CreatePlaceResponse>;
   CreatePlaceList(request: CreatePlaceListRequest): Promise<CreatePlaceListResponse>;
-  ReadPlace(request: ReadPlaceRequest): Promise<ReadPlaceResponse>;
   ReadPlaceList(request: ReadPlaceListRequest): Promise<ReadPlaceListResponse>;
-  UpdatePlace(request: UpdatePlaceRequest): Promise<UpdatePlaceResponse>;
   UpdatePlaceList(request: UpdatePlaceListRequest): Promise<UpdatePlaceListResponse>;
-  DeletePlace(request: DeletePlaceRequest): Promise<DeletePlaceResponse>;
   DeletePlaceList(request: DeletePlaceListRequest): Promise<DeletePlaceListResponse>;
 }
 
@@ -1554,45 +1398,15 @@ export class PlaceServiceClientImpl implements PlaceService {
   constructor(rpc: Rpc, opts?: { service?: string }) {
     this.service = opts?.service || PlaceServiceServiceName;
     this.rpc = rpc;
-    this.QueryPlaceListBySquare = this.QueryPlaceListBySquare.bind(this);
-    this.QueryPlaceListByRadius = this.QueryPlaceListByRadius.bind(this);
-    this.CreatePlace = this.CreatePlace.bind(this);
     this.CreatePlaceList = this.CreatePlaceList.bind(this);
-    this.ReadPlace = this.ReadPlace.bind(this);
     this.ReadPlaceList = this.ReadPlaceList.bind(this);
-    this.UpdatePlace = this.UpdatePlace.bind(this);
     this.UpdatePlaceList = this.UpdatePlaceList.bind(this);
-    this.DeletePlace = this.DeletePlace.bind(this);
     this.DeletePlaceList = this.DeletePlaceList.bind(this);
   }
-  QueryPlaceListBySquare(request: QueryPlaceListBySquareRequest): Promise<QueryPlaceListResponse> {
-    const data = QueryPlaceListBySquareRequest.encode(request).finish();
-    const promise = this.rpc.request(this.service, "QueryPlaceListBySquare", data);
-    return promise.then((data) => QueryPlaceListResponse.decode(_m0.Reader.create(data)));
-  }
-
-  QueryPlaceListByRadius(request: QueryPlaceListByRadiusRequest): Promise<QueryPlaceListResponse> {
-    const data = QueryPlaceListByRadiusRequest.encode(request).finish();
-    const promise = this.rpc.request(this.service, "QueryPlaceListByRadius", data);
-    return promise.then((data) => QueryPlaceListResponse.decode(_m0.Reader.create(data)));
-  }
-
-  CreatePlace(request: CreatePlaceRequest): Promise<CreatePlaceResponse> {
-    const data = CreatePlaceRequest.encode(request).finish();
-    const promise = this.rpc.request(this.service, "CreatePlace", data);
-    return promise.then((data) => CreatePlaceResponse.decode(_m0.Reader.create(data)));
-  }
-
   CreatePlaceList(request: CreatePlaceListRequest): Promise<CreatePlaceListResponse> {
     const data = CreatePlaceListRequest.encode(request).finish();
     const promise = this.rpc.request(this.service, "CreatePlaceList", data);
     return promise.then((data) => CreatePlaceListResponse.decode(_m0.Reader.create(data)));
-  }
-
-  ReadPlace(request: ReadPlaceRequest): Promise<ReadPlaceResponse> {
-    const data = ReadPlaceRequest.encode(request).finish();
-    const promise = this.rpc.request(this.service, "ReadPlace", data);
-    return promise.then((data) => ReadPlaceResponse.decode(_m0.Reader.create(data)));
   }
 
   ReadPlaceList(request: ReadPlaceListRequest): Promise<ReadPlaceListResponse> {
@@ -1601,22 +1415,10 @@ export class PlaceServiceClientImpl implements PlaceService {
     return promise.then((data) => ReadPlaceListResponse.decode(_m0.Reader.create(data)));
   }
 
-  UpdatePlace(request: UpdatePlaceRequest): Promise<UpdatePlaceResponse> {
-    const data = UpdatePlaceRequest.encode(request).finish();
-    const promise = this.rpc.request(this.service, "UpdatePlace", data);
-    return promise.then((data) => UpdatePlaceResponse.decode(_m0.Reader.create(data)));
-  }
-
   UpdatePlaceList(request: UpdatePlaceListRequest): Promise<UpdatePlaceListResponse> {
     const data = UpdatePlaceListRequest.encode(request).finish();
     const promise = this.rpc.request(this.service, "UpdatePlaceList", data);
     return promise.then((data) => UpdatePlaceListResponse.decode(_m0.Reader.create(data)));
-  }
-
-  DeletePlace(request: DeletePlaceRequest): Promise<DeletePlaceResponse> {
-    const data = DeletePlaceRequest.encode(request).finish();
-    const promise = this.rpc.request(this.service, "DeletePlace", data);
-    return promise.then((data) => DeletePlaceResponse.decode(_m0.Reader.create(data)));
   }
 
   DeletePlaceList(request: DeletePlaceListRequest): Promise<DeletePlaceListResponse> {

@@ -22,15 +22,9 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type PlaceServiceClient interface {
-	QueryPlaceListBySquare(ctx context.Context, in *QueryPlaceListBySquareRequest, opts ...grpc.CallOption) (*QueryPlaceListBySquareResponse, error)
-	QueryPlaceListByRadius(ctx context.Context, in *QueryPlaceListByRadiusRequest, opts ...grpc.CallOption) (*QueryPlaceListByRadiusResponse, error)
-	CreatePlace(ctx context.Context, in *CreatePlaceRequest, opts ...grpc.CallOption) (*CreatePlaceResponse, error)
 	CreatePlaceList(ctx context.Context, in *CreatePlaceListRequest, opts ...grpc.CallOption) (*CreatePlaceListResponse, error)
-	ReadPlace(ctx context.Context, in *ReadPlaceRequest, opts ...grpc.CallOption) (*ReadPlaceResponse, error)
 	ReadPlaceList(ctx context.Context, in *ReadPlaceListRequest, opts ...grpc.CallOption) (*ReadPlaceListResponse, error)
-	UpdatePlace(ctx context.Context, in *UpdatePlaceRequest, opts ...grpc.CallOption) (*UpdatePlaceResponse, error)
 	UpdatePlaceList(ctx context.Context, in *UpdatePlaceListRequest, opts ...grpc.CallOption) (*UpdatePlaceListResponse, error)
-	DeletePlace(ctx context.Context, in *DeletePlaceRequest, opts ...grpc.CallOption) (*DeletePlaceResponse, error)
 	DeletePlaceList(ctx context.Context, in *DeletePlaceListRequest, opts ...grpc.CallOption) (*DeletePlaceListResponse, error)
 }
 
@@ -42,45 +36,9 @@ func NewPlaceServiceClient(cc grpc.ClientConnInterface) PlaceServiceClient {
 	return &placeServiceClient{cc}
 }
 
-func (c *placeServiceClient) QueryPlaceListBySquare(ctx context.Context, in *QueryPlaceListBySquareRequest, opts ...grpc.CallOption) (*QueryPlaceListBySquareResponse, error) {
-	out := new(QueryPlaceListBySquareResponse)
-	err := c.cc.Invoke(ctx, "/place.PlaceService/QueryPlaceListBySquare", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *placeServiceClient) QueryPlaceListByRadius(ctx context.Context, in *QueryPlaceListByRadiusRequest, opts ...grpc.CallOption) (*QueryPlaceListByRadiusResponse, error) {
-	out := new(QueryPlaceListByRadiusResponse)
-	err := c.cc.Invoke(ctx, "/place.PlaceService/QueryPlaceListByRadius", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *placeServiceClient) CreatePlace(ctx context.Context, in *CreatePlaceRequest, opts ...grpc.CallOption) (*CreatePlaceResponse, error) {
-	out := new(CreatePlaceResponse)
-	err := c.cc.Invoke(ctx, "/place.PlaceService/CreatePlace", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *placeServiceClient) CreatePlaceList(ctx context.Context, in *CreatePlaceListRequest, opts ...grpc.CallOption) (*CreatePlaceListResponse, error) {
 	out := new(CreatePlaceListResponse)
 	err := c.cc.Invoke(ctx, "/place.PlaceService/CreatePlaceList", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *placeServiceClient) ReadPlace(ctx context.Context, in *ReadPlaceRequest, opts ...grpc.CallOption) (*ReadPlaceResponse, error) {
-	out := new(ReadPlaceResponse)
-	err := c.cc.Invoke(ctx, "/place.PlaceService/ReadPlace", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -96,27 +54,9 @@ func (c *placeServiceClient) ReadPlaceList(ctx context.Context, in *ReadPlaceLis
 	return out, nil
 }
 
-func (c *placeServiceClient) UpdatePlace(ctx context.Context, in *UpdatePlaceRequest, opts ...grpc.CallOption) (*UpdatePlaceResponse, error) {
-	out := new(UpdatePlaceResponse)
-	err := c.cc.Invoke(ctx, "/place.PlaceService/UpdatePlace", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *placeServiceClient) UpdatePlaceList(ctx context.Context, in *UpdatePlaceListRequest, opts ...grpc.CallOption) (*UpdatePlaceListResponse, error) {
 	out := new(UpdatePlaceListResponse)
 	err := c.cc.Invoke(ctx, "/place.PlaceService/UpdatePlaceList", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *placeServiceClient) DeletePlace(ctx context.Context, in *DeletePlaceRequest, opts ...grpc.CallOption) (*DeletePlaceResponse, error) {
-	out := new(DeletePlaceResponse)
-	err := c.cc.Invoke(ctx, "/place.PlaceService/DeletePlace", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -136,15 +76,9 @@ func (c *placeServiceClient) DeletePlaceList(ctx context.Context, in *DeletePlac
 // All implementations must embed UnimplementedPlaceServiceServer
 // for forward compatibility
 type PlaceServiceServer interface {
-	QueryPlaceListBySquare(context.Context, *QueryPlaceListBySquareRequest) (*QueryPlaceListBySquareResponse, error)
-	QueryPlaceListByRadius(context.Context, *QueryPlaceListByRadiusRequest) (*QueryPlaceListByRadiusResponse, error)
-	CreatePlace(context.Context, *CreatePlaceRequest) (*CreatePlaceResponse, error)
 	CreatePlaceList(context.Context, *CreatePlaceListRequest) (*CreatePlaceListResponse, error)
-	ReadPlace(context.Context, *ReadPlaceRequest) (*ReadPlaceResponse, error)
 	ReadPlaceList(context.Context, *ReadPlaceListRequest) (*ReadPlaceListResponse, error)
-	UpdatePlace(context.Context, *UpdatePlaceRequest) (*UpdatePlaceResponse, error)
 	UpdatePlaceList(context.Context, *UpdatePlaceListRequest) (*UpdatePlaceListResponse, error)
-	DeletePlace(context.Context, *DeletePlaceRequest) (*DeletePlaceResponse, error)
 	DeletePlaceList(context.Context, *DeletePlaceListRequest) (*DeletePlaceListResponse, error)
 	mustEmbedUnimplementedPlaceServiceServer()
 }
@@ -153,32 +87,14 @@ type PlaceServiceServer interface {
 type UnimplementedPlaceServiceServer struct {
 }
 
-func (UnimplementedPlaceServiceServer) QueryPlaceListBySquare(context.Context, *QueryPlaceListBySquareRequest) (*QueryPlaceListBySquareResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method QueryPlaceListBySquare not implemented")
-}
-func (UnimplementedPlaceServiceServer) QueryPlaceListByRadius(context.Context, *QueryPlaceListByRadiusRequest) (*QueryPlaceListByRadiusResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method QueryPlaceListByRadius not implemented")
-}
-func (UnimplementedPlaceServiceServer) CreatePlace(context.Context, *CreatePlaceRequest) (*CreatePlaceResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreatePlace not implemented")
-}
 func (UnimplementedPlaceServiceServer) CreatePlaceList(context.Context, *CreatePlaceListRequest) (*CreatePlaceListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreatePlaceList not implemented")
-}
-func (UnimplementedPlaceServiceServer) ReadPlace(context.Context, *ReadPlaceRequest) (*ReadPlaceResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ReadPlace not implemented")
 }
 func (UnimplementedPlaceServiceServer) ReadPlaceList(context.Context, *ReadPlaceListRequest) (*ReadPlaceListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReadPlaceList not implemented")
 }
-func (UnimplementedPlaceServiceServer) UpdatePlace(context.Context, *UpdatePlaceRequest) (*UpdatePlaceResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdatePlace not implemented")
-}
 func (UnimplementedPlaceServiceServer) UpdatePlaceList(context.Context, *UpdatePlaceListRequest) (*UpdatePlaceListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdatePlaceList not implemented")
-}
-func (UnimplementedPlaceServiceServer) DeletePlace(context.Context, *DeletePlaceRequest) (*DeletePlaceResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeletePlace not implemented")
 }
 func (UnimplementedPlaceServiceServer) DeletePlaceList(context.Context, *DeletePlaceListRequest) (*DeletePlaceListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeletePlaceList not implemented")
@@ -196,60 +112,6 @@ func RegisterPlaceServiceServer(s grpc.ServiceRegistrar, srv PlaceServiceServer)
 	s.RegisterService(&PlaceService_ServiceDesc, srv)
 }
 
-func _PlaceService_QueryPlaceListBySquare_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryPlaceListBySquareRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(PlaceServiceServer).QueryPlaceListBySquare(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/place.PlaceService/QueryPlaceListBySquare",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PlaceServiceServer).QueryPlaceListBySquare(ctx, req.(*QueryPlaceListBySquareRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _PlaceService_QueryPlaceListByRadius_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryPlaceListByRadiusRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(PlaceServiceServer).QueryPlaceListByRadius(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/place.PlaceService/QueryPlaceListByRadius",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PlaceServiceServer).QueryPlaceListByRadius(ctx, req.(*QueryPlaceListByRadiusRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _PlaceService_CreatePlace_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreatePlaceRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(PlaceServiceServer).CreatePlace(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/place.PlaceService/CreatePlace",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PlaceServiceServer).CreatePlace(ctx, req.(*CreatePlaceRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _PlaceService_CreatePlaceList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreatePlaceListRequest)
 	if err := dec(in); err != nil {
@@ -264,24 +126,6 @@ func _PlaceService_CreatePlaceList_Handler(srv interface{}, ctx context.Context,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(PlaceServiceServer).CreatePlaceList(ctx, req.(*CreatePlaceListRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _PlaceService_ReadPlace_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ReadPlaceRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(PlaceServiceServer).ReadPlace(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/place.PlaceService/ReadPlace",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PlaceServiceServer).ReadPlace(ctx, req.(*ReadPlaceRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -304,24 +148,6 @@ func _PlaceService_ReadPlaceList_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
-func _PlaceService_UpdatePlace_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdatePlaceRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(PlaceServiceServer).UpdatePlace(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/place.PlaceService/UpdatePlace",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PlaceServiceServer).UpdatePlace(ctx, req.(*UpdatePlaceRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _PlaceService_UpdatePlaceList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdatePlaceListRequest)
 	if err := dec(in); err != nil {
@@ -336,24 +162,6 @@ func _PlaceService_UpdatePlaceList_Handler(srv interface{}, ctx context.Context,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(PlaceServiceServer).UpdatePlaceList(ctx, req.(*UpdatePlaceListRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _PlaceService_DeletePlace_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeletePlaceRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(PlaceServiceServer).DeletePlace(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/place.PlaceService/DeletePlace",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PlaceServiceServer).DeletePlace(ctx, req.(*DeletePlaceRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -384,40 +192,16 @@ var PlaceService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*PlaceServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "QueryPlaceListBySquare",
-			Handler:    _PlaceService_QueryPlaceListBySquare_Handler,
-		},
-		{
-			MethodName: "QueryPlaceListByRadius",
-			Handler:    _PlaceService_QueryPlaceListByRadius_Handler,
-		},
-		{
-			MethodName: "CreatePlace",
-			Handler:    _PlaceService_CreatePlace_Handler,
-		},
-		{
 			MethodName: "CreatePlaceList",
 			Handler:    _PlaceService_CreatePlaceList_Handler,
-		},
-		{
-			MethodName: "ReadPlace",
-			Handler:    _PlaceService_ReadPlace_Handler,
 		},
 		{
 			MethodName: "ReadPlaceList",
 			Handler:    _PlaceService_ReadPlaceList_Handler,
 		},
 		{
-			MethodName: "UpdatePlace",
-			Handler:    _PlaceService_UpdatePlace_Handler,
-		},
-		{
 			MethodName: "UpdatePlaceList",
 			Handler:    _PlaceService_UpdatePlaceList_Handler,
-		},
-		{
-			MethodName: "DeletePlace",
-			Handler:    _PlaceService_DeletePlace_Handler,
 		},
 		{
 			MethodName: "DeletePlaceList",
