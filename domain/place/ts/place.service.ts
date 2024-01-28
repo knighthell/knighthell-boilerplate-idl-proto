@@ -1,6 +1,6 @@
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
-import { Period } from "./period";
+import { PeriodDateTime } from "./period-datetime";
 import { Place, Wgs84Coordinates } from "./place";
 import { ResponseInfo } from "./response-info";
 
@@ -144,15 +144,15 @@ export interface ReadPlaceListRequest {
     | undefined;
   /** 날찌 및 시간 범위 안에 생성된 장소를 구하기 위한 범위 */
   createdAtPeriod?:
-    | Period
+    | PeriodDateTime
     | undefined;
   /** 날찌 및 시간 범위 안에 수정된 장소를 구하기 위한 범위 */
   updatedAtPeriod?:
-    | Period
+    | PeriodDateTime
     | undefined;
   /** 날찌 및 시간 범위 안에 삭제된 장소를 구하기 위한 범위 */
   deletedAtPeriod?:
-    | Period
+    | PeriodDateTime
     | undefined;
   /** 삭제된 장소까지 조회 할지에 대한 여부 */
   isIncludeDeletedPlace?:
@@ -469,13 +469,13 @@ export const ReadPlaceListRequest = {
       writer.uint32(18).string(message.keywords);
     }
     if (message.createdAtPeriod !== undefined) {
-      Period.encode(message.createdAtPeriod, writer.uint32(26).fork()).ldelim();
+      PeriodDateTime.encode(message.createdAtPeriod, writer.uint32(26).fork()).ldelim();
     }
     if (message.updatedAtPeriod !== undefined) {
-      Period.encode(message.updatedAtPeriod, writer.uint32(34).fork()).ldelim();
+      PeriodDateTime.encode(message.updatedAtPeriod, writer.uint32(34).fork()).ldelim();
     }
     if (message.deletedAtPeriod !== undefined) {
-      Period.encode(message.deletedAtPeriod, writer.uint32(42).fork()).ldelim();
+      PeriodDateTime.encode(message.deletedAtPeriod, writer.uint32(42).fork()).ldelim();
     }
     if (message.isIncludeDeletedPlace !== undefined) {
       writer.uint32(48).bool(message.isIncludeDeletedPlace);
@@ -521,21 +521,21 @@ export const ReadPlaceListRequest = {
             break;
           }
 
-          message.createdAtPeriod = Period.decode(reader, reader.uint32());
+          message.createdAtPeriod = PeriodDateTime.decode(reader, reader.uint32());
           continue;
         case 4:
           if (tag !== 34) {
             break;
           }
 
-          message.updatedAtPeriod = Period.decode(reader, reader.uint32());
+          message.updatedAtPeriod = PeriodDateTime.decode(reader, reader.uint32());
           continue;
         case 5:
           if (tag !== 42) {
             break;
           }
 
-          message.deletedAtPeriod = Period.decode(reader, reader.uint32());
+          message.deletedAtPeriod = PeriodDateTime.decode(reader, reader.uint32());
           continue;
         case 6:
           if (tag !== 48) {
@@ -587,9 +587,9 @@ export const ReadPlaceListRequest = {
         ? object.places.map((e: any) => ReadPlaceListRequest_Place.fromJSON(e))
         : [],
       keywords: isSet(object.keywords) ? globalThis.String(object.keywords) : undefined,
-      createdAtPeriod: isSet(object.createdAtPeriod) ? Period.fromJSON(object.createdAtPeriod) : undefined,
-      updatedAtPeriod: isSet(object.updatedAtPeriod) ? Period.fromJSON(object.updatedAtPeriod) : undefined,
-      deletedAtPeriod: isSet(object.deletedAtPeriod) ? Period.fromJSON(object.deletedAtPeriod) : undefined,
+      createdAtPeriod: isSet(object.createdAtPeriod) ? PeriodDateTime.fromJSON(object.createdAtPeriod) : undefined,
+      updatedAtPeriod: isSet(object.updatedAtPeriod) ? PeriodDateTime.fromJSON(object.updatedAtPeriod) : undefined,
+      deletedAtPeriod: isSet(object.deletedAtPeriod) ? PeriodDateTime.fromJSON(object.deletedAtPeriod) : undefined,
       isIncludeDeletedPlace: isSet(object.isIncludeDeletedPlace)
         ? globalThis.Boolean(object.isIncludeDeletedPlace)
         : undefined,
@@ -609,13 +609,13 @@ export const ReadPlaceListRequest = {
       obj.keywords = message.keywords;
     }
     if (message.createdAtPeriod !== undefined) {
-      obj.createdAtPeriod = Period.toJSON(message.createdAtPeriod);
+      obj.createdAtPeriod = PeriodDateTime.toJSON(message.createdAtPeriod);
     }
     if (message.updatedAtPeriod !== undefined) {
-      obj.updatedAtPeriod = Period.toJSON(message.updatedAtPeriod);
+      obj.updatedAtPeriod = PeriodDateTime.toJSON(message.updatedAtPeriod);
     }
     if (message.deletedAtPeriod !== undefined) {
-      obj.deletedAtPeriod = Period.toJSON(message.deletedAtPeriod);
+      obj.deletedAtPeriod = PeriodDateTime.toJSON(message.deletedAtPeriod);
     }
     if (message.isIncludeDeletedPlace !== undefined) {
       obj.isIncludeDeletedPlace = message.isIncludeDeletedPlace;
@@ -643,13 +643,13 @@ export const ReadPlaceListRequest = {
     message.places = object.places?.map((e) => ReadPlaceListRequest_Place.fromPartial(e)) || [];
     message.keywords = object.keywords ?? undefined;
     message.createdAtPeriod = (object.createdAtPeriod !== undefined && object.createdAtPeriod !== null)
-      ? Period.fromPartial(object.createdAtPeriod)
+      ? PeriodDateTime.fromPartial(object.createdAtPeriod)
       : undefined;
     message.updatedAtPeriod = (object.updatedAtPeriod !== undefined && object.updatedAtPeriod !== null)
-      ? Period.fromPartial(object.updatedAtPeriod)
+      ? PeriodDateTime.fromPartial(object.updatedAtPeriod)
       : undefined;
     message.deletedAtPeriod = (object.deletedAtPeriod !== undefined && object.deletedAtPeriod !== null)
-      ? Period.fromPartial(object.deletedAtPeriod)
+      ? PeriodDateTime.fromPartial(object.deletedAtPeriod)
       : undefined;
     message.isIncludeDeletedPlace = object.isIncludeDeletedPlace ?? undefined;
     message.boundSquare = (object.boundSquare !== undefined && object.boundSquare !== null)

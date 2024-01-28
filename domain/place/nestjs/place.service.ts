@@ -1,7 +1,7 @@
 /* eslint-disable */
 import { GrpcMethod, GrpcStreamMethod } from "@nestjs/microservices";
 import { Observable } from "rxjs";
-import { Period } from "./period";
+import { PeriodDateTime } from "./period-datetime";
 import { Place, Wgs84Coordinates } from "./place";
 import { ResponseInfo } from "./response-info";
 
@@ -47,15 +47,15 @@ export interface ReadPlaceListRequest {
     | undefined;
   /** 날찌 및 시간 범위 안에 생성된 장소를 구하기 위한 범위 */
   createdAtPeriod?:
-    | Period
+    | PeriodDateTime
     | undefined;
   /** 날찌 및 시간 범위 안에 수정된 장소를 구하기 위한 범위 */
   updatedAtPeriod?:
-    | Period
+    | PeriodDateTime
     | undefined;
   /** 날찌 및 시간 범위 안에 삭제된 장소를 구하기 위한 범위 */
   deletedAtPeriod?:
-    | Period
+    | PeriodDateTime
     | undefined;
   /** 삭제된 장소까지 조회 할지에 대한 여부 */
   isIncludeDeletedPlace?:

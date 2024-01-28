@@ -6,7 +6,7 @@ option go_package = "github.com/knighthell/knighthell-boilerplate-idl-proto/comm
 
 import "google/protobuf/timestamp.proto";
 
-message Period {
+message PeriodDateTime {
   optional google.protobuf.Timestamp from = 5;
   optional google.protobuf.Timestamp to = 6;
 }

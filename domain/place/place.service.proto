@@ -5,7 +5,7 @@ package place;
 option go_package = "github.com/knighthell/knighthell-boilerplate-idl-proto/domain/place";
 
 import "response-info.proto";
-import "period.proto";
+import "period-datetime.proto";
 import "place.proto";
 
 service PlaceService {
@@ -55,9 +55,9 @@ message ReadPlaceListRequest {
 
   optional string keywords = 2; // 검색 InputText에 넣은 그대로의 값
 
-  optional common.Period createdAtPeriod = 3; // 날찌 및 시간 범위 안에 생성된 장소를 구하기 위한 범위
-  optional common.Period updatedAtPeriod = 4; // 날찌 및 시간 범위 안에 수정된 장소를 구하기 위한 범위
-  optional common.Period deletedAtPeriod = 5; // 날찌 및 시간 범위 안에 삭제된 장소를 구하기 위한 범위
+  optional common.PeriodDateTime createdAtPeriod = 3; // 날찌 및 시간 범위 안에 생성된 장소를 구하기 위한 범위
+  optional common.PeriodDateTime updatedAtPeriod = 4; // 날찌 및 시간 범위 안에 수정된 장소를 구하기 위한 범위
+  optional common.PeriodDateTime deletedAtPeriod = 5; // 날찌 및 시간 범위 안에 삭제된 장소를 구하기 위한 범위
 
   optional bool isIncludeDeletedPlace = 6; // 삭제된 장소까지 조회 할지에 대한 여부
 
@@ -116,5 +116,4 @@ message BoundCircle {
 message Pagination {
   optional int32 pageNumber = 10; // Pagination을 이한 page 수
   optional int32 rowPerPage = 11; // Page당 보여지는 row의 개수(e.g. limit of query)
-
 }
