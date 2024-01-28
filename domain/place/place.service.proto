@@ -43,12 +43,6 @@ message CreatePlaceListRequest {
 }
 
 message CreatePlaceListResponse {
-
-  int32 totalCount = 1;
-  int32 resultCount = 2;
-  int32 requestedPageNumber = 3;
-  int32 requestedLimitNumber = 4;
-
   repeated place.Place results = 5;
 }
 
@@ -61,10 +55,10 @@ message ReadPlaceListRequest {
 
   optional string keywords = 2; // 검색 InputText에 넣은 그대로의 값
 
-  common.Period createdAtPeriod = 3;
-  common.Period updatedAtPeriod = 4;
-  common.Period deletedAtPeriod = 5;
-  bool isIncludeDeletedPlace = 6;
+  optional common.Period createdAtPeriod = 3;
+  optional common.Period updatedAtPeriod = 4;
+  optional common.Period deletedAtPeriod = 5;
+  optional bool isIncludeDeletedPlace = 6;
 
   optional BoundSquare boundSquare = 7;
   optional BoundCircle boundCircle = 8;
@@ -90,8 +84,6 @@ message UpdatePlaceListRequest {
 }
 
 message UpdatePlaceListResponse {
-  common.ResponseInfo responseInfo = 1;
-
   repeated place.Place results = 2;
 }
 
@@ -104,8 +96,6 @@ message DeletePlaceListRequest {
 }
 
 message DeletePlaceListResponse {
-  common.ResponseInfo responseInfo = 1;
-
   repeated place.Place results = 2;
 }
 

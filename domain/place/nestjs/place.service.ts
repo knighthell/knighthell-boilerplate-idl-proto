@@ -35,10 +35,6 @@ export interface CreatePlaceListRequest_Place {
 }
 
 export interface CreatePlaceListResponse {
-  totalCount: number;
-  resultCount: number;
-  requestedPageNumber: number;
-  requestedLimitNumber: number;
   results: Place[];
 }
 
@@ -46,10 +42,10 @@ export interface ReadPlaceListRequest {
   places: ReadPlaceListRequest_Place[];
   /** 검색 InputText에 넣은 그대로의 값 */
   keywords?: string | undefined;
-  createdAtPeriod: Period | undefined;
-  updatedAtPeriod: Period | undefined;
-  deletedAtPeriod: Period | undefined;
-  isIncludeDeletedPlace: boolean;
+  createdAtPeriod?: Period | undefined;
+  updatedAtPeriod?: Period | undefined;
+  deletedAtPeriod?: Period | undefined;
+  isIncludeDeletedPlace?: boolean | undefined;
   boundSquare?: BoundSquare | undefined;
   boundCircle?: BoundCircle | undefined;
 }
@@ -82,7 +78,6 @@ export interface UpdatePlaceListRequest_Place {
 }
 
 export interface UpdatePlaceListResponse {
-  responseInfo: ResponseInfo | undefined;
   results: Place[];
 }
 
@@ -95,7 +90,6 @@ export interface DeletePlaceListRequest_Place {
 }
 
 export interface DeletePlaceListResponse {
-  responseInfo: ResponseInfo | undefined;
   results: Place[];
 }
 

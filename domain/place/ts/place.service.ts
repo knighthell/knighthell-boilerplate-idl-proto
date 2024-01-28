@@ -132,10 +132,6 @@ export interface CreatePlaceListRequest_Place {
 }
 
 export interface CreatePlaceListResponse {
-  totalCount: number;
-  resultCount: number;
-  requestedPageNumber: number;
-  requestedLimitNumber: number;
   results: Place[];
 }
 
@@ -143,10 +139,10 @@ export interface ReadPlaceListRequest {
   places: ReadPlaceListRequest_Place[];
   /** 검색 InputText에 넣은 그대로의 값 */
   keywords?: string | undefined;
-  createdAtPeriod: Period | undefined;
-  updatedAtPeriod: Period | undefined;
-  deletedAtPeriod: Period | undefined;
-  isIncludeDeletedPlace: boolean;
+  createdAtPeriod?: Period | undefined;
+  updatedAtPeriod?: Period | undefined;
+  deletedAtPeriod?: Period | undefined;
+  isIncludeDeletedPlace?: boolean | undefined;
   boundSquare?: BoundSquare | undefined;
   boundCircle?: BoundCircle | undefined;
 }
@@ -179,7 +175,6 @@ export interface UpdatePlaceListRequest_Place {
 }
 
 export interface UpdatePlaceListResponse {
-  responseInfo: ResponseInfo | undefined;
   results: Place[];
 }
 
@@ -192,7 +187,6 @@ export interface DeletePlaceListRequest_Place {
 }
 
 export interface DeletePlaceListResponse {
-  responseInfo: ResponseInfo | undefined;
   results: Place[];
 }
 
@@ -357,23 +351,11 @@ export const CreatePlaceListRequest_Place = {
 };
 
 function createBaseCreatePlaceListResponse(): CreatePlaceListResponse {
-  return { totalCount: 0, resultCount: 0, requestedPageNumber: 0, requestedLimitNumber: 0, results: [] };
+  return { results: [] };
 }
 
 export const CreatePlaceListResponse = {
   encode(message: CreatePlaceListResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.totalCount !== 0) {
-      writer.uint32(8).int32(message.totalCount);
-    }
-    if (message.resultCount !== 0) {
-      writer.uint32(16).int32(message.resultCount);
-    }
-    if (message.requestedPageNumber !== 0) {
-      writer.uint32(24).int32(message.requestedPageNumber);
-    }
-    if (message.requestedLimitNumber !== 0) {
-      writer.uint32(32).int32(message.requestedLimitNumber);
-    }
     for (const v of message.results) {
       Place.encode(v!, writer.uint32(42).fork()).ldelim();
     }
@@ -387,34 +369,6 @@ export const CreatePlaceListResponse = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
-          if (tag !== 8) {
-            break;
-          }
-
-          message.totalCount = reader.int32();
-          continue;
-        case 2:
-          if (tag !== 16) {
-            break;
-          }
-
-          message.resultCount = reader.int32();
-          continue;
-        case 3:
-          if (tag !== 24) {
-            break;
-          }
-
-          message.requestedPageNumber = reader.int32();
-          continue;
-        case 4:
-          if (tag !== 32) {
-            break;
-          }
-
-          message.requestedLimitNumber = reader.int32();
-          continue;
         case 5:
           if (tag !== 42) {
             break;
@@ -433,28 +387,12 @@ export const CreatePlaceListResponse = {
 
   fromJSON(object: any): CreatePlaceListResponse {
     return {
-      totalCount: isSet(object.totalCount) ? globalThis.Number(object.totalCount) : 0,
-      resultCount: isSet(object.resultCount) ? globalThis.Number(object.resultCount) : 0,
-      requestedPageNumber: isSet(object.requestedPageNumber) ? globalThis.Number(object.requestedPageNumber) : 0,
-      requestedLimitNumber: isSet(object.requestedLimitNumber) ? globalThis.Number(object.requestedLimitNumber) : 0,
       results: globalThis.Array.isArray(object?.results) ? object.results.map((e: any) => Place.fromJSON(e)) : [],
     };
   },
 
   toJSON(message: CreatePlaceListResponse): unknown {
     const obj: any = {};
-    if (message.totalCount !== 0) {
-      obj.totalCount = Math.round(message.totalCount);
-    }
-    if (message.resultCount !== 0) {
-      obj.resultCount = Math.round(message.resultCount);
-    }
-    if (message.requestedPageNumber !== 0) {
-      obj.requestedPageNumber = Math.round(message.requestedPageNumber);
-    }
-    if (message.requestedLimitNumber !== 0) {
-      obj.requestedLimitNumber = Math.round(message.requestedLimitNumber);
-    }
     if (message.results?.length) {
       obj.results = message.results.map((e) => Place.toJSON(e));
     }
@@ -466,10 +404,6 @@ export const CreatePlaceListResponse = {
   },
   fromPartial<I extends Exact<DeepPartial<CreatePlaceListResponse>, I>>(object: I): CreatePlaceListResponse {
     const message = createBaseCreatePlaceListResponse();
-    message.totalCount = object.totalCount ?? 0;
-    message.resultCount = object.resultCount ?? 0;
-    message.requestedPageNumber = object.requestedPageNumber ?? 0;
-    message.requestedLimitNumber = object.requestedLimitNumber ?? 0;
     message.results = object.results?.map((e) => Place.fromPartial(e)) || [];
     return message;
   },
@@ -482,7 +416,7 @@ function createBaseReadPlaceListRequest(): ReadPlaceListRequest {
     createdAtPeriod: undefined,
     updatedAtPeriod: undefined,
     deletedAtPeriod: undefined,
-    isIncludeDeletedPlace: false,
+    isIncludeDeletedPlace: undefined,
     boundSquare: undefined,
     boundCircle: undefined,
   };
@@ -505,7 +439,7 @@ export const ReadPlaceListRequest = {
     if (message.deletedAtPeriod !== undefined) {
       Period.encode(message.deletedAtPeriod, writer.uint32(42).fork()).ldelim();
     }
-    if (message.isIncludeDeletedPlace === true) {
+    if (message.isIncludeDeletedPlace !== undefined) {
       writer.uint32(48).bool(message.isIncludeDeletedPlace);
     }
     if (message.boundSquare !== undefined) {
@@ -600,7 +534,7 @@ export const ReadPlaceListRequest = {
       deletedAtPeriod: isSet(object.deletedAtPeriod) ? Period.fromJSON(object.deletedAtPeriod) : undefined,
       isIncludeDeletedPlace: isSet(object.isIncludeDeletedPlace)
         ? globalThis.Boolean(object.isIncludeDeletedPlace)
-        : false,
+        : undefined,
       boundSquare: isSet(object.boundSquare) ? BoundSquare.fromJSON(object.boundSquare) : undefined,
       boundCircle: isSet(object.boundCircle) ? BoundCircle.fromJSON(object.boundCircle) : undefined,
     };
@@ -623,7 +557,7 @@ export const ReadPlaceListRequest = {
     if (message.deletedAtPeriod !== undefined) {
       obj.deletedAtPeriod = Period.toJSON(message.deletedAtPeriod);
     }
-    if (message.isIncludeDeletedPlace === true) {
+    if (message.isIncludeDeletedPlace !== undefined) {
       obj.isIncludeDeletedPlace = message.isIncludeDeletedPlace;
     }
     if (message.boundSquare !== undefined) {
@@ -651,7 +585,7 @@ export const ReadPlaceListRequest = {
     message.deletedAtPeriod = (object.deletedAtPeriod !== undefined && object.deletedAtPeriod !== null)
       ? Period.fromPartial(object.deletedAtPeriod)
       : undefined;
-    message.isIncludeDeletedPlace = object.isIncludeDeletedPlace ?? false;
+    message.isIncludeDeletedPlace = object.isIncludeDeletedPlace ?? undefined;
     message.boundSquare = (object.boundSquare !== undefined && object.boundSquare !== null)
       ? BoundSquare.fromPartial(object.boundSquare)
       : undefined;
@@ -961,14 +895,11 @@ export const UpdatePlaceListRequest_Place = {
 };
 
 function createBaseUpdatePlaceListResponse(): UpdatePlaceListResponse {
-  return { responseInfo: undefined, results: [] };
+  return { results: [] };
 }
 
 export const UpdatePlaceListResponse = {
   encode(message: UpdatePlaceListResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.responseInfo !== undefined) {
-      ResponseInfo.encode(message.responseInfo, writer.uint32(10).fork()).ldelim();
-    }
     for (const v of message.results) {
       Place.encode(v!, writer.uint32(18).fork()).ldelim();
     }
@@ -982,13 +913,6 @@ export const UpdatePlaceListResponse = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.responseInfo = ResponseInfo.decode(reader, reader.uint32());
-          continue;
         case 2:
           if (tag !== 18) {
             break;
@@ -1007,16 +931,12 @@ export const UpdatePlaceListResponse = {
 
   fromJSON(object: any): UpdatePlaceListResponse {
     return {
-      responseInfo: isSet(object.responseInfo) ? ResponseInfo.fromJSON(object.responseInfo) : undefined,
       results: globalThis.Array.isArray(object?.results) ? object.results.map((e: any) => Place.fromJSON(e)) : [],
     };
   },
 
   toJSON(message: UpdatePlaceListResponse): unknown {
     const obj: any = {};
-    if (message.responseInfo !== undefined) {
-      obj.responseInfo = ResponseInfo.toJSON(message.responseInfo);
-    }
     if (message.results?.length) {
       obj.results = message.results.map((e) => Place.toJSON(e));
     }
@@ -1028,9 +948,6 @@ export const UpdatePlaceListResponse = {
   },
   fromPartial<I extends Exact<DeepPartial<UpdatePlaceListResponse>, I>>(object: I): UpdatePlaceListResponse {
     const message = createBaseUpdatePlaceListResponse();
-    message.responseInfo = (object.responseInfo !== undefined && object.responseInfo !== null)
-      ? ResponseInfo.fromPartial(object.responseInfo)
-      : undefined;
     message.results = object.results?.map((e) => Place.fromPartial(e)) || [];
     return message;
   },
@@ -1155,14 +1072,11 @@ export const DeletePlaceListRequest_Place = {
 };
 
 function createBaseDeletePlaceListResponse(): DeletePlaceListResponse {
-  return { responseInfo: undefined, results: [] };
+  return { results: [] };
 }
 
 export const DeletePlaceListResponse = {
   encode(message: DeletePlaceListResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.responseInfo !== undefined) {
-      ResponseInfo.encode(message.responseInfo, writer.uint32(10).fork()).ldelim();
-    }
     for (const v of message.results) {
       Place.encode(v!, writer.uint32(18).fork()).ldelim();
     }
@@ -1176,13 +1090,6 @@ export const DeletePlaceListResponse = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.responseInfo = ResponseInfo.decode(reader, reader.uint32());
-          continue;
         case 2:
           if (tag !== 18) {
             break;
@@ -1201,16 +1108,12 @@ export const DeletePlaceListResponse = {
 
   fromJSON(object: any): DeletePlaceListResponse {
     return {
-      responseInfo: isSet(object.responseInfo) ? ResponseInfo.fromJSON(object.responseInfo) : undefined,
       results: globalThis.Array.isArray(object?.results) ? object.results.map((e: any) => Place.fromJSON(e)) : [],
     };
   },
 
   toJSON(message: DeletePlaceListResponse): unknown {
     const obj: any = {};
-    if (message.responseInfo !== undefined) {
-      obj.responseInfo = ResponseInfo.toJSON(message.responseInfo);
-    }
     if (message.results?.length) {
       obj.results = message.results.map((e) => Place.toJSON(e));
     }
@@ -1222,9 +1125,6 @@ export const DeletePlaceListResponse = {
   },
   fromPartial<I extends Exact<DeepPartial<DeletePlaceListResponse>, I>>(object: I): DeletePlaceListResponse {
     const message = createBaseDeletePlaceListResponse();
-    message.responseInfo = (object.responseInfo !== undefined && object.responseInfo !== null)
-      ? ResponseInfo.fromPartial(object.responseInfo)
-      : undefined;
     message.results = object.results?.map((e) => Place.fromPartial(e)) || [];
     return message;
   },
