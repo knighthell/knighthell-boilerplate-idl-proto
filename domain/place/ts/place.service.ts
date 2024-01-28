@@ -136,15 +136,42 @@ export interface CreatePlaceListResponse {
 }
 
 export interface ReadPlaceListRequest {
+  /** 장소의 고유 Id목록으로 조회하기 위한 배열 */
   places: ReadPlaceListRequest_Place[];
   /** 검색 InputText에 넣은 그대로의 값 */
-  keywords?: string | undefined;
-  createdAtPeriod?: Period | undefined;
-  updatedAtPeriod?: Period | undefined;
-  deletedAtPeriod?: Period | undefined;
-  isIncludeDeletedPlace?: boolean | undefined;
-  boundSquare?: BoundSquare | undefined;
-  boundCircle?: BoundCircle | undefined;
+  keywords?:
+    | string
+    | undefined;
+  /** 날찌 및 시간 범위 안에 생성된 장소를 구하기 위한 범위 */
+  createdAtPeriod?:
+    | Period
+    | undefined;
+  /** 날찌 및 시간 범위 안에 수정된 장소를 구하기 위한 범위 */
+  updatedAtPeriod?:
+    | Period
+    | undefined;
+  /** 날찌 및 시간 범위 안에 삭제된 장소를 구하기 위한 범위 */
+  deletedAtPeriod?:
+    | Period
+    | undefined;
+  /** 삭제된 장소까지 조회 할지에 대한 여부 */
+  isIncludeDeletedPlace?:
+    | boolean
+    | undefined;
+  /** 우측상단 좌표와 좌측하단 좌표로 이루어진 사각형 범위 안에 있는 장소를 구하기 위한 정보 */
+  boundSquare?:
+    | BoundSquare
+    | undefined;
+  /** 중심좌표로부터 반지름(단위: 미터) 범위 안에 있는 장소를 구하기 위한 정보 */
+  boundCircle?:
+    | BoundCircle
+    | undefined;
+  /** 사용자에 위치로부터 장소들간의 거리를 구하기 위한 정보 */
+  userLocation?:
+    | Wgs84Coordinates
+    | undefined;
+  /** Pagination으로 조회하기 위한 정보 */
+  pagination?: Pagination | undefined;
 }
 
 export interface ReadPlaceListRequest_Place {
@@ -198,6 +225,15 @@ export interface BoundSquare {
 export interface BoundCircle {
   center: Wgs84Coordinates | undefined;
   radiusMeter: number;
+}
+
+export interface Pagination {
+  /** Pagination을 이한 page 수 */
+  pageNumber?:
+    | number
+    | undefined;
+  /** Page당 보여지는 row의 개수(e.g. limit of query) */
+  rowPerPage?: number | undefined;
 }
 
 function createBaseCreatePlaceListRequest(): CreatePlaceListRequest {
@@ -419,6 +455,8 @@ function createBaseReadPlaceListRequest(): ReadPlaceListRequest {
     isIncludeDeletedPlace: undefined,
     boundSquare: undefined,
     boundCircle: undefined,
+    userLocation: undefined,
+    pagination: undefined,
   };
 }
 
@@ -447,6 +485,12 @@ export const ReadPlaceListRequest = {
     }
     if (message.boundCircle !== undefined) {
       BoundCircle.encode(message.boundCircle, writer.uint32(66).fork()).ldelim();
+    }
+    if (message.userLocation !== undefined) {
+      Wgs84Coordinates.encode(message.userLocation, writer.uint32(74).fork()).ldelim();
+    }
+    if (message.pagination !== undefined) {
+      Pagination.encode(message.pagination, writer.uint32(82).fork()).ldelim();
     }
     return writer;
   },
@@ -514,6 +558,20 @@ export const ReadPlaceListRequest = {
 
           message.boundCircle = BoundCircle.decode(reader, reader.uint32());
           continue;
+        case 9:
+          if (tag !== 74) {
+            break;
+          }
+
+          message.userLocation = Wgs84Coordinates.decode(reader, reader.uint32());
+          continue;
+        case 10:
+          if (tag !== 82) {
+            break;
+          }
+
+          message.pagination = Pagination.decode(reader, reader.uint32());
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -537,6 +595,8 @@ export const ReadPlaceListRequest = {
         : undefined,
       boundSquare: isSet(object.boundSquare) ? BoundSquare.fromJSON(object.boundSquare) : undefined,
       boundCircle: isSet(object.boundCircle) ? BoundCircle.fromJSON(object.boundCircle) : undefined,
+      userLocation: isSet(object.userLocation) ? Wgs84Coordinates.fromJSON(object.userLocation) : undefined,
+      pagination: isSet(object.pagination) ? Pagination.fromJSON(object.pagination) : undefined,
     };
   },
 
@@ -566,6 +626,12 @@ export const ReadPlaceListRequest = {
     if (message.boundCircle !== undefined) {
       obj.boundCircle = BoundCircle.toJSON(message.boundCircle);
     }
+    if (message.userLocation !== undefined) {
+      obj.userLocation = Wgs84Coordinates.toJSON(message.userLocation);
+    }
+    if (message.pagination !== undefined) {
+      obj.pagination = Pagination.toJSON(message.pagination);
+    }
     return obj;
   },
 
@@ -591,6 +657,12 @@ export const ReadPlaceListRequest = {
       : undefined;
     message.boundCircle = (object.boundCircle !== undefined && object.boundCircle !== null)
       ? BoundCircle.fromPartial(object.boundCircle)
+      : undefined;
+    message.userLocation = (object.userLocation !== undefined && object.userLocation !== null)
+      ? Wgs84Coordinates.fromPartial(object.userLocation)
+      : undefined;
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? Pagination.fromPartial(object.pagination)
       : undefined;
     return message;
   },
@@ -1280,6 +1352,80 @@ export const BoundCircle = {
       ? Wgs84Coordinates.fromPartial(object.center)
       : undefined;
     message.radiusMeter = object.radiusMeter ?? 0;
+    return message;
+  },
+};
+
+function createBasePagination(): Pagination {
+  return { pageNumber: undefined, rowPerPage: undefined };
+}
+
+export const Pagination = {
+  encode(message: Pagination, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.pageNumber !== undefined) {
+      writer.uint32(80).int32(message.pageNumber);
+    }
+    if (message.rowPerPage !== undefined) {
+      writer.uint32(88).int32(message.rowPerPage);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): Pagination {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBasePagination();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 10:
+          if (tag !== 80) {
+            break;
+          }
+
+          message.pageNumber = reader.int32();
+          continue;
+        case 11:
+          if (tag !== 88) {
+            break;
+          }
+
+          message.rowPerPage = reader.int32();
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): Pagination {
+    return {
+      pageNumber: isSet(object.pageNumber) ? globalThis.Number(object.pageNumber) : undefined,
+      rowPerPage: isSet(object.rowPerPage) ? globalThis.Number(object.rowPerPage) : undefined,
+    };
+  },
+
+  toJSON(message: Pagination): unknown {
+    const obj: any = {};
+    if (message.pageNumber !== undefined) {
+      obj.pageNumber = Math.round(message.pageNumber);
+    }
+    if (message.rowPerPage !== undefined) {
+      obj.rowPerPage = Math.round(message.rowPerPage);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<Pagination>, I>>(base?: I): Pagination {
+    return Pagination.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<Pagination>, I>>(object: I): Pagination {
+    const message = createBasePagination();
+    message.pageNumber = object.pageNumber ?? undefined;
+    message.rowPerPage = object.rowPerPage ?? undefined;
     return message;
   },
 };
