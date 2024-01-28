@@ -13,195 +13,164 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
-@$core.Deprecated('Use queryPlaceListBySquareRequestDescriptor instead')
-const QueryPlaceListBySquareRequest$json = {
-  '1': 'QueryPlaceListBySquareRequest',
+@$core.Deprecated('Use placeServiceRequestEventTypeDescriptor instead')
+const PlaceServiceRequestEventType$json = {
+  '1': 'PlaceServiceRequestEventType',
   '2': [
-    {'1': 'topRightLatitude', '3': 1, '4': 1, '5': 1, '10': 'topRightLatitude'},
-    {'1': 'topRightLongitude', '3': 2, '4': 1, '5': 1, '10': 'topRightLongitude'},
-    {'1': 'bottomLeftLatitude', '3': 3, '4': 1, '5': 1, '10': 'bottomLeftLatitude'},
-    {'1': 'bottomLeftLongitude', '3': 4, '4': 1, '5': 1, '10': 'bottomLeftLongitude'},
-    {'1': 'userLatitude', '3': 5, '4': 1, '5': 1, '9': 0, '10': 'userLatitude', '17': true},
-    {'1': 'userLongitude', '3': 6, '4': 1, '5': 1, '9': 1, '10': 'userLongitude', '17': true},
-  ],
-  '8': [
-    {'1': '_userLatitude'},
-    {'1': '_userLongitude'},
+    {'1': 'CREATE_PLACE', '2': 0},
+    {'1': 'READ_PLACE', '2': 1},
+    {'1': 'UPDATE_PLACE', '2': 2},
+    {'1': 'DELETE_PLACE', '2': 3},
   ],
 };
 
-/// Descriptor for `QueryPlaceListBySquareRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List queryPlaceListBySquareRequestDescriptor = $convert.base64Decode(
-    'Ch1RdWVyeVBsYWNlTGlzdEJ5U3F1YXJlUmVxdWVzdBIqChB0b3BSaWdodExhdGl0dWRlGAEgAS'
-    'gBUhB0b3BSaWdodExhdGl0dWRlEiwKEXRvcFJpZ2h0TG9uZ2l0dWRlGAIgASgBUhF0b3BSaWdo'
-    'dExvbmdpdHVkZRIuChJib3R0b21MZWZ0TGF0aXR1ZGUYAyABKAFSEmJvdHRvbUxlZnRMYXRpdH'
-    'VkZRIwChNib3R0b21MZWZ0TG9uZ2l0dWRlGAQgASgBUhNib3R0b21MZWZ0TG9uZ2l0dWRlEicK'
-    'DHVzZXJMYXRpdHVkZRgFIAEoAUgAUgx1c2VyTGF0aXR1ZGWIAQESKQoNdXNlckxvbmdpdHVkZR'
-    'gGIAEoAUgBUg11c2VyTG9uZ2l0dWRliAEBQg8KDV91c2VyTGF0aXR1ZGVCEAoOX3VzZXJMb25n'
-    'aXR1ZGU=');
+/// Descriptor for `PlaceServiceRequestEventType`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List placeServiceRequestEventTypeDescriptor = $convert.base64Decode(
+    'ChxQbGFjZVNlcnZpY2VSZXF1ZXN0RXZlbnRUeXBlEhAKDENSRUFURV9QTEFDRRAAEg4KClJFQU'
+    'RfUExBQ0UQARIQCgxVUERBVEVfUExBQ0UQAhIQCgxERUxFVEVfUExBQ0UQAw==');
 
-@$core.Deprecated('Use queryPlaceListBySquareResponseDescriptor instead')
-const QueryPlaceListBySquareResponse$json = {
-  '1': 'QueryPlaceListBySquareResponse',
+@$core.Deprecated('Use placeServiceResponseEventTypeDescriptor instead')
+const PlaceServiceResponseEventType$json = {
+  '1': 'PlaceServiceResponseEventType',
   '2': [
-    {'1': 'results', '3': 1, '4': 3, '5': 11, '6': '.place.Place', '10': 'results'},
+    {'1': 'PLACE_CREATED', '2': 0},
+    {'1': 'PLACE_READ', '2': 1},
+    {'1': 'PLACE_UPDATED', '2': 2},
+    {'1': 'PLACE_DELETED', '2': 3},
   ],
 };
 
-/// Descriptor for `QueryPlaceListBySquareResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List queryPlaceListBySquareResponseDescriptor = $convert.base64Decode(
-    'Ch5RdWVyeVBsYWNlTGlzdEJ5U3F1YXJlUmVzcG9uc2USJgoHcmVzdWx0cxgBIAMoCzIMLnBsYW'
-    'NlLlBsYWNlUgdyZXN1bHRz');
-
-@$core.Deprecated('Use queryPlaceListByRadiusRequestDescriptor instead')
-const QueryPlaceListByRadiusRequest$json = {
-  '1': 'QueryPlaceListByRadiusRequest',
-  '2': [
-    {'1': 'centerLatitude', '3': 1, '4': 1, '5': 1, '10': 'centerLatitude'},
-    {'1': 'centerLongitude', '3': 2, '4': 1, '5': 1, '10': 'centerLongitude'},
-    {'1': 'meterRadius', '3': 3, '4': 1, '5': 13, '10': 'meterRadius'},
-    {'1': 'userLatitude', '3': 4, '4': 1, '5': 1, '9': 0, '10': 'userLatitude', '17': true},
-    {'1': 'userLongitude', '3': 5, '4': 1, '5': 1, '9': 1, '10': 'userLongitude', '17': true},
-  ],
-  '8': [
-    {'1': '_userLatitude'},
-    {'1': '_userLongitude'},
-  ],
-};
-
-/// Descriptor for `QueryPlaceListByRadiusRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List queryPlaceListByRadiusRequestDescriptor = $convert.base64Decode(
-    'Ch1RdWVyeVBsYWNlTGlzdEJ5UmFkaXVzUmVxdWVzdBImCg5jZW50ZXJMYXRpdHVkZRgBIAEoAV'
-    'IOY2VudGVyTGF0aXR1ZGUSKAoPY2VudGVyTG9uZ2l0dWRlGAIgASgBUg9jZW50ZXJMb25naXR1'
-    'ZGUSIAoLbWV0ZXJSYWRpdXMYAyABKA1SC21ldGVyUmFkaXVzEicKDHVzZXJMYXRpdHVkZRgEIA'
-    'EoAUgAUgx1c2VyTGF0aXR1ZGWIAQESKQoNdXNlckxvbmdpdHVkZRgFIAEoAUgBUg11c2VyTG9u'
-    'Z2l0dWRliAEBQg8KDV91c2VyTGF0aXR1ZGVCEAoOX3VzZXJMb25naXR1ZGU=');
-
-@$core.Deprecated('Use queryPlaceListByRadiusResponseDescriptor instead')
-const QueryPlaceListByRadiusResponse$json = {
-  '1': 'QueryPlaceListByRadiusResponse',
-  '2': [
-    {'1': 'results', '3': 1, '4': 3, '5': 11, '6': '.place.Place', '10': 'results'},
-  ],
-};
-
-/// Descriptor for `QueryPlaceListByRadiusResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List queryPlaceListByRadiusResponseDescriptor = $convert.base64Decode(
-    'Ch5RdWVyeVBsYWNlTGlzdEJ5UmFkaXVzUmVzcG9uc2USJgoHcmVzdWx0cxgBIAMoCzIMLnBsYW'
-    'NlLlBsYWNlUgdyZXN1bHRz');
-
-@$core.Deprecated('Use createPlaceRequestDescriptor instead')
-const CreatePlaceRequest$json = {
-  '1': 'CreatePlaceRequest',
-  '2': [
-    {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
-    {'1': 'latitude', '3': 2, '4': 1, '5': 1, '10': 'latitude'},
-    {'1': 'longitude', '3': 3, '4': 1, '5': 1, '10': 'longitude'},
-  ],
-};
-
-/// Descriptor for `CreatePlaceRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List createPlaceRequestDescriptor = $convert.base64Decode(
-    'ChJDcmVhdGVQbGFjZVJlcXVlc3QSEgoEbmFtZRgBIAEoCVIEbmFtZRIaCghsYXRpdHVkZRgCIA'
-    'EoAVIIbGF0aXR1ZGUSHAoJbG9uZ2l0dWRlGAMgASgBUglsb25naXR1ZGU=');
-
-@$core.Deprecated('Use readPlaceRequestDescriptor instead')
-const ReadPlaceRequest$json = {
-  '1': 'ReadPlaceRequest',
-  '2': [
-    {'1': 'id', '3': 1, '4': 1, '5': 9, '10': 'id'},
-  ],
-};
-
-/// Descriptor for `ReadPlaceRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List readPlaceRequestDescriptor = $convert.base64Decode(
-    'ChBSZWFkUGxhY2VSZXF1ZXN0Eg4KAmlkGAEgASgJUgJpZA==');
-
-@$core.Deprecated('Use readPlaceResponseDescriptor instead')
-const ReadPlaceResponse$json = {
-  '1': 'ReadPlaceResponse',
-  '2': [
-    {'1': 'place', '3': 1, '4': 1, '5': 11, '6': '.place.Place', '10': 'place'},
-  ],
-};
-
-/// Descriptor for `ReadPlaceResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List readPlaceResponseDescriptor = $convert.base64Decode(
-    'ChFSZWFkUGxhY2VSZXNwb25zZRIiCgVwbGFjZRgBIAEoCzIMLnBsYWNlLlBsYWNlUgVwbGFjZQ'
-    '==');
-
-@$core.Deprecated('Use readPlaceListRequestDescriptor instead')
-const ReadPlaceListRequest$json = {
-  '1': 'ReadPlaceListRequest',
-  '2': [
-    {'1': 'places', '3': 1, '4': 3, '5': 11, '6': '.place.ReadPlaceRequest', '10': 'places'},
-  ],
-};
-
-/// Descriptor for `ReadPlaceListRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List readPlaceListRequestDescriptor = $convert.base64Decode(
-    'ChRSZWFkUGxhY2VMaXN0UmVxdWVzdBIvCgZwbGFjZXMYASADKAsyFy5wbGFjZS5SZWFkUGxhY2'
-    'VSZXF1ZXN0UgZwbGFjZXM=');
-
-@$core.Deprecated('Use readPlaceListResponseDescriptor instead')
-const ReadPlaceListResponse$json = {
-  '1': 'ReadPlaceListResponse',
-  '2': [
-    {'1': 'places', '3': 2, '4': 3, '5': 11, '6': '.place.Place', '10': 'places'},
-  ],
-};
-
-/// Descriptor for `ReadPlaceListResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List readPlaceListResponseDescriptor = $convert.base64Decode(
-    'ChVSZWFkUGxhY2VMaXN0UmVzcG9uc2USJAoGcGxhY2VzGAIgAygLMgwucGxhY2UuUGxhY2VSBn'
-    'BsYWNlcw==');
-
-@$core.Deprecated('Use createPlaceResponseDescriptor instead')
-const CreatePlaceResponse$json = {
-  '1': 'CreatePlaceResponse',
-  '2': [
-    {'1': 'place', '3': 1, '4': 1, '5': 11, '6': '.place.Place', '10': 'place'},
-  ],
-};
-
-/// Descriptor for `CreatePlaceResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List createPlaceResponseDescriptor = $convert.base64Decode(
-    'ChNDcmVhdGVQbGFjZVJlc3BvbnNlEiIKBXBsYWNlGAEgASgLMgwucGxhY2UuUGxhY2VSBXBsYW'
-    'Nl');
+/// Descriptor for `PlaceServiceResponseEventType`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List placeServiceResponseEventTypeDescriptor = $convert.base64Decode(
+    'Ch1QbGFjZVNlcnZpY2VSZXNwb25zZUV2ZW50VHlwZRIRCg1QTEFDRV9DUkVBVEVEEAASDgoKUE'
+    'xBQ0VfUkVBRBABEhEKDVBMQUNFX1VQREFURUQQAhIRCg1QTEFDRV9ERUxFVEVEEAM=');
 
 @$core.Deprecated('Use createPlaceListRequestDescriptor instead')
 const CreatePlaceListRequest$json = {
   '1': 'CreatePlaceListRequest',
   '2': [
-    {'1': 'places', '3': 1, '4': 3, '5': 11, '6': '.place.CreatePlaceRequest', '10': 'places'},
+    {'1': 'places', '3': 1, '4': 3, '5': 11, '6': '.place.CreatePlaceListRequest.Place', '10': 'places'},
+  ],
+  '3': [CreatePlaceListRequest_Place$json],
+};
+
+@$core.Deprecated('Use createPlaceListRequestDescriptor instead')
+const CreatePlaceListRequest_Place$json = {
+  '1': 'Place',
+  '2': [
+    {'1': 'name', '3': 2, '4': 1, '5': 9, '10': 'name'},
+    {'1': 'latitude', '3': 3, '4': 1, '5': 1, '10': 'latitude'},
+    {'1': 'longitude', '3': 4, '4': 1, '5': 1, '10': 'longitude'},
   ],
 };
 
 /// Descriptor for `CreatePlaceListRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List createPlaceListRequestDescriptor = $convert.base64Decode(
-    'ChZDcmVhdGVQbGFjZUxpc3RSZXF1ZXN0EjEKBnBsYWNlcxgBIAMoCzIZLnBsYWNlLkNyZWF0ZV'
-    'BsYWNlUmVxdWVzdFIGcGxhY2Vz');
+    'ChZDcmVhdGVQbGFjZUxpc3RSZXF1ZXN0EjsKBnBsYWNlcxgBIAMoCzIjLnBsYWNlLkNyZWF0ZV'
+    'BsYWNlTGlzdFJlcXVlc3QuUGxhY2VSBnBsYWNlcxpVCgVQbGFjZRISCgRuYW1lGAIgASgJUgRu'
+    'YW1lEhoKCGxhdGl0dWRlGAMgASgBUghsYXRpdHVkZRIcCglsb25naXR1ZGUYBCABKAFSCWxvbm'
+    'dpdHVkZQ==');
 
 @$core.Deprecated('Use createPlaceListResponseDescriptor instead')
 const CreatePlaceListResponse$json = {
   '1': 'CreatePlaceListResponse',
   '2': [
-    {'1': 'places', '3': 2, '4': 3, '5': 11, '6': '.place.Place', '10': 'places'},
+    {'1': 'results', '3': 5, '4': 3, '5': 11, '6': '.place.Place', '10': 'results'},
   ],
 };
 
 /// Descriptor for `CreatePlaceListResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List createPlaceListResponseDescriptor = $convert.base64Decode(
-    'ChdDcmVhdGVQbGFjZUxpc3RSZXNwb25zZRIkCgZwbGFjZXMYAiADKAsyDC5wbGFjZS5QbGFjZV'
-    'IGcGxhY2Vz');
+    'ChdDcmVhdGVQbGFjZUxpc3RSZXNwb25zZRImCgdyZXN1bHRzGAUgAygLMgwucGxhY2UuUGxhY2'
+    'VSB3Jlc3VsdHM=');
 
-@$core.Deprecated('Use updatePlaceRequestDescriptor instead')
-const UpdatePlaceRequest$json = {
-  '1': 'UpdatePlaceRequest',
+@$core.Deprecated('Use readPlaceListRequestDescriptor instead')
+const ReadPlaceListRequest$json = {
+  '1': 'ReadPlaceListRequest',
   '2': [
-    {'1': 'name', '3': 1, '4': 1, '5': 9, '9': 0, '10': 'name', '17': true},
-    {'1': 'latitude', '3': 2, '4': 1, '5': 1, '9': 1, '10': 'latitude', '17': true},
-    {'1': 'longitude', '3': 3, '4': 1, '5': 1, '9': 2, '10': 'longitude', '17': true},
+    {'1': 'places', '3': 1, '4': 3, '5': 11, '6': '.place.ReadPlaceListRequest.Place', '10': 'places'},
+    {'1': 'keywords', '3': 2, '4': 1, '5': 9, '9': 0, '10': 'keywords', '17': true},
+    {'1': 'createdAtPeriod', '3': 3, '4': 1, '5': 11, '6': '.common.PeriodDateTime', '9': 1, '10': 'createdAtPeriod', '17': true},
+    {'1': 'updatedAtPeriod', '3': 4, '4': 1, '5': 11, '6': '.common.PeriodDateTime', '9': 2, '10': 'updatedAtPeriod', '17': true},
+    {'1': 'deletedAtPeriod', '3': 5, '4': 1, '5': 11, '6': '.common.PeriodDateTime', '9': 3, '10': 'deletedAtPeriod', '17': true},
+    {'1': 'isIncludeDeletedPlace', '3': 6, '4': 1, '5': 8, '9': 4, '10': 'isIncludeDeletedPlace', '17': true},
+    {'1': 'boundSquare', '3': 7, '4': 1, '5': 11, '6': '.place.BoundSquare', '9': 5, '10': 'boundSquare', '17': true},
+    {'1': 'boundCircle', '3': 8, '4': 1, '5': 11, '6': '.place.BoundCircle', '9': 6, '10': 'boundCircle', '17': true},
+    {'1': 'userLocation', '3': 9, '4': 1, '5': 11, '6': '.place.Wgs84Coordinates', '9': 7, '10': 'userLocation', '17': true},
+    {'1': 'pagination', '3': 10, '4': 1, '5': 11, '6': '.place.Pagination', '9': 8, '10': 'pagination', '17': true},
+  ],
+  '3': [ReadPlaceListRequest_Place$json],
+  '8': [
+    {'1': '_keywords'},
+    {'1': '_createdAtPeriod'},
+    {'1': '_updatedAtPeriod'},
+    {'1': '_deletedAtPeriod'},
+    {'1': '_isIncludeDeletedPlace'},
+    {'1': '_boundSquare'},
+    {'1': '_boundCircle'},
+    {'1': '_userLocation'},
+    {'1': '_pagination'},
+  ],
+};
+
+@$core.Deprecated('Use readPlaceListRequestDescriptor instead')
+const ReadPlaceListRequest_Place$json = {
+  '1': 'Place',
+  '2': [
+    {'1': 'placeId', '3': 1, '4': 1, '5': 9, '10': 'placeId'},
+  ],
+};
+
+/// Descriptor for `ReadPlaceListRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List readPlaceListRequestDescriptor = $convert.base64Decode(
+    'ChRSZWFkUGxhY2VMaXN0UmVxdWVzdBI5CgZwbGFjZXMYASADKAsyIS5wbGFjZS5SZWFkUGxhY2'
+    'VMaXN0UmVxdWVzdC5QbGFjZVIGcGxhY2VzEh8KCGtleXdvcmRzGAIgASgJSABSCGtleXdvcmRz'
+    'iAEBEkUKD2NyZWF0ZWRBdFBlcmlvZBgDIAEoCzIWLmNvbW1vbi5QZXJpb2REYXRlVGltZUgBUg'
+    '9jcmVhdGVkQXRQZXJpb2SIAQESRQoPdXBkYXRlZEF0UGVyaW9kGAQgASgLMhYuY29tbW9uLlBl'
+    'cmlvZERhdGVUaW1lSAJSD3VwZGF0ZWRBdFBlcmlvZIgBARJFCg9kZWxldGVkQXRQZXJpb2QYBS'
+    'ABKAsyFi5jb21tb24uUGVyaW9kRGF0ZVRpbWVIA1IPZGVsZXRlZEF0UGVyaW9kiAEBEjkKFWlz'
+    'SW5jbHVkZURlbGV0ZWRQbGFjZRgGIAEoCEgEUhVpc0luY2x1ZGVEZWxldGVkUGxhY2WIAQESOQ'
+    'oLYm91bmRTcXVhcmUYByABKAsyEi5wbGFjZS5Cb3VuZFNxdWFyZUgFUgtib3VuZFNxdWFyZYgB'
+    'ARI5Cgtib3VuZENpcmNsZRgIIAEoCzISLnBsYWNlLkJvdW5kQ2lyY2xlSAZSC2JvdW5kQ2lyY2'
+    'xliAEBEkAKDHVzZXJMb2NhdGlvbhgJIAEoCzIXLnBsYWNlLldnczg0Q29vcmRpbmF0ZXNIB1IM'
+    'dXNlckxvY2F0aW9uiAEBEjYKCnBhZ2luYXRpb24YCiABKAsyES5wbGFjZS5QYWdpbmF0aW9uSA'
+    'hSCnBhZ2luYXRpb26IAQEaIQoFUGxhY2USGAoHcGxhY2VJZBgBIAEoCVIHcGxhY2VJZEILCglf'
+    'a2V5d29yZHNCEgoQX2NyZWF0ZWRBdFBlcmlvZEISChBfdXBkYXRlZEF0UGVyaW9kQhIKEF9kZW'
+    'xldGVkQXRQZXJpb2RCGAoWX2lzSW5jbHVkZURlbGV0ZWRQbGFjZUIOCgxfYm91bmRTcXVhcmVC'
+    'DgoMX2JvdW5kQ2lyY2xlQg8KDV91c2VyTG9jYXRpb25CDQoLX3BhZ2luYXRpb24=');
+
+@$core.Deprecated('Use readPlaceListResponseDescriptor instead')
+const ReadPlaceListResponse$json = {
+  '1': 'ReadPlaceListResponse',
+  '2': [
+    {'1': 'responseInfo', '3': 1, '4': 1, '5': 11, '6': '.common.ResponseInfo', '10': 'responseInfo'},
+    {'1': 'results', '3': 2, '4': 3, '5': 11, '6': '.place.Place', '10': 'results'},
+  ],
+};
+
+/// Descriptor for `ReadPlaceListResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List readPlaceListResponseDescriptor = $convert.base64Decode(
+    'ChVSZWFkUGxhY2VMaXN0UmVzcG9uc2USOAoMcmVzcG9uc2VJbmZvGAEgASgLMhQuY29tbW9uLl'
+    'Jlc3BvbnNlSW5mb1IMcmVzcG9uc2VJbmZvEiYKB3Jlc3VsdHMYAiADKAsyDC5wbGFjZS5QbGFj'
+    'ZVIHcmVzdWx0cw==');
+
+@$core.Deprecated('Use updatePlaceListRequestDescriptor instead')
+const UpdatePlaceListRequest$json = {
+  '1': 'UpdatePlaceListRequest',
+  '2': [
+    {'1': 'places', '3': 1, '4': 3, '5': 11, '6': '.place.UpdatePlaceListRequest.Place', '10': 'places'},
+  ],
+  '3': [UpdatePlaceListRequest_Place$json],
+};
+
+@$core.Deprecated('Use updatePlaceListRequestDescriptor instead')
+const UpdatePlaceListRequest_Place$json = {
+  '1': 'Place',
+  '2': [
+    {'1': 'placeId', '3': 1, '4': 1, '5': 9, '10': 'placeId'},
+    {'1': 'name', '3': 2, '4': 1, '5': 9, '9': 0, '10': 'name', '17': true},
+    {'1': 'latitude', '3': 3, '4': 1, '5': 1, '9': 1, '10': 'latitude', '17': true},
+    {'1': 'longitude', '3': 4, '4': 1, '5': 1, '9': 2, '10': 'longitude', '17': true},
   ],
   '8': [
     {'1': '_name'},
@@ -210,99 +179,108 @@ const UpdatePlaceRequest$json = {
   ],
 };
 
-/// Descriptor for `UpdatePlaceRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List updatePlaceRequestDescriptor = $convert.base64Decode(
-    'ChJVcGRhdGVQbGFjZVJlcXVlc3QSFwoEbmFtZRgBIAEoCUgAUgRuYW1liAEBEh8KCGxhdGl0dW'
-    'RlGAIgASgBSAFSCGxhdGl0dWRliAEBEiEKCWxvbmdpdHVkZRgDIAEoAUgCUglsb25naXR1ZGWI'
-    'AQFCBwoFX25hbWVCCwoJX2xhdGl0dWRlQgwKCl9sb25naXR1ZGU=');
-
-@$core.Deprecated('Use updatePlaceResponseDescriptor instead')
-const UpdatePlaceResponse$json = {
-  '1': 'UpdatePlaceResponse',
-  '2': [
-    {'1': 'place', '3': 1, '4': 1, '5': 11, '6': '.place.Place', '10': 'place'},
-  ],
-};
-
-/// Descriptor for `UpdatePlaceResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List updatePlaceResponseDescriptor = $convert.base64Decode(
-    'ChNVcGRhdGVQbGFjZVJlc3BvbnNlEiIKBXBsYWNlGAEgASgLMgwucGxhY2UuUGxhY2VSBXBsYW'
-    'Nl');
-
-@$core.Deprecated('Use updatePlaceListRequestDescriptor instead')
-const UpdatePlaceListRequest$json = {
-  '1': 'UpdatePlaceListRequest',
-  '2': [
-    {'1': 'places', '3': 1, '4': 3, '5': 11, '6': '.place.UpdatePlaceRequest', '10': 'places'},
-  ],
-};
-
 /// Descriptor for `UpdatePlaceListRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updatePlaceListRequestDescriptor = $convert.base64Decode(
-    'ChZVcGRhdGVQbGFjZUxpc3RSZXF1ZXN0EjEKBnBsYWNlcxgBIAMoCzIZLnBsYWNlLlVwZGF0ZV'
-    'BsYWNlUmVxdWVzdFIGcGxhY2Vz');
+    'ChZVcGRhdGVQbGFjZUxpc3RSZXF1ZXN0EjsKBnBsYWNlcxgBIAMoCzIjLnBsYWNlLlVwZGF0ZV'
+    'BsYWNlTGlzdFJlcXVlc3QuUGxhY2VSBnBsYWNlcxqiAQoFUGxhY2USGAoHcGxhY2VJZBgBIAEo'
+    'CVIHcGxhY2VJZBIXCgRuYW1lGAIgASgJSABSBG5hbWWIAQESHwoIbGF0aXR1ZGUYAyABKAFIAV'
+    'IIbGF0aXR1ZGWIAQESIQoJbG9uZ2l0dWRlGAQgASgBSAJSCWxvbmdpdHVkZYgBAUIHCgVfbmFt'
+    'ZUILCglfbGF0aXR1ZGVCDAoKX2xvbmdpdHVkZQ==');
 
 @$core.Deprecated('Use updatePlaceListResponseDescriptor instead')
 const UpdatePlaceListResponse$json = {
   '1': 'UpdatePlaceListResponse',
   '2': [
-    {'1': 'places', '3': 1, '4': 3, '5': 11, '6': '.place.Place', '10': 'places'},
+    {'1': 'results', '3': 2, '4': 3, '5': 11, '6': '.place.Place', '10': 'results'},
   ],
 };
 
 /// Descriptor for `UpdatePlaceListResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updatePlaceListResponseDescriptor = $convert.base64Decode(
-    'ChdVcGRhdGVQbGFjZUxpc3RSZXNwb25zZRIkCgZwbGFjZXMYASADKAsyDC5wbGFjZS5QbGFjZV'
-    'IGcGxhY2Vz');
-
-@$core.Deprecated('Use deletePlaceRequestDescriptor instead')
-const DeletePlaceRequest$json = {
-  '1': 'DeletePlaceRequest',
-  '2': [
-    {'1': 'id', '3': 1, '4': 1, '5': 9, '10': 'id'},
-  ],
-};
-
-/// Descriptor for `DeletePlaceRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List deletePlaceRequestDescriptor = $convert.base64Decode(
-    'ChJEZWxldGVQbGFjZVJlcXVlc3QSDgoCaWQYASABKAlSAmlk');
-
-@$core.Deprecated('Use deletePlaceResponseDescriptor instead')
-const DeletePlaceResponse$json = {
-  '1': 'DeletePlaceResponse',
-  '2': [
-    {'1': 'place', '3': 1, '4': 1, '5': 11, '6': '.place.Place', '10': 'place'},
-  ],
-};
-
-/// Descriptor for `DeletePlaceResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List deletePlaceResponseDescriptor = $convert.base64Decode(
-    'ChNEZWxldGVQbGFjZVJlc3BvbnNlEiIKBXBsYWNlGAEgASgLMgwucGxhY2UuUGxhY2VSBXBsYW'
-    'Nl');
+    'ChdVcGRhdGVQbGFjZUxpc3RSZXNwb25zZRImCgdyZXN1bHRzGAIgAygLMgwucGxhY2UuUGxhY2'
+    'VSB3Jlc3VsdHM=');
 
 @$core.Deprecated('Use deletePlaceListRequestDescriptor instead')
 const DeletePlaceListRequest$json = {
   '1': 'DeletePlaceListRequest',
   '2': [
-    {'1': 'places', '3': 1, '4': 3, '5': 11, '6': '.place.DeletePlaceRequest', '10': 'places'},
+    {'1': 'places', '3': 1, '4': 3, '5': 11, '6': '.place.DeletePlaceListRequest.Place', '10': 'places'},
+  ],
+  '3': [DeletePlaceListRequest_Place$json],
+};
+
+@$core.Deprecated('Use deletePlaceListRequestDescriptor instead')
+const DeletePlaceListRequest_Place$json = {
+  '1': 'Place',
+  '2': [
+    {'1': 'placeId', '3': 1, '4': 1, '5': 9, '10': 'placeId'},
   ],
 };
 
 /// Descriptor for `DeletePlaceListRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List deletePlaceListRequestDescriptor = $convert.base64Decode(
-    'ChZEZWxldGVQbGFjZUxpc3RSZXF1ZXN0EjEKBnBsYWNlcxgBIAMoCzIZLnBsYWNlLkRlbGV0ZV'
-    'BsYWNlUmVxdWVzdFIGcGxhY2Vz');
+    'ChZEZWxldGVQbGFjZUxpc3RSZXF1ZXN0EjsKBnBsYWNlcxgBIAMoCzIjLnBsYWNlLkRlbGV0ZV'
+    'BsYWNlTGlzdFJlcXVlc3QuUGxhY2VSBnBsYWNlcxohCgVQbGFjZRIYCgdwbGFjZUlkGAEgASgJ'
+    'UgdwbGFjZUlk');
 
 @$core.Deprecated('Use deletePlaceListResponseDescriptor instead')
 const DeletePlaceListResponse$json = {
   '1': 'DeletePlaceListResponse',
   '2': [
-    {'1': 'places', '3': 1, '4': 3, '5': 11, '6': '.place.Place', '10': 'places'},
+    {'1': 'results', '3': 2, '4': 3, '5': 11, '6': '.place.Place', '10': 'results'},
   ],
 };
 
 /// Descriptor for `DeletePlaceListResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List deletePlaceListResponseDescriptor = $convert.base64Decode(
-    'ChdEZWxldGVQbGFjZUxpc3RSZXNwb25zZRIkCgZwbGFjZXMYASADKAsyDC5wbGFjZS5QbGFjZV'
-    'IGcGxhY2Vz');
+    'ChdEZWxldGVQbGFjZUxpc3RSZXNwb25zZRImCgdyZXN1bHRzGAIgAygLMgwucGxhY2UuUGxhY2'
+    'VSB3Jlc3VsdHM=');
+
+@$core.Deprecated('Use boundSquareDescriptor instead')
+const BoundSquare$json = {
+  '1': 'BoundSquare',
+  '2': [
+    {'1': 'topRight', '3': 1, '4': 1, '5': 11, '6': '.place.Wgs84Coordinates', '10': 'topRight'},
+    {'1': 'bottomLeft', '3': 2, '4': 1, '5': 11, '6': '.place.Wgs84Coordinates', '10': 'bottomLeft'},
+  ],
+};
+
+/// Descriptor for `BoundSquare`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List boundSquareDescriptor = $convert.base64Decode(
+    'CgtCb3VuZFNxdWFyZRIzCgh0b3BSaWdodBgBIAEoCzIXLnBsYWNlLldnczg0Q29vcmRpbmF0ZX'
+    'NSCHRvcFJpZ2h0EjcKCmJvdHRvbUxlZnQYAiABKAsyFy5wbGFjZS5XZ3M4NENvb3JkaW5hdGVz'
+    'Ugpib3R0b21MZWZ0');
+
+@$core.Deprecated('Use boundCircleDescriptor instead')
+const BoundCircle$json = {
+  '1': 'BoundCircle',
+  '2': [
+    {'1': 'center', '3': 1, '4': 1, '5': 11, '6': '.place.Wgs84Coordinates', '10': 'center'},
+    {'1': 'radiusMeter', '3': 2, '4': 1, '5': 5, '10': 'radiusMeter'},
+  ],
+};
+
+/// Descriptor for `BoundCircle`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List boundCircleDescriptor = $convert.base64Decode(
+    'CgtCb3VuZENpcmNsZRIvCgZjZW50ZXIYASABKAsyFy5wbGFjZS5XZ3M4NENvb3JkaW5hdGVzUg'
+    'ZjZW50ZXISIAoLcmFkaXVzTWV0ZXIYAiABKAVSC3JhZGl1c01ldGVy');
+
+@$core.Deprecated('Use paginationDescriptor instead')
+const Pagination$json = {
+  '1': 'Pagination',
+  '2': [
+    {'1': 'pageNumber', '3': 10, '4': 1, '5': 5, '9': 0, '10': 'pageNumber', '17': true},
+    {'1': 'rowPerPage', '3': 11, '4': 1, '5': 5, '9': 1, '10': 'rowPerPage', '17': true},
+  ],
+  '8': [
+    {'1': '_pageNumber'},
+    {'1': '_rowPerPage'},
+  ],
+};
+
+/// Descriptor for `Pagination`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List paginationDescriptor = $convert.base64Decode(
+    'CgpQYWdpbmF0aW9uEiMKCnBhZ2VOdW1iZXIYCiABKAVIAFIKcGFnZU51bWJlcogBARIjCgpyb3'
+    'dQZXJQYWdlGAsgASgFSAFSCnJvd1BlclBhZ2WIAQFCDQoLX3BhZ2VOdW1iZXJCDQoLX3Jvd1Bl'
+    'clBhZ2U=');
 

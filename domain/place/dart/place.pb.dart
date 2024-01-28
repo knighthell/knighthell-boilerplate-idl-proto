@@ -13,26 +13,27 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'google/protobuf/timestamp.pb.dart' as $1;
+import 'google/protobuf/timestamp.pb.dart' as $2;
+import 'place-user.pb.dart' as $1;
 
 class Place extends $pb.GeneratedMessage {
   factory Place({
-    $core.String? id,
+    $core.String? placeId,
     $core.double? latitude,
     $core.double? longitude,
-    PlaceUser? createdBy,
-    $1.Timestamp? createdAt,
-    PlaceUser? updatedBy,
-    $1.Timestamp? updatedAt,
-    PlaceUser? deletedBy,
-    $1.Timestamp? deletedAt,
+    $1.PlaceUser? createdBy,
+    $2.Timestamp? createdAt,
+    $1.PlaceUser? updatedBy,
+    $2.Timestamp? updatedAt,
+    $1.PlaceUser? deletedBy,
+    $2.Timestamp? deletedAt,
     $core.String? name,
     PlaceNameTranslation? nameTranslation,
     PlaceAddress? address,
   }) {
     final $result = create();
-    if (id != null) {
-      $result.id = id;
+    if (placeId != null) {
+      $result.placeId = placeId;
     }
     if (latitude != null) {
       $result.latitude = latitude;
@@ -74,15 +75,15 @@ class Place extends $pb.GeneratedMessage {
   factory Place.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Place', package: const $pb.PackageName(_omitMessageNames ? '' : 'place'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'id')
+    ..aOS(1, _omitFieldNames ? '' : 'placeId', protoName: 'placeId')
     ..a<$core.double>(2, _omitFieldNames ? '' : 'latitude', $pb.PbFieldType.OD)
     ..a<$core.double>(3, _omitFieldNames ? '' : 'longitude', $pb.PbFieldType.OD)
-    ..aOM<PlaceUser>(4, _omitFieldNames ? '' : 'createdBy', protoName: 'createdBy', subBuilder: PlaceUser.create)
-    ..aOM<$1.Timestamp>(5, _omitFieldNames ? '' : 'createdAt', protoName: 'createdAt', subBuilder: $1.Timestamp.create)
-    ..aOM<PlaceUser>(6, _omitFieldNames ? '' : 'updatedBy', protoName: 'updatedBy', subBuilder: PlaceUser.create)
-    ..aOM<$1.Timestamp>(7, _omitFieldNames ? '' : 'updatedAt', protoName: 'updatedAt', subBuilder: $1.Timestamp.create)
-    ..aOM<PlaceUser>(8, _omitFieldNames ? '' : 'deletedBy', protoName: 'deletedBy', subBuilder: PlaceUser.create)
-    ..aOM<$1.Timestamp>(9, _omitFieldNames ? '' : 'deletedAt', protoName: 'deletedAt', subBuilder: $1.Timestamp.create)
+    ..aOM<$1.PlaceUser>(4, _omitFieldNames ? '' : 'createdBy', protoName: 'createdBy', subBuilder: $1.PlaceUser.create)
+    ..aOM<$2.Timestamp>(5, _omitFieldNames ? '' : 'createdAt', protoName: 'createdAt', subBuilder: $2.Timestamp.create)
+    ..aOM<$1.PlaceUser>(6, _omitFieldNames ? '' : 'updatedBy', protoName: 'updatedBy', subBuilder: $1.PlaceUser.create)
+    ..aOM<$2.Timestamp>(7, _omitFieldNames ? '' : 'updatedAt', protoName: 'updatedAt', subBuilder: $2.Timestamp.create)
+    ..aOM<$1.PlaceUser>(8, _omitFieldNames ? '' : 'deletedBy', protoName: 'deletedBy', subBuilder: $1.PlaceUser.create)
+    ..aOM<$2.Timestamp>(9, _omitFieldNames ? '' : 'deletedAt', protoName: 'deletedAt', subBuilder: $2.Timestamp.create)
     ..aOS(10, _omitFieldNames ? '' : 'name')
     ..aOM<PlaceNameTranslation>(11, _omitFieldNames ? '' : 'nameTranslation', protoName: 'nameTranslation', subBuilder: PlaceNameTranslation.create)
     ..aOM<PlaceAddress>(12, _omitFieldNames ? '' : 'address', subBuilder: PlaceAddress.create)
@@ -111,13 +112,13 @@ class Place extends $pb.GeneratedMessage {
   static Place? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get id => $_getSZ(0);
+  $core.String get placeId => $_getSZ(0);
   @$pb.TagNumber(1)
-  set id($core.String v) { $_setString(0, v); }
+  set placeId($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasId() => $_has(0);
+  $core.bool hasPlaceId() => $_has(0);
   @$pb.TagNumber(1)
-  void clearId() => clearField(1);
+  void clearPlaceId() => clearField(1);
 
   @$pb.TagNumber(2)
   $core.double get latitude => $_getN(1);
@@ -138,70 +139,70 @@ class Place extends $pb.GeneratedMessage {
   void clearLongitude() => clearField(3);
 
   @$pb.TagNumber(4)
-  PlaceUser get createdBy => $_getN(3);
+  $1.PlaceUser get createdBy => $_getN(3);
   @$pb.TagNumber(4)
-  set createdBy(PlaceUser v) { setField(4, v); }
+  set createdBy($1.PlaceUser v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasCreatedBy() => $_has(3);
   @$pb.TagNumber(4)
   void clearCreatedBy() => clearField(4);
   @$pb.TagNumber(4)
-  PlaceUser ensureCreatedBy() => $_ensure(3);
+  $1.PlaceUser ensureCreatedBy() => $_ensure(3);
 
   @$pb.TagNumber(5)
-  $1.Timestamp get createdAt => $_getN(4);
+  $2.Timestamp get createdAt => $_getN(4);
   @$pb.TagNumber(5)
-  set createdAt($1.Timestamp v) { setField(5, v); }
+  set createdAt($2.Timestamp v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasCreatedAt() => $_has(4);
   @$pb.TagNumber(5)
   void clearCreatedAt() => clearField(5);
   @$pb.TagNumber(5)
-  $1.Timestamp ensureCreatedAt() => $_ensure(4);
+  $2.Timestamp ensureCreatedAt() => $_ensure(4);
 
   @$pb.TagNumber(6)
-  PlaceUser get updatedBy => $_getN(5);
+  $1.PlaceUser get updatedBy => $_getN(5);
   @$pb.TagNumber(6)
-  set updatedBy(PlaceUser v) { setField(6, v); }
+  set updatedBy($1.PlaceUser v) { setField(6, v); }
   @$pb.TagNumber(6)
   $core.bool hasUpdatedBy() => $_has(5);
   @$pb.TagNumber(6)
   void clearUpdatedBy() => clearField(6);
   @$pb.TagNumber(6)
-  PlaceUser ensureUpdatedBy() => $_ensure(5);
+  $1.PlaceUser ensureUpdatedBy() => $_ensure(5);
 
   @$pb.TagNumber(7)
-  $1.Timestamp get updatedAt => $_getN(6);
+  $2.Timestamp get updatedAt => $_getN(6);
   @$pb.TagNumber(7)
-  set updatedAt($1.Timestamp v) { setField(7, v); }
+  set updatedAt($2.Timestamp v) { setField(7, v); }
   @$pb.TagNumber(7)
   $core.bool hasUpdatedAt() => $_has(6);
   @$pb.TagNumber(7)
   void clearUpdatedAt() => clearField(7);
   @$pb.TagNumber(7)
-  $1.Timestamp ensureUpdatedAt() => $_ensure(6);
+  $2.Timestamp ensureUpdatedAt() => $_ensure(6);
 
   @$pb.TagNumber(8)
-  PlaceUser get deletedBy => $_getN(7);
+  $1.PlaceUser get deletedBy => $_getN(7);
   @$pb.TagNumber(8)
-  set deletedBy(PlaceUser v) { setField(8, v); }
+  set deletedBy($1.PlaceUser v) { setField(8, v); }
   @$pb.TagNumber(8)
   $core.bool hasDeletedBy() => $_has(7);
   @$pb.TagNumber(8)
   void clearDeletedBy() => clearField(8);
   @$pb.TagNumber(8)
-  PlaceUser ensureDeletedBy() => $_ensure(7);
+  $1.PlaceUser ensureDeletedBy() => $_ensure(7);
 
   @$pb.TagNumber(9)
-  $1.Timestamp get deletedAt => $_getN(8);
+  $2.Timestamp get deletedAt => $_getN(8);
   @$pb.TagNumber(9)
-  set deletedAt($1.Timestamp v) { setField(9, v); }
+  set deletedAt($2.Timestamp v) { setField(9, v); }
   @$pb.TagNumber(9)
   $core.bool hasDeletedAt() => $_has(8);
   @$pb.TagNumber(9)
   void clearDeletedAt() => clearField(9);
   @$pb.TagNumber(9)
-  $1.Timestamp ensureDeletedAt() => $_ensure(8);
+  $2.Timestamp ensureDeletedAt() => $_ensure(8);
 
   @$pb.TagNumber(10)
   $core.String get name => $_getSZ(9);
@@ -235,102 +236,12 @@ class Place extends $pb.GeneratedMessage {
   PlaceAddress ensureAddress() => $_ensure(11);
 }
 
-class PlaceUser extends $pb.GeneratedMessage {
-  factory PlaceUser({
-    $core.String? id,
-    $core.String? email,
-    $core.String? photoURL,
-    $core.String? displayName,
-  }) {
-    final $result = create();
-    if (id != null) {
-      $result.id = id;
-    }
-    if (email != null) {
-      $result.email = email;
-    }
-    if (photoURL != null) {
-      $result.photoURL = photoURL;
-    }
-    if (displayName != null) {
-      $result.displayName = displayName;
-    }
-    return $result;
-  }
-  PlaceUser._() : super();
-  factory PlaceUser.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory PlaceUser.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PlaceUser', package: const $pb.PackageName(_omitMessageNames ? '' : 'place'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'id')
-    ..aOS(2, _omitFieldNames ? '' : 'email')
-    ..aOS(3, _omitFieldNames ? '' : 'photoURL', protoName: 'photoURL')
-    ..aOS(4, _omitFieldNames ? '' : 'displayName', protoName: 'displayName')
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
-  PlaceUser clone() => PlaceUser()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  PlaceUser copyWith(void Function(PlaceUser) updates) => super.copyWith((message) => updates(message as PlaceUser)) as PlaceUser;
-
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static PlaceUser create() => PlaceUser._();
-  PlaceUser createEmptyInstance() => create();
-  static $pb.PbList<PlaceUser> createRepeated() => $pb.PbList<PlaceUser>();
-  @$core.pragma('dart2js:noInline')
-  static PlaceUser getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PlaceUser>(create);
-  static PlaceUser? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $core.String get id => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set id($core.String v) { $_setString(0, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasId() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearId() => clearField(1);
-
-  @$pb.TagNumber(2)
-  $core.String get email => $_getSZ(1);
-  @$pb.TagNumber(2)
-  set email($core.String v) { $_setString(1, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasEmail() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearEmail() => clearField(2);
-
-  @$pb.TagNumber(3)
-  $core.String get photoURL => $_getSZ(2);
-  @$pb.TagNumber(3)
-  set photoURL($core.String v) { $_setString(2, v); }
-  @$pb.TagNumber(3)
-  $core.bool hasPhotoURL() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearPhotoURL() => clearField(3);
-
-  @$pb.TagNumber(4)
-  $core.String get displayName => $_getSZ(3);
-  @$pb.TagNumber(4)
-  set displayName($core.String v) { $_setString(3, v); }
-  @$pb.TagNumber(4)
-  $core.bool hasDisplayName() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearDisplayName() => clearField(4);
-}
-
 class PlaceNameTranslation extends $pb.GeneratedMessage {
   factory PlaceNameTranslation({
     $core.String? ko,
     $core.String? en,
+    $core.String? ja,
+    $core.String? zh,
   }) {
     final $result = create();
     if (ko != null) {
@@ -338,6 +249,12 @@ class PlaceNameTranslation extends $pb.GeneratedMessage {
     }
     if (en != null) {
       $result.en = en;
+    }
+    if (ja != null) {
+      $result.ja = ja;
+    }
+    if (zh != null) {
+      $result.zh = zh;
     }
     return $result;
   }
@@ -348,6 +265,8 @@ class PlaceNameTranslation extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PlaceNameTranslation', package: const $pb.PackageName(_omitMessageNames ? '' : 'place'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'ko')
     ..aOS(2, _omitFieldNames ? '' : 'en')
+    ..aOS(3, _omitFieldNames ? '' : 'ja')
+    ..aOS(4, _omitFieldNames ? '' : 'zh')
     ..hasRequiredFields = false
   ;
 
@@ -389,6 +308,24 @@ class PlaceNameTranslation extends $pb.GeneratedMessage {
   $core.bool hasEn() => $_has(1);
   @$pb.TagNumber(2)
   void clearEn() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get ja => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set ja($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasJa() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearJa() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get zh => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set zh($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasZh() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearZh() => clearField(4);
 }
 
 class PlaceAddress extends $pb.GeneratedMessage {
