@@ -3,10 +3,7 @@
   "version": "0.0.1",
   "description": "knighthell's Interface Definition(Description) Language using protobuf",
   "scripts": {
-    "compile:place:golang": "./domain/place/.protoc-shells/protoc_place_golang.sh",
-    "compile:place:nestjs": "./domain/place/.protoc-shells/protoc_place_nestjs.sh",
-    "compile:place:ts": "./domain/place/.protoc-shells/protoc_place_ts.sh",
-    "compile:place:dart": "./domain/place/.protoc-shells/protoc_place_dart.sh"
+    "compile:place:all": "./protoc.sh -d place -t nestjs -t ts -t golang"
   },
   "repository": {
     "type": "git",
