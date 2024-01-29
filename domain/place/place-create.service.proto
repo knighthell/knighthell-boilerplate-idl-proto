@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package place.service.create;
+
+option go_package = "github.com/knighthell/knighthell-boilerplate-idl-proto/domain/place";
+
+import "place.proto";
+
+service PlaceCreateService {
+  rpc CreatePlaceList(CreatePlaceListRequest) returns (CreatePlaceListResponse);
+}
+
+enum PlaceCreateServiceEventType {
+  CREATE_PLACE = 0;
+}
+
+message CreatePlaceListRequest {
+
+  message Place {
+    string name = 2; // 장소(Place)의 원래 이름
+    double latitude = 3; // 장소(Place)의 위도
+    double longitude = 4; // 장소(Place)의 경도
+  }
+  repeated Place places = 1;
+}
+
+message CreatePlaceListResponse {
+  repeated place.Place results = 5;
+}

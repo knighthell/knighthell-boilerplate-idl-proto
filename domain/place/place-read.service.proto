@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+package place.service.read;
+
+option go_package = "github.com/knighthell/knighthell-boilerplate-idl-proto/domain/place";
+
+import "response-info.proto";
+import "period-datetime.proto";
+import "place.proto";
+
+service PlaceReadService {
+  rpc ReadPlaceList(ReadPlaceListRequest) returns (ReadPlaceListResponse);
+}
+
+message ReadPlaceListRequest {
+
+  message Place {
+    string placeId = 1;
+  }
+  repeated Place places = 1; // 장소의 고유 Id목록으로 조회하기 위한 배열
+
+  optional string keywords = 2; // 검색 InputText에 넣은 그대로의 값
+
+  optional common.PeriodDateTime createdAtPeriod = 3; // 날찌 및 시간 범위 안에 생성된 장소를 구하기 위한 범위
+  optional common.PeriodDateTime updatedAtPeriod = 4; // 날찌 및 시간 범위 안에 수정된 장소를 구하기 위한 범위
+  optional common.PeriodDateTime deletedAtPeriod = 5; // 날찌 및 시간 범위 안에 삭제된 장소를 구하기 위한 범위
+
+  optional bool isIncludeDeletedPlace = 6; // 삭제된 장소까지 조회 할지에 대한 여부
+
+  optional BoundSquare boundSquare = 7; // 우측상단 좌표와 좌측하단 좌표로 이루어진 사각형 범위 안에 있는 장소를 구하기 위한 정보
+  optional BoundCircle boundCircle = 8; // 중심좌표로부터 반지름(단위: 미터) 범위 안에 있는 장소를 구하기 위한 정보
+  optional Wgs84Coordinates userLocation = 9; // 사용자에 위치로부터 장소들간의 거리를 구하기 위한 정보
+
+  optional Pagination pagination = 10; // Pagination으로 조회하기 위한 정보
+}
+
+message ReadPlaceListResponse {
+
+  common.ResponseInfo responseInfo = 1;
+
+  repeated place.Place results = 2;
+}
+
+message BoundSquare {
+  Wgs84Coordinates topRight = 1;
+  Wgs84Coordinates bottomLeft = 2;
+}
+
+message BoundCircle {
+  Wgs84Coordinates center = 1;
+  int32 radiusMeter = 2;
+}
+
+message Pagination {
+  optional int32 pageNumber = 10; // Pagination을 이한 page 수
+  optional int32 rowPerPage = 11; // Page당 보여지는 row의 개수(e.g. limit of query)
+}

@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package place.service.delete;
+
+option go_package = "github.com/knighthell/knighthell-boilerplate-idl-proto/domain/place";
+
+import "place.proto";
+
+service PlaceDeleteService {
+  rpc DeletePlaceList(DeletePlaceListRequest) returns (DeletePlaceListResponse);
+}
+
+message DeletePlaceListRequest {
+  message Place {
+    string placeId = 1;
+  }
+
+  repeated Place places = 1;
+}
+
+message DeletePlaceListResponse {
+  repeated place.Place results = 2;
+}
