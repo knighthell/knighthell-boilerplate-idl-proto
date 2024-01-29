@@ -55,21 +55,31 @@ checkAvailableDomains() {
   exit 1
 }
 
+emptyCompileTypeDirOfDomain() {
+  domain=$1
+  compileType=$2
+
+  compileTypeDirPath="${SHELL_DIR_PATH}/domain/${domain}/${compileType}"
+
+  if [ -d "${compileTypeDirPath}" ] ; then
+    rm -rf "${compileTypeDirPath}"
+    echo Deleted Domain="$domain" Type="$compileType" Directory
+  fi
+
+  mkdir "${compileTypeDirPath}"
+  echo Generated Domain="$domain" Type="$compileType" Directory
+}
+
 compileNestJs() {
   domain=$1
+  compileType="nestjs"
   domainProtoDirPath="${SHELL_DIR_PATH}/domain/${domain}"
 
 #  echo SHELL_DIR_PATH: "${SHELL_DIR_PATH}"
 #  echo domainProtoDirPath: "${domainProtoDirPath}"
 #  echo COMMON_PROTO_DIR_PATH: "${COMMON_PROTO_DIR_PATH}"
 
-  if [ -d "${domainProtoDirPath%%/}/nestjs" ] ; then
-    rm -rf "${domainProtoDirPath%%/}/nestjs"
-    echo Deleted Place NestJS Directory
-  fi
-
-  mkdir "${domainProtoDirPath%%/}/nestjs"
-  echo Generated Place NestJS Directory
+  emptyCompileTypeDirOfDomain "$domain" "$compileType"
 
   protoc -I "${domainProtoDirPath%%/}" -I "${COMMON_PROTO_DIR_PATH}" \
       --plugin=./node_modules/.bin/protoc-gen-ts_proto.cmd \
@@ -80,17 +90,20 @@ compileNestJs() {
       --ts_proto_opt=nestJs=true \
       --ts_proto_opt=addNestjsRestParameter=true \
       --ts_proto_opt=stringEnums=true \
-      --ts_proto_out="${domainProtoDirPath%%/}"/nestjs/ \
+      --ts_proto_out="${domainProtoDirPath%%/}"/"${compileType}"/ \
       "${domainProtoDirPath%%/}"/**.proto
 }
 
 compileTypeScript() {
   domain=$1
+  compileType="ts"
   domainProtoDirPath="${SHELL_DIR_PATH}/domain/${domain}"
 
 #  echo SHELL_DIR_PATH: "${SHELL_DIR_PATH}"
 #  echo domainProtoDirPath: "${domainProtoDirPath}"
 #  echo COMMON_PROTO_DIR_PATH: "${COMMON_PROTO_DIR_PATH}"
+
+  emptyCompileTypeDirOfDomain "$domain" "$compileType"
 
   protoc -I "${domainProtoDirPath%%/}" -I "${COMMON_PROTO_DIR_PATH}" \
       --plugin=./node_modules/.bin/protoc-gen-ts_proto.cmd \
@@ -98,14 +111,17 @@ compileTypeScript() {
       --ts_proto_opt=useDate=true \
       --ts_proto_opt=env=both \
       --ts_proto_opt=unrecognizedEnum=false \
-      --ts_proto_out="${domainProtoDirPath%%/}"/ts/ \
+      --ts_proto_out="${domainProtoDirPath%%/}"/"${compileType}"/ \
       --ts_proto_opt=stringEnums=true \
       "${domainProtoDirPath%%/}"/**.proto
 }
 
 compileGolang() {
   domain=$1
+  compileType="golang"
   domainProtoDirPath="${SHELL_DIR_PATH}/domain/${domain}"
+
+  emptyCompileTypeDirOfDomain "$domain" "$compileType"
 
   export PATH="$PATH:$(go env GOPATH)/bin"
 
@@ -119,7 +135,10 @@ compileGolang() {
 
 compileDart() {
   domain=$1
+  compileType="dart"
   domainProtoDirPath="${SHELL_DIR_PATH}/domain/${domain}"
+
+  emptyCompileTypeDirOfDomain "$domain" "$compileType"
 
   export PATH="$PATH:$HOME/.pub-cache/bin"
 
@@ -130,22 +149,34 @@ compileDart() {
 
 compileJava() {
   domain=$1
+  compileType="java"
   domainProtoDirPath="${SHELL_DIR_PATH}/domain/${domain}"
+
+  emptyCompileTypeDirOfDomain "$domain" "$compileType"
 }
 
 compileKotlin() {
   domain=$1
+  compileType="kotlin"
   domainProtoDirPath="${SHELL_DIR_PATH}/domain/${domain}"
+
+  emptyCompileTypeDirOfDomain "$domain" "$compileType"
 }
 
 compileRust() {
   domain=$1
+  compileType="rust"
   domainProtoDirPath="${SHELL_DIR_PATH}/domain/${domain}"
+
+  emptyCompileTypeDirOfDomain "$domain" "$compileType"
 }
 
 compilePython() {
   domain=$1
+  compileType="python"
   domainProtoDirPath="${SHELL_DIR_PATH}/domain/${domain}"
+
+  emptyCompileTypeDirOfDomain "$domain" "$compileType"
 }
 
 domains=()
