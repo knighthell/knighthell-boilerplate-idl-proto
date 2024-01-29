@@ -13,20 +13,20 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'google/protobuf/timestamp.pb.dart' as $2;
-import 'place-user.pb.dart' as $1;
+import 'google/protobuf/timestamp.pb.dart' as $5;
+import 'place-user.pb.dart' as $4;
 
 class Place extends $pb.GeneratedMessage {
   factory Place({
     $core.String? placeId,
     $core.double? latitude,
     $core.double? longitude,
-    $1.PlaceUser? createdBy,
-    $2.Timestamp? createdAt,
-    $1.PlaceUser? updatedBy,
-    $2.Timestamp? updatedAt,
-    $1.PlaceUser? deletedBy,
-    $2.Timestamp? deletedAt,
+    $4.PlaceUser? createdBy,
+    $5.Timestamp? createdAt,
+    $4.PlaceUser? updatedBy,
+    $5.Timestamp? updatedAt,
+    $4.PlaceUser? deletedBy,
+    $5.Timestamp? deletedAt,
     $core.String? name,
     PlaceNameTranslation? nameTranslation,
     PlaceAddress? address,
@@ -82,12 +82,12 @@ class Place extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'placeId', protoName: 'placeId')
     ..a<$core.double>(2, _omitFieldNames ? '' : 'latitude', $pb.PbFieldType.OD)
     ..a<$core.double>(3, _omitFieldNames ? '' : 'longitude', $pb.PbFieldType.OD)
-    ..aOM<$1.PlaceUser>(4, _omitFieldNames ? '' : 'createdBy', protoName: 'createdBy', subBuilder: $1.PlaceUser.create)
-    ..aOM<$2.Timestamp>(5, _omitFieldNames ? '' : 'createdAt', protoName: 'createdAt', subBuilder: $2.Timestamp.create)
-    ..aOM<$1.PlaceUser>(6, _omitFieldNames ? '' : 'updatedBy', protoName: 'updatedBy', subBuilder: $1.PlaceUser.create)
-    ..aOM<$2.Timestamp>(7, _omitFieldNames ? '' : 'updatedAt', protoName: 'updatedAt', subBuilder: $2.Timestamp.create)
-    ..aOM<$1.PlaceUser>(8, _omitFieldNames ? '' : 'deletedBy', protoName: 'deletedBy', subBuilder: $1.PlaceUser.create)
-    ..aOM<$2.Timestamp>(9, _omitFieldNames ? '' : 'deletedAt', protoName: 'deletedAt', subBuilder: $2.Timestamp.create)
+    ..aOM<$4.PlaceUser>(4, _omitFieldNames ? '' : 'createdBy', protoName: 'createdBy', subBuilder: $4.PlaceUser.create)
+    ..aOM<$5.Timestamp>(5, _omitFieldNames ? '' : 'createdAt', protoName: 'createdAt', subBuilder: $5.Timestamp.create)
+    ..aOM<$4.PlaceUser>(6, _omitFieldNames ? '' : 'updatedBy', protoName: 'updatedBy', subBuilder: $4.PlaceUser.create)
+    ..aOM<$5.Timestamp>(7, _omitFieldNames ? '' : 'updatedAt', protoName: 'updatedAt', subBuilder: $5.Timestamp.create)
+    ..aOM<$4.PlaceUser>(8, _omitFieldNames ? '' : 'deletedBy', protoName: 'deletedBy', subBuilder: $4.PlaceUser.create)
+    ..aOM<$5.Timestamp>(9, _omitFieldNames ? '' : 'deletedAt', protoName: 'deletedAt', subBuilder: $5.Timestamp.create)
     ..aOS(10, _omitFieldNames ? '' : 'name')
     ..aOM<PlaceNameTranslation>(11, _omitFieldNames ? '' : 'nameTranslation', protoName: 'nameTranslation', subBuilder: PlaceNameTranslation.create)
     ..aOM<PlaceAddress>(12, _omitFieldNames ? '' : 'address', subBuilder: PlaceAddress.create)
@@ -144,70 +144,70 @@ class Place extends $pb.GeneratedMessage {
   void clearLongitude() => clearField(3);
 
   @$pb.TagNumber(4)
-  $1.PlaceUser get createdBy => $_getN(3);
+  $4.PlaceUser get createdBy => $_getN(3);
   @$pb.TagNumber(4)
-  set createdBy($1.PlaceUser v) { setField(4, v); }
+  set createdBy($4.PlaceUser v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasCreatedBy() => $_has(3);
   @$pb.TagNumber(4)
   void clearCreatedBy() => clearField(4);
   @$pb.TagNumber(4)
-  $1.PlaceUser ensureCreatedBy() => $_ensure(3);
+  $4.PlaceUser ensureCreatedBy() => $_ensure(3);
 
   @$pb.TagNumber(5)
-  $2.Timestamp get createdAt => $_getN(4);
+  $5.Timestamp get createdAt => $_getN(4);
   @$pb.TagNumber(5)
-  set createdAt($2.Timestamp v) { setField(5, v); }
+  set createdAt($5.Timestamp v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasCreatedAt() => $_has(4);
   @$pb.TagNumber(5)
   void clearCreatedAt() => clearField(5);
   @$pb.TagNumber(5)
-  $2.Timestamp ensureCreatedAt() => $_ensure(4);
+  $5.Timestamp ensureCreatedAt() => $_ensure(4);
 
   @$pb.TagNumber(6)
-  $1.PlaceUser get updatedBy => $_getN(5);
+  $4.PlaceUser get updatedBy => $_getN(5);
   @$pb.TagNumber(6)
-  set updatedBy($1.PlaceUser v) { setField(6, v); }
+  set updatedBy($4.PlaceUser v) { setField(6, v); }
   @$pb.TagNumber(6)
   $core.bool hasUpdatedBy() => $_has(5);
   @$pb.TagNumber(6)
   void clearUpdatedBy() => clearField(6);
   @$pb.TagNumber(6)
-  $1.PlaceUser ensureUpdatedBy() => $_ensure(5);
+  $4.PlaceUser ensureUpdatedBy() => $_ensure(5);
 
   @$pb.TagNumber(7)
-  $2.Timestamp get updatedAt => $_getN(6);
+  $5.Timestamp get updatedAt => $_getN(6);
   @$pb.TagNumber(7)
-  set updatedAt($2.Timestamp v) { setField(7, v); }
+  set updatedAt($5.Timestamp v) { setField(7, v); }
   @$pb.TagNumber(7)
   $core.bool hasUpdatedAt() => $_has(6);
   @$pb.TagNumber(7)
   void clearUpdatedAt() => clearField(7);
   @$pb.TagNumber(7)
-  $2.Timestamp ensureUpdatedAt() => $_ensure(6);
+  $5.Timestamp ensureUpdatedAt() => $_ensure(6);
 
   @$pb.TagNumber(8)
-  $1.PlaceUser get deletedBy => $_getN(7);
+  $4.PlaceUser get deletedBy => $_getN(7);
   @$pb.TagNumber(8)
-  set deletedBy($1.PlaceUser v) { setField(8, v); }
+  set deletedBy($4.PlaceUser v) { setField(8, v); }
   @$pb.TagNumber(8)
   $core.bool hasDeletedBy() => $_has(7);
   @$pb.TagNumber(8)
   void clearDeletedBy() => clearField(8);
   @$pb.TagNumber(8)
-  $1.PlaceUser ensureDeletedBy() => $_ensure(7);
+  $4.PlaceUser ensureDeletedBy() => $_ensure(7);
 
   @$pb.TagNumber(9)
-  $2.Timestamp get deletedAt => $_getN(8);
+  $5.Timestamp get deletedAt => $_getN(8);
   @$pb.TagNumber(9)
-  set deletedAt($2.Timestamp v) { setField(9, v); }
+  set deletedAt($5.Timestamp v) { setField(9, v); }
   @$pb.TagNumber(9)
   $core.bool hasDeletedAt() => $_has(8);
   @$pb.TagNumber(9)
   void clearDeletedAt() => clearField(9);
   @$pb.TagNumber(9)
-  $2.Timestamp ensureDeletedAt() => $_ensure(8);
+  $5.Timestamp ensureDeletedAt() => $_ensure(8);
 
   @$pb.TagNumber(10)
   $core.String get name => $_getSZ(9);
