@@ -63,6 +63,14 @@ compileNestJs() {
 #  echo domainProtoDirPath: "${domainProtoDirPath}"
 #  echo COMMON_PROTO_DIR_PATH: "${COMMON_PROTO_DIR_PATH}"
 
+  if [ -d "${domainProtoDirPath%%/}/nestjs" ] ; then
+    rm -rf "${domainProtoDirPath%%/}/nestjs"
+    echo Deleted Place NestJS Directory
+  fi
+
+  mkdir "${domainProtoDirPath%%/}/nestjs"
+  echo Generated Place NestJS Directory
+
   protoc -I "${domainProtoDirPath%%/}" -I "${COMMON_PROTO_DIR_PATH}" \
       --plugin=./node_modules/.bin/protoc-gen-ts_proto.cmd \
       --ts_proto_opt=useOptionals=none \
