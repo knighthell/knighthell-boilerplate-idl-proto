@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "knighthell's Interface Definition(Description) Language using protobuf",
   "scripts": {
-    "compile:place:all": "./protoc.sh -d place -t nestjs -t ts -t golang"
+    "compile:place:all": "./idlprotoc.sh -d place -t nestjs -t ts -t golang"
   },
   "repository": {
     "type": "git",
