@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package payment;
+
+option go_package = "github.com/knighthell-family/knighthell-family-idl/payment";
+
+import "google/protobuf/timestamp.proto";
+import "payment/payment-user.proto";
+
+message Credit {
+  string id = 1;
+
+  uint32 value = 2;
+}
