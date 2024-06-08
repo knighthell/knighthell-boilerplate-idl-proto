@@ -5,10 +5,10 @@ package chat;
 option go_package = "github.com/knighthell-family/knighthell-family-idl/chat";
 
 import "google/protobuf/timestamp.proto";
+import "chat-room.proto";
 import "chat-user.proto";
-import "chat-participant.proto";
 
-message ChatMessage {
+message ChatParticipant {
   string id = 1;
 
   ChatUser createdBy = 2;
@@ -18,16 +18,15 @@ message ChatMessage {
   optional ChatUser deletedBy = 6;
   optional google.protobuf.Timestamp deletedDateTimeUTC = 7;
 
-  ChatParticipant participant = 8;
+  ChatRoom room = 8;
+  ChatUser user = 9;
 
-  ChatMessageType type = 9;
-  ChatMessageContent content = 10;
+  optional string participantName = 10;
+  optional string participantPhotoUrl = 11;
 }
 
-message ChatMessageContent {
-  string text = 2;
-}
-
-enum ChatMessageType {
-  TEXT = 0;
+enum ChatParticipantType {
+  OWNER = 0;
+  MANAGER = 1;
+  PARTICIPANT = 2;
 }
