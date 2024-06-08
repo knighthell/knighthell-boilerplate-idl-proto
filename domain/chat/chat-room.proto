@@ -15,7 +15,7 @@ message ChatRoom {
   optional ChatUser updatedBy = 4;
   optional google.protobuf.Timestamp updatedDateTimeUTC = 5;
   optional ChatUser deletedBy = 6;
-  google.protobuf.Timestamp deletedDateTimeUTC = 7;
+  optional google.protobuf.Timestamp deletedDateTimeUTC = 7;
 
   optional string title = 8;
   int32 participantCount = 9;

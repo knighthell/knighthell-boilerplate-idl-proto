@@ -11,7 +11,7 @@ export interface ChatRoom {
   updatedBy?: ChatUser | undefined;
   updatedDateTimeUTC?: Date | undefined;
   deletedBy?: ChatUser | undefined;
-  deletedDateTimeUTC: Date | undefined;
+  deletedDateTimeUTC?: Date | undefined;
   title?: string | undefined;
   participantCount: number;
 }
