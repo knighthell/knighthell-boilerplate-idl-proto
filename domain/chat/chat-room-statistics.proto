@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package chat;
+
+option go_package = "github.com/knighthell-family/knighthell-family-idl/chat";
+
+message ChatRoomStatistics {
+  int32 participantCount = 1;
+}

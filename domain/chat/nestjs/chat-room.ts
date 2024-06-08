@@ -1,5 +1,6 @@
 /* eslint-disable */
 import { wrappers } from "protobufjs";
+import { ChatRoomStatistics } from "./chat-room-statistics";
 import { ChatUser } from "./chat-user";
 
 export const protobufPackage = "chat";
@@ -13,7 +14,7 @@ export interface ChatRoom {
   deletedBy?: ChatUser | undefined;
   deletedDateTimeUTC?: Date | undefined;
   title?: string | undefined;
-  participantCount: number;
+  statistics: ChatRoomStatistics | undefined;
 }
 
 export const CHAT_PACKAGE_NAME = "chat";

@@ -6,6 +6,7 @@ option go_package = "github.com/knighthell-family/knighthell-family-idl/chat";
 
 import "google/protobuf/timestamp.proto";
 import "chat-user.proto";
+import "chat-room-statistics.proto";
 
 message ChatRoom {
   string id = 1;
@@ -18,5 +19,5 @@ message ChatRoom {
   optional google.protobuf.Timestamp deletedDateTimeUTC = 7;
 
   optional string title = 8;
-  int32 participantCount = 9;
+  ChatRoomStatistics statistics = 9;
 }

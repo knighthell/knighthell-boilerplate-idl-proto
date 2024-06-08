@@ -1,5 +1,6 @@
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
+import { ChatRoomStatistics } from "./chat-room-statistics";
 import { ChatUser } from "./chat-user";
 import { Timestamp } from "./google/protobuf/timestamp";
 
@@ -14,7 +15,7 @@ export interface ChatRoom {
   deletedBy?: ChatUser | undefined;
   deletedDateTimeUTC?: Date | undefined;
   title?: string | undefined;
-  participantCount: number;
+  statistics: ChatRoomStatistics | undefined;
 }
 
 function createBaseChatRoom(): ChatRoom {
@@ -27,7 +28,7 @@ function createBaseChatRoom(): ChatRoom {
     deletedBy: undefined,
     deletedDateTimeUTC: undefined,
     title: undefined,
-    participantCount: 0,
+    statistics: undefined,
   };
 }
 
@@ -57,8 +58,8 @@ export const ChatRoom = {
     if (message.title !== undefined) {
       writer.uint32(66).string(message.title);
     }
-    if (message.participantCount !== 0) {
-      writer.uint32(72).int32(message.participantCount);
+    if (message.statistics !== undefined) {
+      ChatRoomStatistics.encode(message.statistics, writer.uint32(74).fork()).ldelim();
     }
     return writer;
   },
@@ -127,11 +128,11 @@ export const ChatRoom = {
           message.title = reader.string();
           continue;
         case 9:
-          if (tag !== 72) {
+          if (tag !== 74) {
             break;
           }
 
-          message.participantCount = reader.int32();
+          message.statistics = ChatRoomStatistics.decode(reader, reader.uint32());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -152,7 +153,7 @@ export const ChatRoom = {
       deletedBy: isSet(object.deletedBy) ? ChatUser.fromJSON(object.deletedBy) : undefined,
       deletedDateTimeUTC: isSet(object.deletedDateTimeUTC) ? fromJsonTimestamp(object.deletedDateTimeUTC) : undefined,
       title: isSet(object.title) ? globalThis.String(object.title) : undefined,
-      participantCount: isSet(object.participantCount) ? globalThis.Number(object.participantCount) : 0,
+      statistics: isSet(object.statistics) ? ChatRoomStatistics.fromJSON(object.statistics) : undefined,
     };
   },
 
@@ -182,8 +183,8 @@ export const ChatRoom = {
     if (message.title !== undefined) {
       obj.title = message.title;
     }
-    if (message.participantCount !== 0) {
-      obj.participantCount = Math.round(message.participantCount);
+    if (message.statistics !== undefined) {
+      obj.statistics = ChatRoomStatistics.toJSON(message.statistics);
     }
     return obj;
   },
@@ -207,7 +208,9 @@ export const ChatRoom = {
       : undefined;
     message.deletedDateTimeUTC = object.deletedDateTimeUTC ?? undefined;
     message.title = object.title ?? undefined;
-    message.participantCount = object.participantCount ?? 0;
+    message.statistics = (object.statistics !== undefined && object.statistics !== null)
+      ? ChatRoomStatistics.fromPartial(object.statistics)
+      : undefined;
     return message;
   },
 };
