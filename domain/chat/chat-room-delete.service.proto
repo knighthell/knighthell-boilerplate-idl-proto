@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package chat;
+
+option go_package = "github.com/knighthell-family/knighthell-family-idl/chat";
+
+import "chat-room.proto";
+
+service ChatRoomDeleteService {
+  rpc DeleteChatRoom(DeleteChatRoomRequest) returns (DeleteChatRoomResponse);
+}
+
+message DeleteChatRoomRequest {
+  message ChatRoom {
+    string id = 1;
+  }
+  ChatRoom room = 1;
+}
+
+message DeleteChatRoomResponse {
+  ChatRoom room = 1;
+}
+
+enum ChatRoomDeleteEventType {
+  DELETE_CHAT_ROOM = 0;
+  CHAT_ROOM_DELETED = 1;
+}

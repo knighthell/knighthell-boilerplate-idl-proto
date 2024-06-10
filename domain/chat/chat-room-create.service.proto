@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package chat;
+
+option go_package = "github.com/knighthell-family/knighthell-family-idl/chat";
+
+import "chat-room.proto";
+
+service ChatRoomCreateService {
+  rpc CreateChatRoom(CreateChatRoomRequest) returns (CreateChatRoomResponse);
+}
+
+message CreateChatRoomRequest {
+  message ChatRoom {
+    string title = 1;
+  }
+  ChatRoom room = 1;
+}
+
+message CreateChatRoomResponse {
+  ChatRoom room = 1;
+}
+
+enum ChatRoomCreateEventType {
+  CREATE_CHAT_ROOM = 0;
+  CHAT_ROOM_CREATED = 1;
+}

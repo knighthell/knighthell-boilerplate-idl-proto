@@ -3,9 +3,14 @@ package place;
 
 option go_package = "github.com/knighthell/knighthell-boilerplate-idl-proto/place";
 
+import "google/protobuf/timestamp.proto";
+
 message PlaceUser {
   string id = 1;
+
   string email = 2;
-  string photoURL = 3;
-  string displayName = 4;
+  string displayName = 3;
+  google.protobuf.Timestamp createdDateTimeUTC = 4;
+
+  optional string photoUrl = 5;
 }

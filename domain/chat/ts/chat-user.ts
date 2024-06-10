@@ -1,5 +1,6 @@
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
+import { Timestamp } from "./google/protobuf/timestamp";
 
 export const protobufPackage = "chat";
 
@@ -7,11 +8,12 @@ export interface ChatUser {
   id: string;
   email: string;
   displayName: string;
-  photoUrl: string;
+  createdDateTimeUTC: Date | undefined;
+  photoUrl?: string | undefined;
 }
 
 function createBaseChatUser(): ChatUser {
-  return { id: "", email: "", displayName: "", photoUrl: "" };
+  return { id: "", email: "", displayName: "", createdDateTimeUTC: undefined, photoUrl: undefined };
 }
 
 export const ChatUser = {
@@ -23,9 +25,12 @@ export const ChatUser = {
       writer.uint32(18).string(message.email);
     }
     if (message.displayName !== "") {
-      writer.uint32(34).string(message.displayName);
+      writer.uint32(26).string(message.displayName);
     }
-    if (message.photoUrl !== "") {
+    if (message.createdDateTimeUTC !== undefined) {
+      Timestamp.encode(toTimestamp(message.createdDateTimeUTC), writer.uint32(34).fork()).ldelim();
+    }
+    if (message.photoUrl !== undefined) {
       writer.uint32(42).string(message.photoUrl);
     }
     return writer;
@@ -52,12 +57,19 @@ export const ChatUser = {
 
           message.email = reader.string();
           continue;
+        case 3:
+          if (tag !== 26) {
+            break;
+          }
+
+          message.displayName = reader.string();
+          continue;
         case 4:
           if (tag !== 34) {
             break;
           }
 
-          message.displayName = reader.string();
+          message.createdDateTimeUTC = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           continue;
         case 5:
           if (tag !== 42) {
@@ -80,7 +92,8 @@ export const ChatUser = {
       id: isSet(object.id) ? globalThis.String(object.id) : "",
       email: isSet(object.email) ? globalThis.String(object.email) : "",
       displayName: isSet(object.displayName) ? globalThis.String(object.displayName) : "",
-      photoUrl: isSet(object.photoUrl) ? globalThis.String(object.photoUrl) : "",
+      createdDateTimeUTC: isSet(object.createdDateTimeUTC) ? fromJsonTimestamp(object.createdDateTimeUTC) : undefined,
+      photoUrl: isSet(object.photoUrl) ? globalThis.String(object.photoUrl) : undefined,
     };
   },
 
@@ -95,7 +108,10 @@ export const ChatUser = {
     if (message.displayName !== "") {
       obj.displayName = message.displayName;
     }
-    if (message.photoUrl !== "") {
+    if (message.createdDateTimeUTC !== undefined) {
+      obj.createdDateTimeUTC = message.createdDateTimeUTC.toISOString();
+    }
+    if (message.photoUrl !== undefined) {
       obj.photoUrl = message.photoUrl;
     }
     return obj;
@@ -109,7 +125,8 @@ export const ChatUser = {
     message.id = object.id ?? "";
     message.email = object.email ?? "";
     message.displayName = object.displayName ?? "";
-    message.photoUrl = object.photoUrl ?? "";
+    message.createdDateTimeUTC = object.createdDateTimeUTC ?? undefined;
+    message.photoUrl = object.photoUrl ?? undefined;
     return message;
   },
 };
@@ -125,6 +142,28 @@ export type DeepPartial<T> = T extends Builtin ? T
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+
+function toTimestamp(date: Date): Timestamp {
+  const seconds = Math.trunc(date.getTime() / 1_000);
+  const nanos = (date.getTime() % 1_000) * 1_000_000;
+  return { seconds, nanos };
+}
+
+function fromTimestamp(t: Timestamp): Date {
+  let millis = (t.seconds || 0) * 1_000;
+  millis += (t.nanos || 0) / 1_000_000;
+  return new globalThis.Date(millis);
+}
+
+function fromJsonTimestamp(o: any): Date {
+  if (o instanceof globalThis.Date) {
+    return o;
+  } else if (typeof o === "string") {
+    return new globalThis.Date(o);
+  } else {
+    return fromTimestamp(Timestamp.fromJSON(o));
+  }
+}
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;

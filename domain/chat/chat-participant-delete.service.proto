@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package chat;
+
+option go_package = "github.com/knighthell-family/knighthell-family-idl/chat";
+
+import "chat-participant.proto";
+
+service ChatParticipantDeleteService {
+  rpc DeleteChatParticipant(DeleteChatParticipantRequest) returns (DeleteChatParticipantResponse);
+}
+
+message DeleteChatParticipantRequest {
+  message ChatParticipant {
+    message ChatRoom {
+      string id = 1;
+    }
+    ChatRoom room = 1;
+  }
+  ChatParticipant participant = 1;
+}
+
+message DeleteChatParticipantResponse {
+  ChatParticipant participant = 1;
+}
+
+enum ChatParticipantDeleteEventType {
+  DELETE_CHAT_PARTICIPANT = 0;
+  CHAT_PARTICIPANT_DELETED = 1;
+}
