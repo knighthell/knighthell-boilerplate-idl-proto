@@ -13,7 +13,7 @@ export interface ChatRoom {
   updatedDateTimeUTC?: Date | undefined;
   deletedBy?: ChatUser | undefined;
   deletedDateTimeUTC?: Date | undefined;
-  title?: string | undefined;
+  title: string;
   statistics: ChatRoomStatistics | undefined;
 }
 

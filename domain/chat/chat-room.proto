@@ -18,6 +18,6 @@ message ChatRoom {
   optional ChatUser deletedBy = 6;
   optional google.protobuf.Timestamp deletedDateTimeUTC = 7;
 
-  optional string title = 8;
+  string title = 8;
   ChatRoomStatistics statistics = 9;
 }

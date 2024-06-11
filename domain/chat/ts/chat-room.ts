@@ -14,7 +14,7 @@ export interface ChatRoom {
   updatedDateTimeUTC?: Date | undefined;
   deletedBy?: ChatUser | undefined;
   deletedDateTimeUTC?: Date | undefined;
-  title?: string | undefined;
+  title: string;
   statistics: ChatRoomStatistics | undefined;
 }
 
@@ -27,7 +27,7 @@ function createBaseChatRoom(): ChatRoom {
     updatedDateTimeUTC: undefined,
     deletedBy: undefined,
     deletedDateTimeUTC: undefined,
-    title: undefined,
+    title: "",
     statistics: undefined,
   };
 }
@@ -55,7 +55,7 @@ export const ChatRoom = {
     if (message.deletedDateTimeUTC !== undefined) {
       Timestamp.encode(toTimestamp(message.deletedDateTimeUTC), writer.uint32(58).fork()).ldelim();
     }
-    if (message.title !== undefined) {
+    if (message.title !== "") {
       writer.uint32(66).string(message.title);
     }
     if (message.statistics !== undefined) {
@@ -152,7 +152,7 @@ export const ChatRoom = {
       updatedDateTimeUTC: isSet(object.updatedDateTimeUTC) ? fromJsonTimestamp(object.updatedDateTimeUTC) : undefined,
       deletedBy: isSet(object.deletedBy) ? ChatUser.fromJSON(object.deletedBy) : undefined,
       deletedDateTimeUTC: isSet(object.deletedDateTimeUTC) ? fromJsonTimestamp(object.deletedDateTimeUTC) : undefined,
-      title: isSet(object.title) ? globalThis.String(object.title) : undefined,
+      title: isSet(object.title) ? globalThis.String(object.title) : "",
       statistics: isSet(object.statistics) ? ChatRoomStatistics.fromJSON(object.statistics) : undefined,
     };
   },
@@ -180,7 +180,7 @@ export const ChatRoom = {
     if (message.deletedDateTimeUTC !== undefined) {
       obj.deletedDateTimeUTC = message.deletedDateTimeUTC.toISOString();
     }
-    if (message.title !== undefined) {
+    if (message.title !== "") {
       obj.title = message.title;
     }
     if (message.statistics !== undefined) {
@@ -207,7 +207,7 @@ export const ChatRoom = {
       ? ChatUser.fromPartial(object.deletedBy)
       : undefined;
     message.deletedDateTimeUTC = object.deletedDateTimeUTC ?? undefined;
-    message.title = object.title ?? undefined;
+    message.title = object.title ?? "";
     message.statistics = (object.statistics !== undefined && object.statistics !== null)
       ? ChatRoomStatistics.fromPartial(object.statistics)
       : undefined;
