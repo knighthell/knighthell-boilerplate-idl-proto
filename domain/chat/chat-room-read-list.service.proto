@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package chat;
+
+option go_package = "github.com/knighthell-family/knighthell-family-idl/chat";
+
+import "chat-room.proto";
+
+service ChatRoomReadListService {
+  rpc ReadListChatRoom(ReadListChatRoomRequest) returns (ReadListChatRoomResponse);
+}
+
+message ReadListChatRoomRequest {
+  message ChatRoomCondition {
+    repeated string ids = 1;
+    optional string createdDateTimeFrom = 2;
+    optional string createdDateTimeTo = 3;
+  }
+  optional ChatRoomCondition room = 1;
+
+  message ChatParticipantCondition {
+    repeated string ids = 1;
+    optional string createdDateTimeFrom = 2;
+    optional string createdDateTimeTo = 3;
+  }
+  optional ChatParticipantCondition participant = 2;
+}
+
+message ReadListChatRoomResponse {
+  repeated ChatRoom results = 1;
+}
+
+enum ChatRoomReadListEventType {
+  READ_LIST_CHAT_ROOM = 0;
+  CHAT_ROOM_READ_LIST = 1;
+}
